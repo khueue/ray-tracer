@@ -1,0 +1,23 @@
+{
+  "name": "ray-tracer",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "private": true,
+  "license": "",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "5.8.2",
+    "@vue/component-compiler-utils": "3.0.0",
+    "bulma": "0.7.5",
+    "node-sass": "4.12.0",
+    "parcel-bundler": "1.12.3",
+    "pug": "2.0.3",
+    "tape": "4.10.2",
+    "tap-dot": "2.0.0",
+    "vue": "2.6.10",
+    "vue-hot-reload-api": "2.3.3",
+    "vue-router": "3.0.6",
+    "vue-template-compiler": "2.6.10",
+    "vuex": "3.1.1"
+  }
+}
