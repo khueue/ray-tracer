@@ -11,8 +11,10 @@ server:
 	make app-cmd-with-ports cmd=./bin/server
 
 test:
-	make app-cmd cmd=./bin/prettify
 	make app-cmd cmd=./bin/test
+
+watch:
+	make app-cmd cmd=./bin/watch
 
 npm-install:
 	make app-cmd cmd="npm install"
