@@ -8,7 +8,7 @@ const router = new VueRouter({
 	routes: [
 		{
 			path: '*',
-			component: function () {
+			component: function() {
 				return import('/js/pages/RayTracerHome');
 			},
 		},

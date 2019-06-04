@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+set -o xtrace
+
+./node_modules/.bin/prettier \
+	--write \
+	--print-width 80 \
+	--use-tabs \
+	--single-quote \
+	--trailing-comma all \
+	"./src/js/**/*.js"

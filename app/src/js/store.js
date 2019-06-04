@@ -9,12 +9,9 @@ const store = new Vuex.Store({
 	state: {
 		appVersion: pkgJson.version,
 	},
-	getters: {
-	},
-	mutations: {
-	},
-	actions: {
-	},
+	getters: {},
+	mutations: {},
+	actions: {},
 });
 
 export default store;

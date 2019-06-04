@@ -10,7 +10,7 @@ const {
 	isVector,
 } = require('./tuples');
 
-test('a tuple with w=1.0 is a point', function (t) {
+test('a tuple with w=1.0 is a point', function(t) {
 	t.plan(6);
 
 	const a = tuple(4.3, -4.2, 3.1, 1.0);
@@ -22,7 +22,7 @@ test('a tuple with w=1.0 is a point', function (t) {
 	t.ok(!isVector(a));
 });
 
-test('a tuple with w=0.0 is a vector', function (t) {
+test('a tuple with w=0.0 is a vector', function(t) {
 	t.plan(6);
 
 	const a = tuple(4.3, -4.2, 3.1, 0.0);
@@ -34,7 +34,7 @@ test('a tuple with w=0.0 is a vector', function (t) {
 	t.ok(isVector(a));
 });
 
-test('point() creates a point', function (t) {
+test('point() creates a point', function(t) {
 	t.plan(1);
 
 	const a = point(4, -4, 3);
@@ -42,7 +42,7 @@ test('point() creates a point', function (t) {
 	t.ok(equalTuples(a, b));
 });
 
-test('vector() creates a vector', function (t) {
+test('vector() creates a vector', function(t) {
 	t.plan(1);
 
 	const a = vector(4, -4, 3);
