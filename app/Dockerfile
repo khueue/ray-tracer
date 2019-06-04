@@ -2,6 +2,7 @@ FROM node:12.3.1-alpine
 
 WORKDIR /workdir
 
+# For running commands.
 RUN apk add --no-cache \
 	bash
 

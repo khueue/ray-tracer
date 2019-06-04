@@ -1,13 +1,14 @@
 const test = require('tape');
 
-const structures = require('./tuples');
-const equalFloats = structures.equalFloats;
-const equalTuples = structures.equalTuples;
-const tuple = structures.tuple;
-const point = structures.point;
-const vector = structures.vector;
-const isPoint = structures.isPoint;
-const isVector = structures.isVector;
+const {
+	equalFloats,
+	equalTuples,
+	tuple,
+	point,
+	vector,
+	isPoint,
+	isVector,
+} = require('./tuples');
 
 test('a tuple with w=1.0 is a point', function (t) {
 	t.plan(6);
