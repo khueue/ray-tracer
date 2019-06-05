@@ -13,7 +13,7 @@ const {
 	mult,
 	div,
 	negate,
-} = require('./tuples');
+} = require('./tuple');
 
 test('tuple with w=1.0 is a point', function(t) {
 	t.plan(6);

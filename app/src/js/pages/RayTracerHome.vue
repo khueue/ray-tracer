@@ -1,12 +1,12 @@
 <script lang="js">
-const tuples = require('/js/lib/tuples');
+const tuple = require('/js/lib/tuple');
 
 export default {
 	components: {
 	},
 	data() {
 		return {
-			p: tuples.point(1, 2, 3),
+			p: tuple.point(1, 2, 3),
 		};
 	},
 	computed: {
