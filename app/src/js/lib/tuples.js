@@ -38,6 +38,26 @@ function isVector(a) {
 	return equalFloats(a.w, 0.0);
 }
 
+function add(a, b) {
+	return tuple(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+}
+
+function sub(a, b) {
+	return tuple(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
+}
+
+function mult(a, s) {
+	return tuple(a.x * s, a.y * s, a.z * s, a.w * s);
+}
+
+function div(a, s) {
+	return tuple(a.x / s, a.y / s, a.z / s, a.w / s);
+}
+
+function negate(a) {
+	return tuple(-a.x, -a.y, -a.z, -a.w);
+}
+
 module.exports = {
 	equalFloats,
 	equalTuples,
@@ -46,4 +66,9 @@ module.exports = {
 	vector,
 	isPoint,
 	isVector,
+	add,
+	sub,
+	mult,
+	div,
+	negate,
 };
