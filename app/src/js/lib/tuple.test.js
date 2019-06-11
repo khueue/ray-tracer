@@ -212,3 +212,40 @@ test('cross product of two vectors', function(t) {
 	t.ok(equalTuples(cross(a, b), vector(-1, 2, -1)));
 	t.ok(equalTuples(cross(b, a), vector(1, -2, 1)));
 });
+
+test('fire projectile', function(t) {
+	function projectile(position, velocity) {
+		return {
+			position,
+			velocity,
+		};
+	}
+
+	function environment(gravity, wind) {
+		return {
+			gravity,
+			wind,
+		};
+	}
+
+	function tick(env, proj) {
+		const newPos = add(proj.position, proj.velocity);
+		const newVelocity = add(add(proj.velocity, env.gravity), env.wind);
+		return projectile(newPos, newVelocity);
+	}
+
+	t.plan(1);
+
+	const env = environment(vector(0, -0.1, 0), vector(-0.01, 0, 0));
+	let proj = projectile(point(0, 1, 0), normalize(vector(1, 1, 0)));
+
+	console.log('x, y:', proj.position.x, proj.position.y);
+	let numTicks = 0;
+	while (proj.position.y >= 0) {
+		proj = tick(env, proj);
+		++numTicks;
+		console.log('x, y:', proj.position.x, proj.position.y);
+	}
+
+	t.ok(numTicks == 17, 'should hit the ground');
+});
