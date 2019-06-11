@@ -13,6 +13,7 @@ const {
 	mult,
 	div,
 	negate,
+	magnitude,
 } = require('./tuple');
 
 test('tuple with w=1.0 is a point', function(t) {
@@ -133,4 +134,39 @@ test('negating a tuple', function(t) {
 	const a = tuple(1, -2, 3, -4);
 	const res = negate(a);
 	t.ok(equalTuples(res, tuple(-1, 2, -3, 4)));
+});
+
+test('computing magnitude of vector(1, 0, 0)', function(t) {
+	t.plan(1);
+
+	const v = vector(1, 0, 0);
+	t.ok(equalFloats(magnitude(v), 1));
+});
+
+test('computing magnitude of vector(0, 1, 0)', function(t) {
+	t.plan(1);
+
+	const v = vector(0, 1, 0);
+	t.ok(equalFloats(magnitude(v), 1));
+});
+
+test('computing magnitude of vector(0, 0, 1)', function(t) {
+	t.plan(1);
+
+	const v = vector(0, 0, 1);
+	t.ok(equalFloats(magnitude(v), 1));
+});
+
+test('computing magnitude of vector(1, 2, 3)', function(t) {
+	t.plan(1);
+
+	const v = vector(1, 2, 3);
+	t.ok(equalFloats(magnitude(v), Math.sqrt(14)));
+});
+
+test('computing magnitude of vector(-1, -2, -3)', function(t) {
+	t.plan(1);
+
+	const v = vector(-1, -2, -3);
+	t.ok(equalFloats(magnitude(v), Math.sqrt(14)));
 });

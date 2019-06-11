@@ -58,6 +58,10 @@ function negate(a) {
 	return tuple(-a.x, -a.y, -a.z, -a.w);
 }
 
+function magnitude(a) {
+	return Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z + a.w * a.w);
+}
+
 module.exports = {
 	equalFloats,
 	equalTuples,
@@ -71,4 +75,5 @@ module.exports = {
 	mult,
 	div,
 	negate,
+	magnitude,
 };
