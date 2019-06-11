@@ -14,6 +14,7 @@ const {
 	div,
 	negate,
 	magnitude,
+	normalize,
 } = require('./tuple');
 
 test('tuple with w=1.0 is a point', function(t) {
@@ -169,4 +170,26 @@ test('computing magnitude of vector(-1, -2, -3)', function(t) {
 
 	const v = vector(-1, -2, -3);
 	t.ok(equalFloats(magnitude(v), Math.sqrt(14)));
+});
+
+test('normalizing vector(4, 0, 0) gives (1, 0, 0)', function(t) {
+	t.plan(1);
+
+	const v = vector(4, 0, 0);
+	t.ok(equalTuples(normalize(v), vector(1, 0, 0)));
+});
+
+test('normalizing vector(1, 2, 3)', function(t) {
+	t.plan(1);
+
+	const v = vector(1, 2, 3);
+	t.ok(equalTuples(normalize(v), vector(0.26726, 0.53452, 0.80178)));
+});
+
+test('magnitude of normalized vector', function(t) {
+	t.plan(1);
+
+	const v = vector(1, 2, 3);
+	const norm = normalize(v);
+	t.ok(equalFloats(magnitude(norm), 1));
 });

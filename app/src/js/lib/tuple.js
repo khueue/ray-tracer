@@ -62,6 +62,11 @@ function magnitude(a) {
 	return Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z + a.w * a.w);
 }
 
+function normalize(a) {
+	const mag = magnitude(a);
+	return tuple(a.x / mag, a.y / mag, a.z / mag, a.w / mag);
+}
+
 module.exports = {
 	equalFloats,
 	equalTuples,
@@ -76,4 +81,5 @@ module.exports = {
 	div,
 	negate,
 	magnitude,
+	normalize,
 };
