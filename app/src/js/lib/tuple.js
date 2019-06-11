@@ -67,6 +67,10 @@ function normalize(a) {
 	return tuple(a.x / mag, a.y / mag, a.z / mag, a.w / mag);
 }
 
+function dot(a, b) {
+	return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+}
+
 module.exports = {
 	equalFloats,
 	equalTuples,
@@ -82,4 +86,5 @@ module.exports = {
 	negate,
 	magnitude,
 	normalize,
+	dot,
 };

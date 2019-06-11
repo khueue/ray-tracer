@@ -15,6 +15,7 @@ const {
 	negate,
 	magnitude,
 	normalize,
+	dot,
 } = require('./tuple');
 
 test('tuple with w=1.0 is a point', function(t) {
@@ -192,4 +193,12 @@ test('magnitude of normalized vector', function(t) {
 	const v = vector(1, 2, 3);
 	const norm = normalize(v);
 	t.ok(equalFloats(magnitude(norm), 1));
+});
+
+test('dot product of two tuples', function(t) {
+	t.plan(1);
+
+	const a = vector(1, 2, 3);
+	const b = vector(2, 3, 4);
+	t.ok(equalFloats(dot(a, b), 20));
 });
