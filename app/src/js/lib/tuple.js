@@ -71,6 +71,14 @@ function dot(a, b) {
 	return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
 }
 
+function cross(a, b) {
+	return vector(
+		a.y * b.z - a.z * b.y,
+		a.z * b.x - a.x * b.z,
+		a.x * b.y - a.y * b.x,
+	);
+}
+
 module.exports = {
 	equalFloats,
 	equalTuples,
@@ -87,4 +95,5 @@ module.exports = {
 	magnitude,
 	normalize,
 	dot,
+	cross,
 };

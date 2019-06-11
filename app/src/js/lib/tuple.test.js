@@ -16,6 +16,7 @@ const {
 	magnitude,
 	normalize,
 	dot,
+	cross,
 } = require('./tuple');
 
 test('tuple with w=1.0 is a point', function(t) {
@@ -201,4 +202,13 @@ test('dot product of two tuples', function(t) {
 	const a = vector(1, 2, 3);
 	const b = vector(2, 3, 4);
 	t.ok(equalFloats(dot(a, b), 20));
+});
+
+test('cross product of two vectors', function(t) {
+	t.plan(2);
+
+	const a = vector(1, 2, 3);
+	const b = vector(2, 3, 4);
+	t.ok(equalTuples(cross(a, b), vector(-1, 2, -1)));
+	t.ok(equalTuples(cross(b, a), vector(1, -2, 1)));
 });
