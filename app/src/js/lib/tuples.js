@@ -1,15 +1,11 @@
-const EPSILON = 0.00001;
+const numbers = require('./numbers');
 
-function equalFloats(a, b) {
-	return Math.abs(a - b) < EPSILON;
-}
-
-function equalTuples(a, b) {
+function equal(a, b) {
 	return (
-		equalFloats(a.x, b.x) &&
-		equalFloats(a.y, b.y) &&
-		equalFloats(a.z, b.z) &&
-		equalFloats(a.w, b.w)
+		numbers.equal(a.x, b.x) &&
+		numbers.equal(a.y, b.y) &&
+		numbers.equal(a.z, b.z) &&
+		numbers.equal(a.w, b.w)
 	);
 }
 
@@ -31,11 +27,11 @@ function vector(x, y, z) {
 }
 
 function isPoint(a) {
-	return equalFloats(a.w, 1.0);
+	return numbers.equal(a.w, 1.0);
 }
 
 function isVector(a) {
-	return equalFloats(a.w, 0.0);
+	return numbers.equal(a.w, 0.0);
 }
 
 function add(a, b) {
@@ -79,29 +75,8 @@ function cross(a, b) {
 	);
 }
 
-function color(red, green, blue) {
-	return {
-		red,
-		green,
-		blue,
-	};
-}
-
-function colorAdd(a, b) {
-	return color(a.red + b.red, a.green + b.green, a.blue + b.blue);
-}
-
-function colorSub(a, b) {
-	return color(a.red - b.red, a.green - b.green, a.blue - b.blue);
-}
-
-function colorMult(a, b) {
-	return color(a.red * b.red, a.green * b.green, a.blue * b.blue);
-}
-
 module.exports = {
-	equalFloats,
-	equalTuples,
+	equal,
 	tuple,
 	point,
 	vector,
@@ -116,8 +91,4 @@ module.exports = {
 	normalize,
 	dot,
 	cross,
-	color,
-	colorAdd,
-	colorSub,
-	colorMult,
 };
