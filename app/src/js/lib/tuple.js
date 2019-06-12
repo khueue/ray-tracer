@@ -79,6 +79,26 @@ function cross(a, b) {
 	);
 }
 
+function color(red, green, blue) {
+	return {
+		red,
+		green,
+		blue,
+	};
+}
+
+function colorAdd(a, b) {
+	return color(a.red + b.red, a.green + b.green, a.blue + b.blue);
+}
+
+function colorSub(a, b) {
+	return color(a.red - b.red, a.green - b.green, a.blue - b.blue);
+}
+
+function colorMult(a, b) {
+	return color(a.red * b.red, a.green * b.green, a.blue * b.blue);
+}
+
 module.exports = {
 	equalFloats,
 	equalTuples,
@@ -96,4 +116,8 @@ module.exports = {
 	normalize,
 	dot,
 	cross,
+	color,
+	colorAdd,
+	colorSub,
+	colorMult,
 };

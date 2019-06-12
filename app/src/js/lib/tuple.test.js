@@ -17,6 +17,10 @@ const {
 	normalize,
 	dot,
 	cross,
+	color,
+	colorAdd,
+	colorSub,
+	colorMult,
 } = require('./tuple');
 
 test('tuple with w=1.0 is a point', function(t) {
@@ -248,4 +252,46 @@ test('fire projectile', function(t) {
 	}
 
 	t.ok(numTicks == 17, 'should hit the ground');
+});
+
+test('color are (red, green, blue) tuples', function(t) {
+	t.plan(3);
+
+	const c = color(-0.5, 0.4, 1.7);
+	t.ok(equalFloats(c.red, -0.5));
+	t.ok(equalFloats(c.green, 0.4));
+	t.ok(equalFloats(c.blue, 1.7));
+});
+
+test('adding colors', function(t) {
+	t.plan(3);
+
+	const a = color(0.9, 0.6, 0.75);
+	const b = color(0.7, 0.1, 0.25);
+	const res = colorAdd(a, b);
+	t.ok(equalFloats(res.red, 1.6));
+	t.ok(equalFloats(res.green, 0.7));
+	t.ok(equalFloats(res.blue, 1.0));
+});
+
+test('subtracting colors', function(t) {
+	t.plan(3);
+
+	const a = color(0.9, 0.6, 0.75);
+	const b = color(0.7, 0.1, 0.25);
+	const res = colorSub(a, b);
+	t.ok(equalFloats(res.red, 0.2));
+	t.ok(equalFloats(res.green, 0.5));
+	t.ok(equalFloats(res.blue, 0.5));
+});
+
+test('multiplying colors', function(t) {
+	t.plan(3);
+
+	const a = color(1, 0.2, 0.4);
+	const b = color(0.9, 1, 0.1);
+	const res = colorMult(a, b);
+	t.ok(equalFloats(res.red, 0.9));
+	t.ok(equalFloats(res.green, 0.2));
+	t.ok(equalFloats(res.blue, 0.04));
 });
