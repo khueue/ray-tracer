@@ -26,10 +26,10 @@ test('adding colors', function(t) {
 
 	const a = color(0.9, 0.6, 0.75);
 	const b = color(0.7, 0.1, 0.25);
-	const res = add(a, b);
-	t.ok(numbers.equal(res.red, 1.6));
-	t.ok(numbers.equal(res.green, 0.7));
-	t.ok(numbers.equal(res.blue, 1.0));
+	const result = add(a, b);
+	t.ok(numbers.equal(result.red, 1.6));
+	t.ok(numbers.equal(result.green, 0.7));
+	t.ok(numbers.equal(result.blue, 1.0));
 });
 
 test('subtracting colors', function(t) {
@@ -37,10 +37,10 @@ test('subtracting colors', function(t) {
 
 	const a = color(0.9, 0.6, 0.75);
 	const b = color(0.7, 0.1, 0.25);
-	const res = sub(a, b);
-	t.ok(numbers.equal(res.red, 0.2));
-	t.ok(numbers.equal(res.green, 0.5));
-	t.ok(numbers.equal(res.blue, 0.5));
+	const result = sub(a, b);
+	t.ok(numbers.equal(result.red, 0.2));
+	t.ok(numbers.equal(result.green, 0.5));
+	t.ok(numbers.equal(result.blue, 0.5));
 });
 
 test('multiplying colors', function(t) {
@@ -48,8 +48,8 @@ test('multiplying colors', function(t) {
 
 	const a = color(1, 0.2, 0.4);
 	const b = color(0.9, 1, 0.1);
-	const res = mult(a, b);
-	t.ok(numbers.equal(res.red, 0.9));
-	t.ok(numbers.equal(res.green, 0.2));
-	t.ok(numbers.equal(res.blue, 0.04));
+	const result = mult(a, b);
+	t.ok(numbers.equal(result.red, 0.9));
+	t.ok(numbers.equal(result.green, 0.2));
+	t.ok(numbers.equal(result.blue, 0.04));
 });

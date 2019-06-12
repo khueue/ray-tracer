@@ -65,8 +65,8 @@ test('adding two tuples', function(t) {
 
 	const a = tuple(3, -2, 5, 1);
 	const b = tuple(-2, 3, 1, 0);
-	const res = add(a, b);
-	t.ok(equal(res, { x: 1, y: 1, z: 6, w: 1 }));
+	const result = add(a, b);
+	t.ok(equal(result, { x: 1, y: 1, z: 6, w: 1 }));
 });
 
 test('subtracting two points', function(t) {
@@ -74,8 +74,8 @@ test('subtracting two points', function(t) {
 
 	const a = point(3, 2, 1);
 	const b = point(5, 6, 7);
-	const res = sub(a, b);
-	t.ok(equal(res, vector(-2, -4, -6)));
+	const result = sub(a, b);
+	t.ok(equal(result, vector(-2, -4, -6)));
 });
 
 test('subtracting vector from point', function(t) {
@@ -83,8 +83,8 @@ test('subtracting vector from point', function(t) {
 
 	const a = point(3, 2, 1);
 	const b = vector(5, 6, 7);
-	const res = sub(a, b);
-	t.ok(equal(res, point(-2, -4, -6)));
+	const result = sub(a, b);
+	t.ok(equal(result, point(-2, -4, -6)));
 });
 
 test('subtracting two vectors', function(t) {
@@ -92,8 +92,8 @@ test('subtracting two vectors', function(t) {
 
 	const a = vector(3, 2, 1);
 	const b = vector(5, 6, 7);
-	const res = sub(a, b);
-	t.ok(equal(res, vector(-2, -4, -6)));
+	const result = sub(a, b);
+	t.ok(equal(result, vector(-2, -4, -6)));
 });
 
 test('subtracting a vector from the zero vector', function(t) {
@@ -101,8 +101,8 @@ test('subtracting a vector from the zero vector', function(t) {
 
 	const zero = vector(0, 0, 0);
 	const v = vector(1, -2, 3);
-	const res = sub(zero, v);
-	t.ok(equal(res, vector(-1, 2, -3)));
+	const result = sub(zero, v);
+	t.ok(equal(result, vector(-1, 2, -3)));
 });
 
 test('multiplying a tuple by a scalar', function(t) {
@@ -110,8 +110,8 @@ test('multiplying a tuple by a scalar', function(t) {
 
 	const a = tuple(1, -2, 3, -4);
 	const s = 3.5;
-	const res = mult(a, s);
-	t.ok(equal(res, tuple(3.5, -7, 10.5, -14)));
+	const result = mult(a, s);
+	t.ok(equal(result, tuple(3.5, -7, 10.5, -14)));
 });
 
 test('multiplying a tuple by a fraction', function(t) {
@@ -119,8 +119,8 @@ test('multiplying a tuple by a fraction', function(t) {
 
 	const a = tuple(1, -2, 3, -4);
 	const s = 0.5;
-	const res = mult(a, s);
-	t.ok(equal(res, tuple(0.5, -1, 1.5, -2)));
+	const result = mult(a, s);
+	t.ok(equal(result, tuple(0.5, -1, 1.5, -2)));
 });
 
 test('dividing a tuple by a scalar', function(t) {
@@ -128,16 +128,16 @@ test('dividing a tuple by a scalar', function(t) {
 
 	const a = tuple(1, -2, 3, -4);
 	const s = 2;
-	const res = div(a, s);
-	t.ok(equal(res, tuple(0.5, -1, 1.5, -2)));
+	const result = div(a, s);
+	t.ok(equal(result, tuple(0.5, -1, 1.5, -2)));
 });
 
 test('negating a tuple', function(t) {
 	t.plan(1);
 
 	const a = tuple(1, -2, 3, -4);
-	const res = negate(a);
-	t.ok(equal(res, tuple(-1, 2, -3, 4)));
+	const result = negate(a);
+	t.ok(equal(result, tuple(-1, 2, -3, 4)));
 });
 
 test('computing magnitude of vector(1, 0, 0)', function(t) {
