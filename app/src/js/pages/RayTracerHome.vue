@@ -17,8 +17,8 @@ export default {
 	},
 	methods: {
 		render() {
-			const context = this.canvas.getContext('2d');
-			context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+			const ctx = this.canvas.getContext('2d');
+			ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
 			function getRandomInt(max) {
 				return Math.floor(Math.random() * Math.floor(max));
@@ -31,13 +31,13 @@ export default {
 						getRandomInt(255),
 						getRandomInt(255),
 					);
-					this.writePixel(context, x, y, c);
+					this.writePixel(ctx, x, y, c);
 				}
 			}
 		},
-		writePixel(context, x, y, color) {
-			context.fillStyle = `rgb(${color.red}, ${color.green}, ${color.blue})`;
-			context.fillRect(x, y, 1, 1);
+		writePixel(ctx, x, y, color) {
+			ctx.fillStyle = `rgb(${color.red}, ${color.green}, ${color.blue})`;
+			ctx.fillRect(x, y, 1, 1);
 		},
 	},
 };
