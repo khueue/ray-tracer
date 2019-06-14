@@ -1,6 +1,6 @@
 const test = require('tape');
 
-const { color, add, sub, mult } = require('./colors');
+const { color, add, sub, mult, equal } = require('./colors');
 const numbers = require('./numbers');
 
 test('color are (red, green, blue) tuples', function(t) {
@@ -52,4 +52,12 @@ test('multiplying colors', function(t) {
 	t.ok(numbers.equal(result.red, 0.9));
 	t.ok(numbers.equal(result.green, 0.2));
 	t.ok(numbers.equal(result.blue, 0.04));
+});
+
+test('comparing colors', function(t) {
+	t.plan(1);
+
+	const a = color(1, 0.2, 0.4);
+	const b = color(1, 0.2, 0.4);
+	t.ok(equal(a, b));
 });
