@@ -10,5 +10,5 @@ set -o xtrace
 	--print-width 80 \
 	--use-tabs \
 	--single-quote \
-	--trailing-comma all \
+	--trailing-comma es5 \
 	"./src/js/**/*.js"
