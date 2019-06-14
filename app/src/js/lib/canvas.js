@@ -15,6 +15,16 @@ function canvas(width, height) {
 	};
 }
 
+function writePixel(canvas, x, y, color) {
+	canvas.pixels[x][y] = color;
+}
+
+function pixelAt(canvas, x, y) {
+	return canvas.pixels[x][y];
+}
+
 module.exports = {
 	canvas,
+	writePixel,
+	pixelAt,
 };
