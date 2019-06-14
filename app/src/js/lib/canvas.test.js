@@ -22,7 +22,7 @@ test('creating canvas', function(t) {
 	t.ok(isBlack(c.pixels[c.width - 1][c.height - 1]));
 });
 
-test('writing pixels to canvas', function(t) {
+test('writing pixel to canvas', function(t) {
 	t.plan(1);
 
 	const c = canvas(10, 20);
