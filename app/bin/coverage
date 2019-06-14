@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+set -o xtrace
+
+./node_modules/.bin/istanbul \
+	cover \
+	./node_modules/.bin/tape \
+	"./src/js/**/*.test.js"
+
+# ./node_modules/.bin/tap \
+# 	"./src/js/lib/canvas.test.js" \
+# 	--cov \
+# 	--coverage-report=html \
+#	--no-browser

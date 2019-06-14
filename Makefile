@@ -7,8 +7,14 @@ default:
 # make test (npm-install must be done first)
 # make npm-install
 
+npm-install:
+	make app-cmd cmd="npm install"
+
 server:
 	make app-cmd-with-ports cmd=./bin/server
+
+pretty:
+	make app-cmd cmd=./bin/pretty
 
 test:
 	make app-cmd cmd=./bin/test
@@ -16,8 +22,19 @@ test:
 watch:
 	make app-cmd cmd=./bin/watch
 
-npm-install:
-	make app-cmd cmd="npm install"
+coverage:
+	# Hack since istanbul always outputs reports to `./coverage`.
+	rm -rf ./app/_coverage
+	mkdir -p ./app/_coverage
+	docker run --interactive --tty --rm \
+		--mount type="bind",source="$(PWD)/app",target="/workdir" \
+		--mount type="bind",source="$(PWD)/app/_coverage",target="/workdir/coverage" \
+		$(IMAGE_TAG_APP) \
+		bash -c "./bin/coverage"
+	rm -rf ./app/coverage
+
+open-coverage:
+	open ./app/_coverage/lcov-report/index.html
 
 # Application tooling.
 #
