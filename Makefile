@@ -47,6 +47,6 @@ app-docker-build:
 		./app
 
 app-clean-all:
-	rm -rf ./app/_build/*
+	rm -rf ./app/_*
 	rm -rf ./app/node_modules
 	rm -rf ./app/package-lock.json

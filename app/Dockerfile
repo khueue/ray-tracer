@@ -1,4 +1,4 @@
-FROM node:12.3.1-alpine
+FROM node:12.4.0-alpine
 
 WORKDIR /workdir
 
@@ -8,8 +8,7 @@ RUN apk add --no-cache \
 
 # For NPM (node-gyp).
 RUN apk add --no-cache \
-	build-base \
-	python
+	build-base
 
 # For Parcel.
 RUN apk add --no-cache \
