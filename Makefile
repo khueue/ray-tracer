@@ -23,18 +23,10 @@ watch:
 	make app-cmd cmd=./bin/watch
 
 coverage:
-	# Hack since istanbul always outputs reports to `./coverage`.
-	rm -rf ./app/_coverage
-	mkdir -p ./app/_coverage
-	docker run --interactive --tty --rm \
-		--mount type="bind",source="$(PWD)/app",target="/workdir" \
-		--mount type="bind",source="$(PWD)/app/_coverage",target="/workdir/coverage" \
-		$(IMAGE_TAG_APP) \
-		bash -c "./bin/coverage"
-	rm -rf ./app/coverage
+	make app-cmd cmd=./bin/coverage
 
 open-coverage:
-	open ./app/_coverage/lcov-report/index.html
+	open ./app/coverage/lcov-report/index.html
 
 # Application tooling.
 #

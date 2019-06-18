@@ -7,4 +7,4 @@ set -o xtrace
 
 ./node_modules/.bin/nodemon \
 	--ext js \
-	--exec "./bin/pretty && ./bin/test"
+	--exec "./bin/pretty && ./bin/coverage"

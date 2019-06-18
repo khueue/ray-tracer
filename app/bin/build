@@ -5,7 +5,7 @@ set -o pipefail
 set -o nounset
 set -o xtrace
 
-OUT_DIR=./_build/dist
+OUT_DIR=./build/dist
 CACHE_DIR="${OUT_DIR}.cache"
 
 rm -rf "${OUT_DIR}"

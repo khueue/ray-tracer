@@ -1,4 +1,4 @@
-_build/
-_coverage/
+build/
+coverage/
 node_modules/
 package-lock.json

@@ -29,7 +29,7 @@ export default {
 					const c = colors.color(
 						getRandomInt(255),
 						getRandomInt(255),
-						getRandomInt(255),
+						getRandomInt(255)
 					);
 					this.writePixel(ctx, x, y, c);
 				}
