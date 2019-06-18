@@ -11,4 +11,6 @@ set -o xtrace
 	--use-tabs \
 	--single-quote \
 	--trailing-comma es5 \
-	"./src/**/*.*"
+	"./src/**/*.js" \
+	"./src/**/*.vue" \
+	"./src/**/*.scss"
