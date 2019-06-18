@@ -1,21 +1,21 @@
 @charset "utf-8";
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 
-$family-sans-serif: "Open Sans", sans-serif;
+$family-sans-serif: 'Open Sans', sans-serif;
 $body-size: 16px;
 
 // Always include these.
-@import "~bulma/sass/utilities/_all.sass";
-@import "~bulma/sass/base/_all.sass";
+@import '~bulma/sass/utilities/_all.sass';
+@import '~bulma/sass/base/_all.sass';
 
 // Then include what you use.
-@import "~bulma/sass/components/_all.sass";
-@import "~bulma/sass/elements/_all.sass";
-@import "~bulma/sass/grid/columns.sass";
+@import '~bulma/sass/components/_all.sass';
+@import '~bulma/sass/elements/_all.sass';
+@import '~bulma/sass/grid/columns.sass';
 
 // Or, simply include entire Bulma.
-// @import "~bulma/bulma.sass";
+// @import '~bulma/bulma.sass';
 
 // Continue with site-specific overrides.
-@import "./site-wide.scss";
+@import './site-wide.scss';
