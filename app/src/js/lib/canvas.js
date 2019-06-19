@@ -1,11 +1,11 @@
 const colors = require('./colors');
 
-function canvas(width, height) {
+function Canvas(width, height) {
 	let pixels = [];
 	for (let x = 0; x < width; ++x) {
 		pixels[x] = [];
 		for (let y = 0; y < height; ++y) {
-			pixels[x][y] = colors.color(0.0, 0.0, 0.0);
+			pixels[x][y] = colors.Color(0.0, 0.0, 0.0);
 		}
 	}
 	return {
@@ -24,7 +24,7 @@ function pixelAt(canvas, x, y) {
 }
 
 module.exports = {
-	canvas,
+	Canvas,
 	writePixel,
 	pixelAt,
 };

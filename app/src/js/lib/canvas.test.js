@@ -1,10 +1,10 @@
 const test = require('tap').test;
 
-const { canvas, writePixel, pixelAt } = require('./canvas');
+const { Canvas, writePixel, pixelAt } = require('./canvas');
 const colors = require('./colors');
 
 test('creating canvas', function(t) {
-	const c = canvas(10, 20);
+	const c = Canvas(10, 20);
 
 	t.ok(c.width === 10);
 	t.ok(c.height === 20);
@@ -23,8 +23,8 @@ test('creating canvas', function(t) {
 });
 
 test('writing pixel to canvas', function(t) {
-	const c = canvas(10, 20);
-	const red = colors.color(1.0, 0.0, 0.0);
+	const c = Canvas(10, 20);
+	const red = colors.Color(1.0, 0.0, 0.0);
 	writePixel(c, 2, 3, red);
 	t.ok(colors.equal(pixelAt(c, 2, 3), red));
 
