@@ -52,7 +52,7 @@ export default {
 			const env = this.environment(gravity, wind);
 
 			while (proj.position.y >= 0) {
-				this.writePixel(ctx, proj.position.x, proj.position.y, colors.color(0, 0, 0));
+				this.writePixel(ctx, proj.position.x, proj.position.y, colors.color(0.0, 0.0, 0.0));
 				proj = this.tick(env, proj);
 			}
 		},

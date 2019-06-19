@@ -44,8 +44,8 @@ test('subtracting colors', function(t) {
 });
 
 test('multiplying colors', function(t) {
-	const a = color(1, 0.2, 0.4);
-	const b = color(0.9, 1, 0.1);
+	const a = color(1.0, 0.2, 0.4);
+	const b = color(0.9, 1.0, 0.1);
 	const result = mult(a, b);
 	t.ok(numbers.equal(result.red, 0.9));
 	t.ok(numbers.equal(result.green, 0.2));
@@ -55,8 +55,8 @@ test('multiplying colors', function(t) {
 });
 
 test('comparing colors', function(t) {
-	const a = color(1, 0.2, 0.4);
-	const b = color(1, 0.2, 0.4);
+	const a = color(1.0, 0.2, 0.4);
+	const b = color(1.0, 0.2, 0.4);
 	t.ok(equal(a, b));
 
 	t.end();
