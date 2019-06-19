@@ -24,7 +24,7 @@ test('creating canvas', function(t) {
 
 test('writing pixel to canvas', function(t) {
 	const c = canvas(10, 20);
-	const red = colors.color(1, 0, 0);
+	const red = colors.color(255, 0, 0);
 	writePixel(c, 2, 3, red);
 	t.ok(colors.equal(pixelAt(c, 2, 3), red));
 

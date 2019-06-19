@@ -1,12 +1,13 @@
 <script lang="js">
 const colors = require('/js/lib/colors');
+const tuples = require('/js/lib/tuples');
 
 export default {
 	data() {
 		return {
 			id: 'ray-tracer',
-			width: 640,
-			height: 480,
+			width: 900,
+			height: 550,
 			canvas: null,
 		};
 	},
@@ -36,7 +37,8 @@ export default {
 			}
 		},
 		writePixel(ctx, x, y, color) {
-			ctx.fillStyle = `rgb(${color.red}, ${color.green}, ${color.blue})`;
+			ctx.fillStyle = `rgb( ${color.red}, ${color.green}, ${color.blue} )`;
+			y = this.height - y - 1; // To draw from the bottom.
 			ctx.fillRect(x, y, 1, 1);
 		},
 	},
@@ -45,7 +47,7 @@ export default {
 
 <template lang="pug">
 section
-	h1.title Ray Tracer!
+	h1.title Ray Tracer
 	canvas(
 		:ref="id"
 		:id="id"
@@ -60,6 +62,6 @@ section {
 }
 
 canvas {
-	border: 1px solid black;
+	border: 1px solid gray;
 }
 </style>
