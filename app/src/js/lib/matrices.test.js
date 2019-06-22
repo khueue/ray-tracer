@@ -11,7 +11,11 @@ const {
 } = require('./matrices');
 
 test('construct 2x2 matrix', function(t) {
-	const m = Matrix22([[-3.0, 5.0], [1.0, -2.0]]);
+	// prettier-ignore
+	const m = Matrix22([
+		[-3.0, 5.0],
+		[1.0, -2.0],
+	]);
 
 	t.ok(numbers.equal(valueAt(m, 0, 0), -3.0));
 	t.ok(numbers.equal(valueAt(m, 0, 1), 5.0));
@@ -54,7 +58,7 @@ test('construct 4x4 matrix', function(t) {
 	t.end();
 });
 
-test('equal matrices', function(t) {
+test('same size, equal matrices', function(t) {
 	const a = Matrix44([
 		[1.0, 2.0, 3.0, 4.0],
 		[5.5, 6.5, 7.5, 8.5],
@@ -73,12 +77,30 @@ test('equal matrices', function(t) {
 	t.end();
 });
 
-test('non-equal matrices', function(t) {
+test('same size, non-equal matrices', function(t) {
 	const a = Matrix44([
 		[1.0, 2.0, 3.0, 4.0],
 		[5.5, 6.5, 7.5, 8.5],
 		[9.0, 10.0, 11.0, 12.0],
 		[13.5, 14.5, 15.5, 16.5],
+	]);
+	const b = Matrix44([
+		[1.0, 2.0, 3.0, 4.0],
+		[5.5, 6.5, 7.5, 8.5],
+		[9.0, 10.0, 11.0, 12.0],
+		[13.5, 14.5, 15.5, 17.5], // Diff at last.
+	]);
+
+	t.ok(!equal(a, b));
+
+	t.end();
+});
+
+test('different size matrices', function(t) {
+	// prettier-ignore
+	const a = Matrix22([
+		[1.0, 2.0],
+		[5.5, 6.5],
 	]);
 	const b = Matrix44([
 		[1.0, 2.0, 3.0, 4.0],
