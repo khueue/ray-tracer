@@ -57,9 +57,11 @@ export default {
 			}
 		},
 		writePixel(ctx, x, y, color) {
-			ctx.fillStyle = `rgb(${color.red}, ${color.green}, ${color.blue})`;
-			y = this.height - y - 1; // To draw from the bottom.
-			ctx.fillRect(x, y, 1, 1);
+			if (0 <= x < this.canvas.width && 0 <= y < this.canvas.height) {
+				ctx.fillStyle = `rgb(${color.red}, ${color.green}, ${color.blue})`;
+				y = this.height - y - 1; // To draw from the bottom.
+				ctx.fillRect(x, y, 1, 1);
+			}
 		},
 	},
 };
