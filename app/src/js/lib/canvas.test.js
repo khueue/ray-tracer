@@ -1,7 +1,8 @@
 const test = require('tap').test;
 
-const { Canvas, writePixel, pixelAt } = require('./canvas');
 const colors = require('./colors');
+
+const { Canvas, writePixel, pixelAt } = require('./canvas');
 
 test('creating canvas', function(t) {
 	const c = Canvas(10, 20);
