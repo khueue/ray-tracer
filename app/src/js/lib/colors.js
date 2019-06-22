@@ -9,15 +9,27 @@ function Color(red, green, blue) {
 }
 
 function add(a, b) {
-	return Color(a.red + b.red, a.green + b.green, a.blue + b.blue);
+	return Color(
+		a.red + b.red,
+		a.green + b.green,
+		a.blue + b.blue
+	);
 }
 
 function sub(a, b) {
-	return Color(a.red - b.red, a.green - b.green, a.blue - b.blue);
+	return Color(
+		a.red - b.red,
+		a.green - b.green,
+		a.blue - b.blue
+	);
 }
 
 function mult(a, b) {
-	return Color(a.red * b.red, a.green * b.green, a.blue * b.blue);
+	return Color(
+		a.red * b.red,
+		a.green * b.green,
+		a.blue * b.blue
+	);
 }
 
 function equal(a, b) {

@@ -1,6 +1,12 @@
 const test = require('tap').test;
 
-const { Color, add, sub, mult, equal } = require('./colors');
+const {
+	Color,
+	add,
+	sub,
+	mult,
+	equal,
+} = require('./colors');
 const numbers = require('./numbers');
 
 test('color are (red, green, blue) tuples', function(t) {

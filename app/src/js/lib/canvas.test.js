@@ -10,7 +10,9 @@ test('creating canvas', function(t) {
 	t.ok(c.height === 20);
 
 	function isBlack(c) {
-		return c.red === 0.0 && c.green === 0.0 && c.blue === 0.0;
+		return (
+			c.red === 0.0 && c.green === 0.0 && c.blue === 0.0
+		);
 	}
 
 	// Suffice to check corners.
