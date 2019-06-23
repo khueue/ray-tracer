@@ -1,5 +1,7 @@
 const test = require('tap').test;
 
+const numbers = require('./numbers');
+
 const {
 	Tuple,
 	Point,
@@ -17,8 +19,6 @@ const {
 	dot,
 	cross,
 } = require('./tuples');
-
-const numbers = require('./numbers');
 
 test('tuple with w=1.0 is a point', function(t) {
 	const a = Tuple(4.3, -4.2, 3.1, 1.0);
@@ -184,9 +184,7 @@ test('normalizing Vector(4, 0, 0) gives (1, 0, 0)', function(t) {
 
 test('normalizing Vector(1, 2, 3)', function(t) {
 	const v = Vector(1, 2, 3);
-	t.ok(
-		equal(normalize(v), Vector(0.26726, 0.53452, 0.80178))
-	);
+	t.ok(equal(normalize(v), Vector(0.26726, 0.53452, 0.80178)));
 
 	t.end();
 });
@@ -233,21 +231,12 @@ test('fire projectile', function(t) {
 
 	function tick(env, proj) {
 		const newPos = add(proj.position, proj.velocity);
-		const newVelocity = add(
-			add(proj.velocity, env.gravity),
-			env.wind
-		);
+		const newVelocity = add(add(proj.velocity, env.gravity), env.wind);
 		return projectile(newPos, newVelocity);
 	}
 
-	const env = environment(
-		Vector(0, -0.1, 0),
-		Vector(-0.01, 0, 0)
-	);
-	let proj = projectile(
-		Point(0, 1, 0),
-		normalize(Vector(1, 1, 0))
-	);
+	const env = environment(Vector(0, -0.1, 0), Vector(-0.01, 0, 0));
+	let proj = projectile(Point(0, 1, 0), normalize(Vector(1, 1, 0)));
 
 	console.log('x, y:', proj.position.x, proj.position.y);
 	let numTicks = 0;

@@ -55,9 +55,7 @@ function negate(a) {
 }
 
 function magnitude(a) {
-	return Math.sqrt(
-		a.x * a.x + a.y * a.y + a.z * a.z + a.w * a.w
-	);
+	return Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z + a.w * a.w);
 }
 
 function normalize(a) {
