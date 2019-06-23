@@ -52,6 +52,13 @@ function Matrix44(m) {
 	return m;
 }
 
+const IDENTITY_44 = Matrix44([
+	[1.0, 0.0, 0.0, 0.0],
+	[0.0, 1.0, 0.0, 0.0],
+	[0.0, 0.0, 1.0, 0.0],
+	[0.0, 0.0, 0.0, 1.0],
+]);
+
 function equal(a, b) {
 	if (a.length !== b.length) {
 		return false;
@@ -115,6 +122,8 @@ function multTuple(a, t) {
 }
 
 module.exports = {
+	IDENTITY_44,
+	Matrix,
 	Matrix22,
 	Matrix33,
 	Matrix44,

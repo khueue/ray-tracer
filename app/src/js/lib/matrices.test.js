@@ -146,8 +146,34 @@ test('matrix mult, by tuple', function(t) {
 	const tup = tuples.Tuple(1.0, 2.0, 3.0, 1.0);
 
 	const actual = matrices.multTuple(m, tup);
-
 	const expected = tuples.Tuple(18.0, 24.0, 33.0, 1.0);
+
+	t.ok(tuples.equal(actual, expected));
+
+	t.end();
+});
+
+test('matrix mult, by identity', function(t) {
+	const m = matrices.Matrix44([
+		[0.0, 1.0, 2.0, 4.0],
+		[1.0, 2.0, 4.0, 8.0],
+		[2.0, 4.0, 8.0, 16.0],
+		[4.0, 8.0, 16.0, 32.0],
+	]);
+
+	const actual = matrices.mult(m, matrices.IDENTITY_44);
+	const expected = m;
+
+	t.ok(matrices.equal(actual, expected));
+
+	t.end();
+});
+
+test('identity mult, by tuple', function(t) {
+	const tup = tuples.Tuple(1.0, 2.0, 3.0, 4.0);
+
+	const actual = matrices.multTuple(matrices.IDENTITY_44, tup);
+	const expected = tup;
 
 	t.ok(tuples.equal(actual, expected));
 
