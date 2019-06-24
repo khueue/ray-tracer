@@ -190,6 +190,10 @@ function cofactor(m, rowToSkip, colToSkip) {
 	}
 }
 
+function invertible(m) {
+	return !numbers.equal(determinant(m), 0.0);
+}
+
 module.exports = {
 	IDENTITY_44,
 	Matrix,
@@ -204,4 +208,5 @@ module.exports = {
 	submatrix,
 	minor,
 	cofactor,
+	invertible,
 };

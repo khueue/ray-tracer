@@ -329,3 +329,31 @@ test('determinant of 4x4', function(t) {
 
 	t.end();
 });
+
+test('matrix is invertible', function(t) {
+	const m = matrices.Matrix44([
+		[6.0, 4.0, 4.0, 4.0],
+		[5.0, 5.0, 7.0, 6.0],
+		[4.0, -9.0, 3.0, -7.0],
+		[9.0, 1.0, 7.0, -6.0],
+	]);
+
+	t.ok(numbers.equal(matrices.determinant(m), -2120.0));
+	t.ok(matrices.invertible(m));
+
+	t.end();
+});
+
+test('matrix is not invertible', function(t) {
+	const m = matrices.Matrix44([
+		[-4.0, 2.0, -2.0, -3.0],
+		[9.0, 6.0, 2.0, 6.0],
+		[0.0, -5.0, 1.0, -5.0],
+		[0.0, 0.0, 0.0, 0.0],
+	]);
+
+	t.ok(numbers.equal(matrices.determinant(m), 0.0));
+	t.ok(!matrices.invertible(m));
+
+	t.end();
+});
