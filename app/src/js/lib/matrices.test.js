@@ -226,7 +226,7 @@ test('determinant of 2x2', function(t) {
 });
 
 test('submatrix of 3x3 is 2x2', function(t) {
-	const m = matrices.Matrix22([
+	const m = matrices.Matrix33([
 		[1.0, 5.0, 0.0],
 		[-3.0, 2.0, 7.0],
 		[0.0, 6.0, -3.0],
@@ -261,6 +261,23 @@ test('submatrix of 4x4 is 3x3', function(t) {
 	]);
 
 	t.ok(matrices.equal(actual, expected));
+
+	t.end();
+});
+
+test('a minor of 3x3', function(t) {
+	const m = matrices.Matrix33([
+		[3.0, 5.0, 0.0],
+		[2.0, -1.0, -7.0],
+		[6.0, -1.0, 5.0],
+	]);
+
+	const sub = matrices.submatrix(m, 1, 0);
+	const det = matrices.determinant(sub);
+	t.ok(numbers.equal(det, 25));
+
+	const minor = matrices.minor(m, 1, 0);
+	t.ok(numbers.equal(minor, 25));
 
 	t.end();
 });

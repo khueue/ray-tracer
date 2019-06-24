@@ -176,6 +176,11 @@ function submatrix(m, rowToSkip, colToSkip) {
 	return sub;
 }
 
+function minor(m, rowToSkip, colToSkip) {
+	const sub = submatrix(m, rowToSkip, colToSkip);
+	return determinant(sub);
+}
+
 module.exports = {
 	IDENTITY_44,
 	Matrix,
@@ -189,4 +194,5 @@ module.exports = {
 	determinant,
 	determinant22,
 	submatrix,
+	minor,
 };
