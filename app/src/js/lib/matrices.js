@@ -194,6 +194,29 @@ function invertible(m) {
 	return !numbers.equal(determinant(m), 0.0);
 }
 
+function inverse(m) {
+	const det = determinant(m);
+
+	// Reimplement invertible() here, to avoid double computation.
+	if (numbers.equal(det, 0.0)) {
+		throw new Error('inverse() requires invertible matrix');
+	}
+
+	const rows = m.length;
+	const cols = m[0].length;
+
+	let inv = Matrix(rows, cols, 0.0);
+
+	for (let row = 0; row < rows; ++row) {
+		for (let col = 0; col < cols; ++col) {
+			const c = cofactor(m, row, col);
+			inv[col][row] = c / det; // Transpose on the fly.
+		}
+	}
+
+	return inv;
+}
+
 module.exports = {
 	IDENTITY_44,
 	Matrix,
@@ -209,4 +232,5 @@ module.exports = {
 	minor,
 	cofactor,
 	invertible,
+	inverse,
 };

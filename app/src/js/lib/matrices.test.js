@@ -357,3 +357,50 @@ test('matrix is not invertible', function(t) {
 
 	t.end();
 });
+
+test('inverse of matrix', function(t) {
+	const m = matrices.Matrix44([
+		[-5.0, 2.0, 6.0, -8.0],
+		[1.0, -5.0, 1.0, 8.0],
+		[7.0, 7.0, -6.0, -7.0],
+		[1.0, -3.0, 7.0, 4.0],
+	]);
+
+	const inv = matrices.inverse(m);
+
+	t.ok(numbers.equal(matrices.determinant(m), 532.0));
+
+	t.ok(numbers.equal(matrices.cofactor(m, 2, 3), -160.0));
+	t.ok(numbers.equal(inv[3][2], -160.0 / 532.0));
+
+	t.ok(numbers.equal(matrices.cofactor(m, 3, 2), 105.0));
+	t.ok(numbers.equal(inv[2][3], 105.0 / 532.0));
+
+	const expected = matrices.Matrix44([
+		[0.21805, 0.45113, 0.2406, -0.04511],
+		[-0.80827, -1.45677, -0.44361, 0.52068],
+		[-0.07895, -0.22368, -0.05263, 0.19737],
+		[-0.52256, -0.81391, -0.30075, 0.30639],
+	]);
+
+	t.ok(matrices.equal(inv, expected));
+
+	t.end();
+});
+
+test('inverse can fail', function(t) {
+	const m = matrices.Matrix44([
+		[-4.0, 2.0, -2.0, -3.0],
+		[9.0, 6.0, 2.0, 6.0],
+		[0.0, -5.0, 1.0, -5.0],
+		[0.0, 0.0, 0.0, 0.0],
+	]);
+
+	t.ok(!matrices.invertible(m));
+
+	t.throws(function() {
+		matrices.inverse(m);
+	}, Error);
+
+	t.end();
+});
