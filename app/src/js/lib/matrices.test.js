@@ -224,3 +224,43 @@ test('determinant of 2x2', function(t) {
 
 	t.end();
 });
+
+test('submatrix of 3x3 is 2x2', function(t) {
+	const m = matrices.Matrix22([
+		[1.0, 5.0, 0.0],
+		[-3.0, 2.0, 7.0],
+		[0.0, 6.0, -3.0],
+	]);
+
+	const actual = matrices.submatrix(m, 0, 2);
+
+	const expected = matrices.Matrix22([
+		[-3.0, 2.0], // prettier-ignore
+		[0.0, 6.0],
+	]);
+
+	t.ok(matrices.equal(actual, expected));
+
+	t.end();
+});
+
+test('submatrix of 4x4 is 3x3', function(t) {
+	const m = matrices.Matrix44([
+		[-6.0, 1.0, 1.0, 6.0],
+		[-8.0, 5.0, 8.0, 6.0],
+		[-1.0, 0.0, 8.0, 2.0],
+		[-7.0, 1.0, -1.0, 1.0],
+	]);
+
+	const actual = matrices.submatrix(m, 2, 1);
+
+	const expected = matrices.Matrix33([
+		[-6.0, 1.0, 6.0],
+		[-8.0, 8.0, 6.0],
+		[-7.0, -1.0, 1.0],
+	]);
+
+	t.ok(matrices.equal(actual, expected));
+
+	t.end();
+});

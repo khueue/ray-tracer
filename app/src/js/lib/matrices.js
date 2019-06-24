@@ -148,6 +148,34 @@ function determinant(m) {
 	}
 }
 
+function submatrix(m, rowToSkip, colToSkip) {
+	const rows = m.length;
+	const cols = m[0].length;
+
+	// Submatrix is always one smaller than the input.
+	let sub = Matrix(rows - 1, cols - 1, 0.0);
+
+	let destRow = 0;
+	for (let row = 0; row < rows; ++row, ++destRow) {
+		if (row === rowToSkip) {
+			// Avoid making a "gap" row in the result matrix.
+			--destRow;
+			continue;
+		}
+		let destCol = 0;
+		for (let col = 0; col < cols; ++col, ++destCol) {
+			if (col === colToSkip) {
+				// Avoid making a "gap" column in the result matrix.
+				--destCol;
+				continue;
+			}
+			sub[destRow][destCol] = m[row][col];
+		}
+	}
+
+	return sub;
+}
+
 module.exports = {
 	IDENTITY_44,
 	Matrix,
@@ -160,4 +188,5 @@ module.exports = {
 	transpose,
 	determinant,
 	determinant22,
+	submatrix,
 };
