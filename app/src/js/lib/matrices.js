@@ -135,16 +135,16 @@ function transpose(m) {
 	return trans;
 }
 
-function determinant22(m) {
-	return m[0][0] * m[1][1] - m[0][1] * m[1][0];
-}
-
 function determinant(m) {
-	if (m.length === 4) {
-		return determinant44(m);
+	if (m.length === 2) {
+		return m[0][0] * m[1][1] - m[0][1] * m[1][0];
 	} else {
-		/* Assume 2x2. */
-		return determinant22(m);
+		const cols = m[0].length;
+		let det = 0.0;
+		for (let col = 0; col < cols; ++col) {
+			det += m[0][col] * cofactor(m, 0, col);
+		}
+		return det;
 	}
 }
 
@@ -201,7 +201,6 @@ module.exports = {
 	multTuple,
 	transpose,
 	determinant,
-	determinant22,
 	submatrix,
 	minor,
 	cofactor,

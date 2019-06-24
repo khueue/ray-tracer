@@ -297,3 +297,35 @@ test('a cofactor of 3x3', function(t) {
 
 	t.end();
 });
+
+test('determinant of 3x3', function(t) {
+	const m = matrices.Matrix33([
+		[1.0, 2.0, 6.0],
+		[-5.0, 8.0, -4.0],
+		[2.0, 6.0, 4.0],
+	]);
+
+	t.ok(numbers.equal(matrices.cofactor(m, 0, 0), 56.0));
+	t.ok(numbers.equal(matrices.cofactor(m, 0, 1), 12.0));
+	t.ok(numbers.equal(matrices.cofactor(m, 0, 2), -46.0));
+	t.ok(numbers.equal(matrices.determinant(m), -196.0));
+
+	t.end();
+});
+
+test('determinant of 4x4', function(t) {
+	const m = matrices.Matrix44([
+		[-2.0, -8.0, 3.0, 5.0],
+		[-3.0, 1.0, 7.0, 3.0],
+		[1.0, 2.0, -9.0, 6.0],
+		[-6.0, 7.0, 7.0, -9.0],
+	]);
+
+	t.ok(numbers.equal(matrices.cofactor(m, 0, 0), 690.0));
+	t.ok(numbers.equal(matrices.cofactor(m, 0, 1), 447.0));
+	t.ok(numbers.equal(matrices.cofactor(m, 0, 2), 210.0));
+	t.ok(numbers.equal(matrices.cofactor(m, 0, 3), 51.0));
+	t.ok(numbers.equal(matrices.determinant(m), -4071.0));
+
+	t.end();
+});
