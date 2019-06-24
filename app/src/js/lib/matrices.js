@@ -181,6 +181,15 @@ function minor(m, rowToSkip, colToSkip) {
 	return determinant(sub);
 }
 
+function cofactor(m, rowToSkip, colToSkip) {
+	const min = minor(m, rowToSkip, colToSkip);
+	if ((rowToSkip + colToSkip) % 2 === 1) {
+		return -min;
+	} else {
+		return min;
+	}
+}
+
 module.exports = {
 	IDENTITY_44,
 	Matrix,
@@ -195,4 +204,5 @@ module.exports = {
 	determinant22,
 	submatrix,
 	minor,
+	cofactor,
 };

@@ -274,10 +274,26 @@ test('a minor of 3x3', function(t) {
 
 	const sub = matrices.submatrix(m, 1, 0);
 	const det = matrices.determinant(sub);
-	t.ok(numbers.equal(det, 25));
+	t.ok(numbers.equal(det, 25.0));
 
 	const minor = matrices.minor(m, 1, 0);
-	t.ok(numbers.equal(minor, 25));
+	t.ok(numbers.equal(minor, 25.0));
+
+	t.end();
+});
+
+test('a cofactor of 3x3', function(t) {
+	const m = matrices.Matrix33([
+		[3.0, 5.0, 0.0],
+		[2.0, -1.0, -7.0],
+		[6.0, -1.0, 5.0],
+	]);
+
+	t.ok(numbers.equal(matrices.minor(m, 0, 0), -12.0));
+	t.ok(numbers.equal(matrices.cofactor(m, 0, 0), -12.0));
+
+	t.ok(numbers.equal(matrices.minor(m, 1, 0), 25.0));
+	t.ok(numbers.equal(matrices.cofactor(m, 1, 0), -25.0));
 
 	t.end();
 });
