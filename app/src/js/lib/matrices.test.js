@@ -179,3 +179,37 @@ test('identity mult, by tuple', function(t) {
 
 	t.end();
 });
+
+test('transpose matrix', function(t) {
+	const m = matrices.Matrix44([
+		[0.0, 9.0, 3.0, 0.0],
+		[9.0, 8.0, 0.0, 8.0],
+		[1.0, 8.0, 5.0, 3.0],
+		[0.0, 0.0, 5.0, 8.0],
+	]);
+
+	const actual = matrices.transpose(m);
+
+	const expected = matrices.Matrix44([
+		[0.0, 9.0, 1.0, 0.0],
+		[9.0, 8.0, 8.0, 0.0],
+		[3.0, 0.0, 5.0, 5.0],
+		[0.0, 8.0, 3.0, 8.0],
+	]);
+
+	t.ok(matrices.equal(actual, expected));
+
+	t.end();
+});
+
+test('transpose identity matrix', function(t) {
+	const m = matrices.IDENTITY_44;
+
+	const actual = matrices.transpose(m);
+
+	const expected = matrices.IDENTITY_44;
+
+	t.ok(matrices.equal(actual, expected));
+
+	t.end();
+});

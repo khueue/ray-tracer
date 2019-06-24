@@ -121,6 +121,21 @@ function multTuple(a, t) {
 	return matrixAsTuple(m);
 }
 
+function transpose(m) {
+	const rows = m.length;
+	const cols = m[0].length;
+
+	let trans = Matrix(rows, cols, 0.0);
+
+	for (let row = 0; row < rows; ++row) {
+		for (let col = 0; col < cols; ++col) {
+			trans[col][row] = m[row][col];
+		}
+	}
+
+	return trans;
+}
+
 module.exports = {
 	IDENTITY_44,
 	Matrix,
@@ -130,4 +145,5 @@ module.exports = {
 	equal,
 	mult,
 	multTuple,
+	transpose,
 };
