@@ -99,9 +99,8 @@ function mult(a, b) {
 }
 
 function tupleAsMatrix(t) {
-	// prettier-ignore
 	return Matrix([
-		[t.x],
+		[t.x], // prettier-ignore
 		[t.y],
 		[t.z],
 		[t.w],
@@ -136,6 +135,19 @@ function transpose(m) {
 	return trans;
 }
 
+function determinant22(m) {
+	return m[0][0] * m[1][1] - m[0][1] * m[1][0];
+}
+
+function determinant(m) {
+	if (m.length === 4) {
+		return determinant44(m);
+	} else {
+		/* Assume 2x2. */
+		return determinant22(m);
+	}
+}
+
 module.exports = {
 	IDENTITY_44,
 	Matrix,
@@ -146,4 +158,6 @@ module.exports = {
 	mult,
 	multTuple,
 	transpose,
+	determinant,
+	determinant22,
 };

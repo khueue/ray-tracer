@@ -5,9 +5,8 @@ const matrices = require('./matrices');
 const tuples = require('./tuples');
 
 test('construct 2x2 matrix', function(t) {
-	// prettier-ignore
 	const m = matrices.Matrix22([
-		[-3.0, 5.0],
+		[-3.0, 5.0], // prettier-ignore
 		[1.0, -2.0],
 	]);
 
@@ -91,9 +90,8 @@ test('same size, non-equal matrices', function(t) {
 });
 
 test('different size matrices', function(t) {
-	// prettier-ignore
 	const a = matrices.Matrix22([
-		[1.0, 2.0],
+		[1.0, 2.0], // prettier-ignore
 		[5.5, 6.5],
 	]);
 	const b = matrices.Matrix44([
@@ -206,10 +204,23 @@ test('transpose identity matrix', function(t) {
 	const m = matrices.IDENTITY_44;
 
 	const actual = matrices.transpose(m);
-
 	const expected = matrices.IDENTITY_44;
 
 	t.ok(matrices.equal(actual, expected));
+
+	t.end();
+});
+
+test('determinant of 2x2', function(t) {
+	const m = matrices.Matrix22([
+		[1.0, 5.0], // prettier-ignore
+		[-3.0, 2.0],
+	]);
+
+	const actual = matrices.determinant(m);
+	const expected = 17.0;
+
+	t.ok(numbers.equal(actual, expected));
 
 	t.end();
 });
