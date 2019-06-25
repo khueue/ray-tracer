@@ -9,8 +9,6 @@ const tuples = require('./tuples');
  *
  * Dimensions and init value:
  * - Matrix(4, 1, 0.0)
- *
- * For efficiency, use the MatrixXX functions where applicable.
  */
 function Matrix(rows, cols, init = NaN) {
 	if (Array.isArray(rows)) {
