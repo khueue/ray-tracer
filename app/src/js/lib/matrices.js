@@ -13,8 +13,8 @@ const tuples = require('./tuples');
  * For efficiency, use the MatrixXX functions where applicable.
  */
 function Matrix(rows, cols, init = NaN) {
-	if (typeof rows === 'object') {
-		// Assume it's an Array representing a matrix and just return it.
+	if (Array.isArray(rows)) {
+		// Assume an array representing a matrix and just return it.
 		// Note that this does not make a copy.
 		return rows;
 	} else {
@@ -27,32 +27,7 @@ function Matrix(rows, cols, init = NaN) {
 	}
 }
 
-// Currently only supports 4x4.
-// function MatrixZero() {
-// 	return [
-// 		[0.0, 0.0, 0.0, 0.0],
-// 		[0.0, 0.0, 0.0, 0.0],
-// 		[0.0, 0.0, 0.0, 0.0],
-// 		[0.0, 0.0, 0.0, 0.0],
-// 	];
-// }
-
-function Matrix22(m) {
-	// Note that this will not create new objects.
-	return m;
-}
-
-function Matrix33(m) {
-	// Note that this will not create new objects.
-	return m;
-}
-
-function Matrix44(m) {
-	// Note that this will not create new objects.
-	return m;
-}
-
-const IDENTITY_44 = Matrix44([
+const IDENTITY_44 = Matrix([
 	[1.0, 0.0, 0.0, 0.0],
 	[0.0, 1.0, 0.0, 0.0],
 	[0.0, 0.0, 1.0, 0.0],
@@ -155,21 +130,21 @@ function submatrix(m, rowToSkip, colToSkip) {
 	// Submatrix is always one smaller than the input.
 	let sub = Matrix(rows - 1, cols - 1, 0.0);
 
-	let destRow = 0;
-	for (let row = 0; row < rows; ++row, ++destRow) {
+	let subRow = 0;
+	for (let row = 0; row < rows; ++row, ++subRow) {
 		if (row === rowToSkip) {
 			// Avoid making a "gap" row in the result matrix.
-			--destRow;
+			--subRow;
 			continue;
 		}
-		let destCol = 0;
-		for (let col = 0; col < cols; ++col, ++destCol) {
+		let subCol = 0;
+		for (let col = 0; col < cols; ++col, ++subCol) {
 			if (col === colToSkip) {
 				// Avoid making a "gap" column in the result matrix.
-				--destCol;
+				--subCol;
 				continue;
 			}
-			sub[destRow][destCol] = m[row][col];
+			sub[subRow][subCol] = m[row][col];
 		}
 	}
 
@@ -209,8 +184,8 @@ function inverse(m) {
 
 	for (let row = 0; row < rows; ++row) {
 		for (let col = 0; col < cols; ++col) {
-			const c = cofactor(m, row, col);
-			inv[col][row] = c / det; // Transpose on the fly.
+			const cof = cofactor(m, row, col);
+			inv[col][row] = cof / det; // Transpose on the fly, [col][row].
 		}
 	}
 
@@ -220,9 +195,6 @@ function inverse(m) {
 module.exports = {
 	IDENTITY_44,
 	Matrix,
-	Matrix22,
-	Matrix33,
-	Matrix44,
 	equal,
 	mult,
 	multTuple,
