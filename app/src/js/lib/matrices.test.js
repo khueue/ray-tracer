@@ -5,7 +5,7 @@ const matrices = require('./matrices');
 const tuples = require('./tuples');
 
 test('construct 2x2 matrix', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[-3.0, 5.0], // prettier-ignore
 		[1.0, -2.0],
 	]);
@@ -19,7 +19,7 @@ test('construct 2x2 matrix', function(t) {
 });
 
 test('construct 3x3 matrix', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[-3.0, 5.0, 0.0],
 		[1.0, -2.0, -7.0],
 		[0.0, 1.0, 1.0],
@@ -33,7 +33,7 @@ test('construct 3x3 matrix', function(t) {
 });
 
 test('construct 4x4 matrix', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[1.0, 2.0, 3.0, 4.0],
 		[5.5, 6.5, 7.5, 8.5],
 		[9.0, 10.0, 11.0, 12.0],
@@ -52,13 +52,13 @@ test('construct 4x4 matrix', function(t) {
 });
 
 test('same size, equal matrices', function(t) {
-	const a = matrices.Matrix([
+	const a = new matrices.Matrix([
 		[1.0, 2.0, 3.0, 4.0],
 		[5.5, 6.5, 7.5, 8.5],
 		[9.0, 10.0, 11.0, 12.0],
 		[13.5, 14.5, 15.5, 16.5],
 	]);
-	const b = matrices.Matrix([
+	const b = new matrices.Matrix([
 		[1.0, 2.0, 3.0, 4.0],
 		[5.5, 6.5, 7.5, 8.5],
 		[9.0, 10.0, 11.0, 12.0],
@@ -71,13 +71,13 @@ test('same size, equal matrices', function(t) {
 });
 
 test('same size, non-equal matrices', function(t) {
-	const a = matrices.Matrix([
+	const a = new matrices.Matrix([
 		[1.0, 2.0, 3.0, 4.0],
 		[5.5, 6.5, 7.5, 8.5],
 		[9.0, 10.0, 11.0, 12.0],
 		[13.5, 14.5, 15.5, 16.5],
 	]);
-	const b = matrices.Matrix([
+	const b = new matrices.Matrix([
 		[1.0, 2.0, 3.0, 4.0],
 		[5.5, 6.5, 7.5, 8.5],
 		[9.0, 10.0, 11.0, 12.0],
@@ -90,11 +90,11 @@ test('same size, non-equal matrices', function(t) {
 });
 
 test('different size matrices', function(t) {
-	const a = matrices.Matrix([
+	const a = new matrices.Matrix([
 		[1.0, 2.0], // prettier-ignore
 		[5.5, 6.5],
 	]);
-	const b = matrices.Matrix([
+	const b = new matrices.Matrix([
 		[1.0, 2.0, 3.0, 4.0],
 		[5.5, 6.5, 7.5, 8.5],
 		[9.0, 10.0, 11.0, 12.0],
@@ -107,13 +107,13 @@ test('different size matrices', function(t) {
 });
 
 test('matrix mult, 4x4', function(t) {
-	const a = matrices.Matrix([
+	const a = new matrices.Matrix([
 		[1.0, 2.0, 3.0, 4.0],
 		[5.0, 6.0, 7.0, 8.0],
 		[9.0, 8.0, 7.0, 6.0],
 		[5.0, 4.0, 3.0, 2.0],
 	]);
-	const b = matrices.Matrix([
+	const b = new matrices.Matrix([
 		[-2.0, 1.0, 2.0, 3.0],
 		[3.0, 2.0, 1.0, -1.0],
 		[4.0, 3.0, 6.0, 5.0],
@@ -122,7 +122,7 @@ test('matrix mult, 4x4', function(t) {
 
 	const actual = matrices.mult(a, b);
 
-	const expected = matrices.Matrix([
+	const expected = new matrices.Matrix([
 		[20.0, 22.0, 50.0, 48.0],
 		[44.0, 54.0, 114.0, 108.0],
 		[40.0, 58.0, 110.0, 102.0],
@@ -135,7 +135,7 @@ test('matrix mult, 4x4', function(t) {
 });
 
 test('matrix mult, by tuple', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[1.0, 2.0, 3.0, 4.0],
 		[2.0, 4.0, 4.0, 2.0],
 		[8.0, 6.0, 4.0, 1.0],
@@ -152,7 +152,7 @@ test('matrix mult, by tuple', function(t) {
 });
 
 test('matrix mult, by identity', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[0.0, 1.0, 2.0, 4.0],
 		[1.0, 2.0, 4.0, 8.0],
 		[2.0, 4.0, 8.0, 16.0],
@@ -179,7 +179,7 @@ test('identity mult, by tuple', function(t) {
 });
 
 test('transpose matrix', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[0.0, 9.0, 3.0, 0.0],
 		[9.0, 8.0, 0.0, 8.0],
 		[1.0, 8.0, 5.0, 3.0],
@@ -188,7 +188,7 @@ test('transpose matrix', function(t) {
 
 	const actual = matrices.transpose(m);
 
-	const expected = matrices.Matrix([
+	const expected = new matrices.Matrix([
 		[0.0, 9.0, 1.0, 0.0],
 		[9.0, 8.0, 8.0, 0.0],
 		[3.0, 0.0, 5.0, 5.0],
@@ -212,7 +212,7 @@ test('transpose identity matrix', function(t) {
 });
 
 test('determinant of 2x2', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[1.0, 5.0], // prettier-ignore
 		[-3.0, 2.0],
 	]);
@@ -226,7 +226,7 @@ test('determinant of 2x2', function(t) {
 });
 
 test('submatrix of 3x3 is 2x2', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[1.0, 5.0, 0.0],
 		[-3.0, 2.0, 7.0],
 		[0.0, 6.0, -3.0],
@@ -234,7 +234,7 @@ test('submatrix of 3x3 is 2x2', function(t) {
 
 	const actual = matrices.submatrix(m, 0, 2);
 
-	const expected = matrices.Matrix([
+	const expected = new matrices.Matrix([
 		[-3.0, 2.0], // prettier-ignore
 		[0.0, 6.0],
 	]);
@@ -245,7 +245,7 @@ test('submatrix of 3x3 is 2x2', function(t) {
 });
 
 test('submatrix of 4x4 is 3x3', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[-6.0, 1.0, 1.0, 6.0],
 		[-8.0, 5.0, 8.0, 6.0],
 		[-1.0, 0.0, 8.0, 2.0],
@@ -254,7 +254,7 @@ test('submatrix of 4x4 is 3x3', function(t) {
 
 	const actual = matrices.submatrix(m, 2, 1);
 
-	const expected = matrices.Matrix([
+	const expected = new matrices.Matrix([
 		[-6.0, 1.0, 6.0],
 		[-8.0, 8.0, 6.0],
 		[-7.0, -1.0, 1.0],
@@ -266,7 +266,7 @@ test('submatrix of 4x4 is 3x3', function(t) {
 });
 
 test('a minor of 3x3', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[3.0, 5.0, 0.0],
 		[2.0, -1.0, -7.0],
 		[6.0, -1.0, 5.0],
@@ -283,7 +283,7 @@ test('a minor of 3x3', function(t) {
 });
 
 test('a cofactor of 3x3', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[3.0, 5.0, 0.0],
 		[2.0, -1.0, -7.0],
 		[6.0, -1.0, 5.0],
@@ -299,7 +299,7 @@ test('a cofactor of 3x3', function(t) {
 });
 
 test('determinant of 3x3', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[1.0, 2.0, 6.0],
 		[-5.0, 8.0, -4.0],
 		[2.0, 6.0, 4.0],
@@ -314,7 +314,7 @@ test('determinant of 3x3', function(t) {
 });
 
 test('determinant of 4x4', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[-2.0, -8.0, 3.0, 5.0],
 		[-3.0, 1.0, 7.0, 3.0],
 		[1.0, 2.0, -9.0, 6.0],
@@ -331,7 +331,7 @@ test('determinant of 4x4', function(t) {
 });
 
 test('matrix is invertible', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[6.0, 4.0, 4.0, 4.0],
 		[5.0, 5.0, 7.0, 6.0],
 		[4.0, -9.0, 3.0, -7.0],
@@ -345,7 +345,7 @@ test('matrix is invertible', function(t) {
 });
 
 test('matrix is not invertible', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[-4.0, 2.0, -2.0, -3.0],
 		[9.0, 6.0, 2.0, 6.0],
 		[0.0, -5.0, 1.0, -5.0],
@@ -359,7 +359,7 @@ test('matrix is not invertible', function(t) {
 });
 
 test('inverse of matrix', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[-5.0, 2.0, 6.0, -8.0],
 		[1.0, -5.0, 1.0, 8.0],
 		[7.0, 7.0, -6.0, -7.0],
@@ -376,7 +376,7 @@ test('inverse of matrix', function(t) {
 	t.ok(numbers.equal(matrices.cofactor(m, 3, 2), 105.0));
 	t.ok(numbers.equal(inv[2][3], 105.0 / 532.0));
 
-	const expected = matrices.Matrix([
+	const expected = new matrices.Matrix([
 		[0.21805, 0.45113, 0.2406, -0.04511],
 		[-0.80827, -1.45677, -0.44361, 0.52068],
 		[-0.07895, -0.22368, -0.05263, 0.19737],
@@ -389,7 +389,7 @@ test('inverse of matrix', function(t) {
 });
 
 test('inverse can fail', function(t) {
-	const m = matrices.Matrix([
+	const m = new matrices.Matrix([
 		[-4.0, 2.0, -2.0, -3.0],
 		[9.0, 6.0, 2.0, 6.0],
 		[0.0, -5.0, 1.0, -5.0],

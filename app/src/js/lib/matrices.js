@@ -5,27 +5,31 @@ const tuples = require('./tuples');
  * General purpose matrix constructor supporting two forms:
  *
  * Literal:
- * - Matrix([[...], ...])
+ * - new Matrix([[...], ...])
  *
  * Dimensions and init value:
- * - Matrix(4, 1, 0.0)
+ * - new Matrix(4, 1, 0.0)
  */
 function Matrix(rows, cols, init = NaN) {
+	const self = this;
 	if (Array.isArray(rows)) {
-		// Assume an array representing a matrix and just return it.
-		// Note that this does not make a copy.
-		return rows;
+		// Assume rows is an array representing a matrix literal.
+		self.numRows = rows.length;
+		self.numCols = rows[0].length;
+		for (let row = 0; row < self.numRows; ++row) {
+			self[row] = rows[row];
+		}
 	} else {
 		// Construct new matrix from dimensions and init value.
-		let m = new Array(rows);
-		for (let row = 0; row < rows; ++row) {
-			m[row] = new Array(cols).fill(init);
+		self.numRows = rows;
+		self.numCols = cols;
+		for (let row = 0; row < self.numRows; ++row) {
+			self[row] = new Array(self.numCols).fill(init);
 		}
-		return m;
 	}
 }
 
-const IDENTITY_44 = Matrix([
+const IDENTITY_44 = new Matrix([
 	[1.0, 0.0, 0.0, 0.0],
 	[0.0, 1.0, 0.0, 0.0],
 	[0.0, 0.0, 1.0, 0.0],
@@ -33,13 +37,11 @@ const IDENTITY_44 = Matrix([
 ]);
 
 function equal(a, b) {
-	if (a.length !== b.length) {
+	if (a.numRows !== b.numRows) {
 		return false;
 	} else {
-		const rows = a.length;
-		const cols = a[0].length;
-		for (let row = 0; row < rows; ++row) {
-			for (let col = 0; col < cols; ++col) {
+		for (let row = 0; row < a.numRows; ++row) {
+			for (let col = 0; col < a.numCols; ++col) {
 				if (!numbers.equal(a[row][col], b[row][col])) {
 					return false;
 				}
@@ -53,13 +55,11 @@ function equal(a, b) {
  * Only supports 4-col x 4-row matrices.
  */
 function mult(a, b) {
-	const rows = a.length; // Rows of a.
-	const cols = b[0].length; // Cols of b.
+	// Rows of a, columns of b.
+	let m = new Matrix(a.numRows, b.numCols, 0.0);
 
-	let m = Matrix(rows, cols, 0.0);
-
-	for (let row = 0; row < rows; ++row) {
-		for (let col = 0; col < cols; ++col) {
+	for (let row = 0; row < a.numRows; ++row) {
+		for (let col = 0; col < b.numCols; ++col) {
 			m[row][col] =
 				a[row][0] * b[0][col] +
 				a[row][1] * b[1][col] +
@@ -72,7 +72,7 @@ function mult(a, b) {
 }
 
 function tupleAsMatrix(t) {
-	return Matrix([
+	return new Matrix([
 		[t.x], // prettier-ignore
 		[t.y],
 		[t.z],
@@ -94,13 +94,10 @@ function multTuple(a, t) {
 }
 
 function transpose(m) {
-	const rows = m.length;
-	const cols = m[0].length;
+	let trans = new Matrix(m.numRows, m.numCols, 0.0);
 
-	let trans = Matrix(rows, cols, 0.0);
-
-	for (let row = 0; row < rows; ++row) {
-		for (let col = 0; col < cols; ++col) {
+	for (let row = 0; row < m.numRows; ++row) {
+		for (let col = 0; col < m.numCols; ++col) {
 			trans[col][row] = m[row][col];
 		}
 	}
@@ -109,12 +106,11 @@ function transpose(m) {
 }
 
 function determinant(m) {
-	if (m.length === 2) {
+	if (m.numRows === 2) {
 		return m[0][0] * m[1][1] - m[0][1] * m[1][0];
 	} else {
-		const cols = m[0].length;
 		let det = 0.0;
-		for (let col = 0; col < cols; ++col) {
+		for (let col = 0; col < m.numCols; ++col) {
 			det += m[0][col] * cofactor(m, 0, col);
 		}
 		return det;
@@ -122,21 +118,18 @@ function determinant(m) {
 }
 
 function submatrix(m, rowToSkip, colToSkip) {
-	const rows = m.length;
-	const cols = m[0].length;
-
 	// Submatrix is always one smaller than the input.
-	let sub = Matrix(rows - 1, cols - 1, 0.0);
+	let sub = new Matrix(m.numRows - 1, m.numCols - 1, 0.0);
 
 	let subRow = 0;
-	for (let row = 0; row < rows; ++row, ++subRow) {
+	for (let row = 0; row < m.numRows; ++row, ++subRow) {
 		if (row === rowToSkip) {
 			// Avoid making a "gap" row in the result matrix.
 			--subRow;
 			continue;
 		}
 		let subCol = 0;
-		for (let col = 0; col < cols; ++col, ++subCol) {
+		for (let col = 0; col < m.numCols; ++col, ++subCol) {
 			if (col === colToSkip) {
 				// Avoid making a "gap" column in the result matrix.
 				--subCol;
@@ -175,15 +168,12 @@ function inverse(m) {
 		throw new Error('inverse() requires invertible matrix');
 	}
 
-	const rows = m.length;
-	const cols = m[0].length;
+	let inv = new Matrix(m.numRows, m.numCols, 0.0);
 
-	let inv = Matrix(rows, cols, 0.0);
-
-	for (let row = 0; row < rows; ++row) {
-		for (let col = 0; col < cols; ++col) {
+	for (let row = 0; row < m.numRows; ++row) {
+		for (let col = 0; col < m.numCols; ++col) {
 			const cof = cofactor(m, row, col);
-			inv[col][row] = cof / det; // Transpose on the fly, [col][row].
+			inv[col][row] = cof / det; // Transpose on the fly: [col][row].
 		}
 	}
 
