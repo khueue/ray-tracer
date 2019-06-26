@@ -27,7 +27,7 @@ test('tuple with w=0.0 is a vector', function(t) {
 	t.end();
 });
 
-test('point() creates a point', function(t) {
+test('Point() creates a point', function(t) {
 	const a = new tuples.Point(4, -4, 3);
 	const b = new tuples.Tuple(4, -4, 3, 1);
 	t.ok(a.equal(b));
