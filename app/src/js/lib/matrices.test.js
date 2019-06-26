@@ -18,6 +18,19 @@ test('construct 2x2 matrix', function(t) {
 	t.end();
 });
 
+test('matrix keeps track of size', function(t) {
+	const m = new matrices.Matrix([
+		[0.0, 0.0], // prettier-ignore
+		[0.0, 0.0],
+	]);
+
+	t.ok(m.numRows === 2);
+	t.ok(m.numCols === 2);
+	t.ok(m.equalSize(m));
+
+	t.end();
+});
+
 test('construct 3x3 matrix', function(t) {
 	const m = new matrices.Matrix([
 		[-3.0, 5.0, 0.0],
@@ -65,7 +78,7 @@ test('same size, equal matrices', function(t) {
 		[13.5, 14.5, 15.5, 16.5],
 	]);
 
-	t.ok(matrices.equal(a, b));
+	t.ok(a.equal(b));
 
 	t.end();
 });
@@ -84,7 +97,7 @@ test('same size, non-equal matrices', function(t) {
 		[13.5, 14.5, 15.5, 17.5], // Diff at last.
 	]);
 
-	t.ok(!matrices.equal(a, b));
+	t.ok(!a.equal(b));
 
 	t.end();
 });
@@ -101,7 +114,7 @@ test('different size matrices', function(t) {
 		[13.5, 14.5, 15.5, 17.5],
 	]);
 
-	t.ok(!matrices.equal(a, b));
+	t.ok(!a.equal(b));
 
 	t.end();
 });
@@ -120,7 +133,7 @@ test('matrix mult, 4x4', function(t) {
 		[1.0, 2.0, 7.0, 8.0],
 	]);
 
-	const actual = matrices.mult(a, b);
+	const actual = a.multiply(b);
 
 	const expected = new matrices.Matrix([
 		[20.0, 22.0, 50.0, 48.0],
@@ -129,7 +142,7 @@ test('matrix mult, 4x4', function(t) {
 		[16.0, 26.0, 46.0, 42.0],
 	]);
 
-	t.ok(matrices.equal(actual, expected));
+	t.ok(actual.equal(expected));
 
 	t.end();
 });
@@ -143,7 +156,7 @@ test('matrix mult, by tuple', function(t) {
 	]);
 	const tup = tuples.Tuple(1.0, 2.0, 3.0, 1.0);
 
-	const actual = matrices.multTuple(m, tup);
+	const actual = m.multiplyByTuple(tup);
 	const expected = tuples.Tuple(18.0, 24.0, 33.0, 1.0);
 
 	t.ok(tuples.equal(actual, expected));
@@ -159,10 +172,10 @@ test('matrix mult, by identity', function(t) {
 		[4.0, 8.0, 16.0, 32.0],
 	]);
 
-	const actual = matrices.mult(m, matrices.IDENTITY_44);
+	const actual = m.multiply(matrices.IDENTITY_44);
 	const expected = m;
 
-	t.ok(matrices.equal(actual, expected));
+	t.ok(actual.equal(expected));
 
 	t.end();
 });
@@ -170,7 +183,7 @@ test('matrix mult, by identity', function(t) {
 test('identity mult, by tuple', function(t) {
 	const tup = tuples.Tuple(1.0, 2.0, 3.0, 4.0);
 
-	const actual = matrices.multTuple(matrices.IDENTITY_44, tup);
+	const actual = matrices.IDENTITY_44.multiplyByTuple(tup);
 	const expected = tup;
 
 	t.ok(tuples.equal(actual, expected));
@@ -186,7 +199,7 @@ test('transpose matrix', function(t) {
 		[0.0, 0.0, 5.0, 8.0],
 	]);
 
-	const actual = matrices.transpose(m);
+	const actual = m.transpose();
 
 	const expected = new matrices.Matrix([
 		[0.0, 9.0, 1.0, 0.0],
@@ -195,7 +208,7 @@ test('transpose matrix', function(t) {
 		[0.0, 8.0, 3.0, 8.0],
 	]);
 
-	t.ok(matrices.equal(actual, expected));
+	t.ok(actual.equal(expected));
 
 	t.end();
 });
@@ -203,10 +216,10 @@ test('transpose matrix', function(t) {
 test('transpose identity matrix', function(t) {
 	const m = matrices.IDENTITY_44;
 
-	const actual = matrices.transpose(m);
+	const actual = m.transpose();
 	const expected = matrices.IDENTITY_44;
 
-	t.ok(matrices.equal(actual, expected));
+	t.ok(actual.equal(expected));
 
 	t.end();
 });
@@ -217,7 +230,7 @@ test('determinant of 2x2', function(t) {
 		[-3.0, 2.0],
 	]);
 
-	const actual = matrices.determinant(m);
+	const actual = m.determinant();
 	const expected = 17.0;
 
 	t.ok(numbers.equal(actual, expected));
@@ -232,14 +245,14 @@ test('submatrix of 3x3 is 2x2', function(t) {
 		[0.0, 6.0, -3.0],
 	]);
 
-	const actual = matrices.submatrix(m, 0, 2);
+	const actual = m.submatrix(0, 2);
 
 	const expected = new matrices.Matrix([
 		[-3.0, 2.0], // prettier-ignore
 		[0.0, 6.0],
 	]);
 
-	t.ok(matrices.equal(actual, expected));
+	t.ok(actual.equal(expected));
 
 	t.end();
 });
@@ -252,7 +265,7 @@ test('submatrix of 4x4 is 3x3', function(t) {
 		[-7.0, 1.0, -1.0, 1.0],
 	]);
 
-	const actual = matrices.submatrix(m, 2, 1);
+	const actual = m.submatrix(2, 1);
 
 	const expected = new matrices.Matrix([
 		[-6.0, 1.0, 6.0],
@@ -260,7 +273,7 @@ test('submatrix of 4x4 is 3x3', function(t) {
 		[-7.0, -1.0, 1.0],
 	]);
 
-	t.ok(matrices.equal(actual, expected));
+	t.ok(actual.equal(expected));
 
 	t.end();
 });
@@ -272,11 +285,11 @@ test('a minor of 3x3', function(t) {
 		[6.0, -1.0, 5.0],
 	]);
 
-	const sub = matrices.submatrix(m, 1, 0);
-	const det = matrices.determinant(sub);
+	const sub = m.submatrix(1, 0);
+	const det = sub.determinant();
 	t.ok(numbers.equal(det, 25.0));
 
-	const minor = matrices.minor(m, 1, 0);
+	const minor = m.minor(1, 0);
 	t.ok(numbers.equal(minor, 25.0));
 
 	t.end();
@@ -289,11 +302,11 @@ test('a cofactor of 3x3', function(t) {
 		[6.0, -1.0, 5.0],
 	]);
 
-	t.ok(numbers.equal(matrices.minor(m, 0, 0), -12.0));
-	t.ok(numbers.equal(matrices.cofactor(m, 0, 0), -12.0));
+	t.ok(numbers.equal(m.minor(0, 0), -12.0));
+	t.ok(numbers.equal(m.cofactor(0, 0), -12.0));
 
-	t.ok(numbers.equal(matrices.minor(m, 1, 0), 25.0));
-	t.ok(numbers.equal(matrices.cofactor(m, 1, 0), -25.0));
+	t.ok(numbers.equal(m.minor(1, 0), 25.0));
+	t.ok(numbers.equal(m.cofactor(1, 0), -25.0));
 
 	t.end();
 });
@@ -305,10 +318,10 @@ test('determinant of 3x3', function(t) {
 		[2.0, 6.0, 4.0],
 	]);
 
-	t.ok(numbers.equal(matrices.cofactor(m, 0, 0), 56.0));
-	t.ok(numbers.equal(matrices.cofactor(m, 0, 1), 12.0));
-	t.ok(numbers.equal(matrices.cofactor(m, 0, 2), -46.0));
-	t.ok(numbers.equal(matrices.determinant(m), -196.0));
+	t.ok(numbers.equal(m.cofactor(0, 0), 56.0));
+	t.ok(numbers.equal(m.cofactor(0, 1), 12.0));
+	t.ok(numbers.equal(m.cofactor(0, 2), -46.0));
+	t.ok(numbers.equal(m.determinant(), -196.0));
 
 	t.end();
 });
@@ -321,11 +334,11 @@ test('determinant of 4x4', function(t) {
 		[-6.0, 7.0, 7.0, -9.0],
 	]);
 
-	t.ok(numbers.equal(matrices.cofactor(m, 0, 0), 690.0));
-	t.ok(numbers.equal(matrices.cofactor(m, 0, 1), 447.0));
-	t.ok(numbers.equal(matrices.cofactor(m, 0, 2), 210.0));
-	t.ok(numbers.equal(matrices.cofactor(m, 0, 3), 51.0));
-	t.ok(numbers.equal(matrices.determinant(m), -4071.0));
+	t.ok(numbers.equal(m.cofactor(0, 0), 690.0));
+	t.ok(numbers.equal(m.cofactor(0, 1), 447.0));
+	t.ok(numbers.equal(m.cofactor(0, 2), 210.0));
+	t.ok(numbers.equal(m.cofactor(0, 3), 51.0));
+	t.ok(numbers.equal(m.determinant(), -4071.0));
 
 	t.end();
 });
@@ -338,8 +351,8 @@ test('matrix is invertible', function(t) {
 		[9.0, 1.0, 7.0, -6.0],
 	]);
 
-	t.ok(numbers.equal(matrices.determinant(m), -2120.0));
-	t.ok(matrices.invertible(m));
+	t.ok(numbers.equal(m.determinant(), -2120.0));
+	t.ok(m.invertible());
 
 	t.end();
 });
@@ -352,8 +365,8 @@ test('matrix is not invertible', function(t) {
 		[0.0, 0.0, 0.0, 0.0],
 	]);
 
-	t.ok(numbers.equal(matrices.determinant(m), 0.0));
-	t.ok(!matrices.invertible(m));
+	t.ok(numbers.equal(m.determinant(), 0.0));
+	t.ok(!m.invertible());
 
 	t.end();
 });
@@ -366,14 +379,14 @@ test('inverse of matrix', function(t) {
 		[1.0, -3.0, 7.0, 4.0],
 	]);
 
-	const inv = matrices.inverse(m);
+	const inv = m.inverse();
 
-	t.ok(numbers.equal(matrices.determinant(m), 532.0));
+	t.ok(numbers.equal(m.determinant(), 532.0));
 
-	t.ok(numbers.equal(matrices.cofactor(m, 2, 3), -160.0));
+	t.ok(numbers.equal(m.cofactor(2, 3), -160.0));
 	t.ok(numbers.equal(inv[3][2], -160.0 / 532.0));
 
-	t.ok(numbers.equal(matrices.cofactor(m, 3, 2), 105.0));
+	t.ok(numbers.equal(m.cofactor(3, 2), 105.0));
 	t.ok(numbers.equal(inv[2][3], 105.0 / 532.0));
 
 	const expected = new matrices.Matrix([
@@ -383,7 +396,7 @@ test('inverse of matrix', function(t) {
 		[-0.52256, -0.81391, -0.30075, 0.30639],
 	]);
 
-	t.ok(matrices.equal(inv, expected));
+	t.ok(inv.equal(expected));
 
 	t.end();
 });
@@ -396,10 +409,10 @@ test('inverse can fail', function(t) {
 		[0.0, 0.0, 0.0, 0.0],
 	]);
 
-	t.ok(!matrices.invertible(m));
+	t.ok(!m.invertible());
 
 	t.throws(function() {
-		matrices.inverse(m);
+		m.inverse();
 	}, Error);
 
 	t.end();
