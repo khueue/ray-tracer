@@ -119,6 +119,13 @@ test('different size matrices', function(t) {
 	t.end();
 });
 
+test('identity constant can not be changed', function(t) {
+	matrices.IDENTITY_44[0][0] = 0.0;
+	t.ok(numbers.equal(matrices.IDENTITY_44[0][0], 1.0));
+
+	t.end();
+});
+
 test('matrix mult, 4x4', function(t) {
 	const a = new matrices.Matrix([
 		[1.0, 2.0, 3.0, 4.0],

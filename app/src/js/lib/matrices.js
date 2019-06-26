@@ -176,12 +176,16 @@ function tupleToMatrix(t) {
 	]);
 }
 
-const IDENTITY_44 = new Matrix([
-	[1.0, 0.0, 0.0, 0.0],
-	[0.0, 1.0, 0.0, 0.0],
-	[0.0, 0.0, 1.0, 0.0],
-	[0.0, 0.0, 0.0, 1.0],
-]);
+const IDENTITY_44 = Object.freeze(
+	new Matrix(
+		Object.freeze([
+			Object.freeze([1.0, 0.0, 0.0, 0.0]),
+			Object.freeze([0.0, 1.0, 0.0, 0.0]),
+			Object.freeze([0.0, 0.0, 1.0, 0.0]),
+			Object.freeze([0.0, 0.0, 0.0, 1.0]),
+		])
+	)
+);
 
 module.exports = {
 	IDENTITY_44,
