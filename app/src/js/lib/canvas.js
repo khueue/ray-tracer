@@ -5,7 +5,7 @@ function Canvas(width, height) {
 	for (let x = 0; x < width; ++x) {
 		pixels[x] = [];
 		for (let y = 0; y < height; ++y) {
-			pixels[x][y] = colors.Color(0.0, 0.0, 0.0);
+			pixels[x][y] = new colors.Color(0.0, 0.0, 0.0);
 		}
 	}
 	return {

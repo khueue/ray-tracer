@@ -27,7 +27,7 @@ export default {
 
 			for (let x = 0; x < this.canvas.width; ++x) {
 				for (let y = 0; y < this.canvas.height; ++y) {
-					const c = colors.Color(
+					const c = new colors.Color(
 						getRandomInt(255),
 						getRandomInt(255),
 						getRandomInt(255)

@@ -5,7 +5,7 @@ const numbers = require('./numbers');
 const { Color, add, sub, mult, equal } = require('./colors');
 
 test('color are (red, green, blue) tuples', function(t) {
-	const c = Color(-0.5, 0.4, 1.7);
+	const c = new Color(-0.5, 0.4, 1.7);
 	t.ok(numbers.equal(c.red, -0.5));
 	t.ok(numbers.equal(c.green, 0.4));
 	t.ok(numbers.equal(c.blue, 1.7));
@@ -14,7 +14,7 @@ test('color are (red, green, blue) tuples', function(t) {
 });
 
 test('color are (red, green, blue) tuples', function(t) {
-	const c = Color(-0.5, 0.4, 1.7);
+	const c = new Color(-0.5, 0.4, 1.7);
 	t.ok(numbers.equal(c.red, -0.5));
 	t.ok(numbers.equal(c.green, 0.4));
 	t.ok(numbers.equal(c.blue, 1.7));
@@ -23,9 +23,9 @@ test('color are (red, green, blue) tuples', function(t) {
 });
 
 test('adding colors', function(t) {
-	const a = Color(0.9, 0.6, 0.75);
-	const b = Color(0.7, 0.1, 0.25);
-	const result = add(a, b);
+	const a = new Color(0.9, 0.6, 0.75);
+	const b = new Color(0.7, 0.1, 0.25);
+	const result = a.add(b);
 	t.ok(numbers.equal(result.red, 1.6));
 	t.ok(numbers.equal(result.green, 0.7));
 	t.ok(numbers.equal(result.blue, 1.0));
@@ -34,9 +34,9 @@ test('adding colors', function(t) {
 });
 
 test('subtracting colors', function(t) {
-	const a = Color(0.9, 0.6, 0.75);
-	const b = Color(0.7, 0.1, 0.25);
-	const result = sub(a, b);
+	const a = new Color(0.9, 0.6, 0.75);
+	const b = new Color(0.7, 0.1, 0.25);
+	const result = a.subtract(b);
 	t.ok(numbers.equal(result.red, 0.2));
 	t.ok(numbers.equal(result.green, 0.5));
 	t.ok(numbers.equal(result.blue, 0.5));
@@ -45,9 +45,9 @@ test('subtracting colors', function(t) {
 });
 
 test('multiplying colors', function(t) {
-	const a = Color(1.0, 0.2, 0.4);
-	const b = Color(0.9, 1.0, 0.1);
-	const result = mult(a, b);
+	const a = new Color(1.0, 0.2, 0.4);
+	const b = new Color(0.9, 1.0, 0.1);
+	const result = a.multiply(b);
 	t.ok(numbers.equal(result.red, 0.9));
 	t.ok(numbers.equal(result.green, 0.2));
 	t.ok(numbers.equal(result.blue, 0.04));
@@ -56,9 +56,9 @@ test('multiplying colors', function(t) {
 });
 
 test('comparing colors', function(t) {
-	const a = Color(1.0, 0.2, 0.4);
-	const b = Color(1.0, 0.2, 0.4);
-	t.ok(equal(a, b));
+	const a = new Color(1.0, 0.2, 0.4);
+	const b = new Color(1.0, 0.2, 0.4);
+	t.ok(a.equal(b));
 
 	t.end();
 });
