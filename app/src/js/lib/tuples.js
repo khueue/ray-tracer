@@ -1,94 +1,92 @@
 const numbers = require('./numbers');
 
 function Tuple(x, y, z, w) {
-	return {
-		x,
-		y,
-		z,
-		w,
-	};
+	this.x = x;
+	this.y = y;
+	this.z = z;
+	this.w = w;
 }
 
 function Point(x, y, z) {
-	return Tuple(x, y, z, 1.0);
+	return new Tuple(x, y, z, 1.0);
 }
 
 function Vector(x, y, z) {
-	return Tuple(x, y, z, 0.0);
+	return new Tuple(x, y, z, 0.0);
 }
 
-function equal(a, b) {
+Tuple.prototype.equal = function(b) {
 	return (
-		numbers.equal(a.x, b.x) &&
-		numbers.equal(a.y, b.y) &&
-		numbers.equal(a.z, b.z) &&
-		numbers.equal(a.w, b.w)
+		numbers.equal(this.x, b.x) &&
+		numbers.equal(this.y, b.y) &&
+		numbers.equal(this.z, b.z) &&
+		numbers.equal(this.w, b.w)
 	);
-}
+};
 
-function isPoint(a) {
-	return numbers.equal(a.w, 1.0);
-}
+Tuple.prototype.isPoint = function() {
+	return numbers.equal(this.w, 1.0);
+};
 
-function isVector(a) {
-	return numbers.equal(a.w, 0.0);
-}
+Tuple.prototype.isVector = function() {
+	return numbers.equal(this.w, 0.0);
+};
 
-function add(a, b) {
-	return Tuple(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
-}
+Tuple.prototype.add = function(b) {
+	return new Tuple(this.x + b.x, this.y + b.y, this.z + b.z, this.w + b.w);
+};
 
-function sub(a, b) {
-	return Tuple(a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w);
-}
+Tuple.prototype.subtract = function(b) {
+	return new Tuple(this.x - b.x, this.y - b.y, this.z - b.z, this.w - b.w);
+};
 
-function mult(a, s) {
-	return Tuple(a.x * s, a.y * s, a.z * s, a.w * s);
-}
-
-function div(a, s) {
-	return Tuple(a.x / s, a.y / s, a.z / s, a.w / s);
-}
-
-function negate(a) {
-	return Tuple(-a.x, -a.y, -a.z, -a.w);
-}
-
-function magnitude(a) {
-	return Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z + a.w * a.w);
-}
-
-function normalize(a) {
-	const mag = magnitude(a);
-	return Tuple(a.x / mag, a.y / mag, a.z / mag, a.w / mag);
-}
-
-function dot(a, b) {
-	return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
-}
-
-function cross(a, b) {
-	return Vector(
-		a.y * b.z - a.z * b.y,
-		a.z * b.x - a.x * b.z,
-		a.x * b.y - a.y * b.x
+Tuple.prototype.multiply = function(scalar) {
+	return new Tuple(
+		this.x * scalar,
+		this.y * scalar,
+		this.z * scalar,
+		this.w * scalar
 	);
-}
+};
+
+Tuple.prototype.divide = function(scalar) {
+	return new Tuple(
+		this.x / scalar,
+		this.y / scalar,
+		this.z / scalar,
+		this.w / scalar
+	);
+};
+
+Tuple.prototype.negate = function() {
+	return new Tuple(-this.x, -this.y, -this.z, -this.w);
+};
+
+Tuple.prototype.magnitude = function() {
+	return Math.sqrt(
+		this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w
+	);
+};
+
+Tuple.prototype.normalize = function() {
+	const mag = this.magnitude();
+	return new Tuple(this.x / mag, this.y / mag, this.z / mag, this.w / mag);
+};
+
+Tuple.prototype.dot = function(b) {
+	return this.x * b.x + this.y * b.y + this.z * b.z + this.w * b.w;
+};
+
+Tuple.prototype.cross = function(b) {
+	return new Vector(
+		this.y * b.z - this.z * b.y,
+		this.z * b.x - this.x * b.z,
+		this.x * b.y - this.y * b.x
+	);
+};
 
 module.exports = {
 	Tuple,
 	Point,
 	Vector,
-	equal,
-	isPoint,
-	isVector,
-	add,
-	sub,
-	mult,
-	div,
-	negate,
-	magnitude,
-	normalize,
-	dot,
-	cross,
 };

@@ -161,12 +161,12 @@ test('matrix mult, by tuple', function(t) {
 		[8.0, 6.0, 4.0, 1.0],
 		[0.0, 0.0, 0.0, 1.0],
 	]);
-	const tup = tuples.Tuple(1.0, 2.0, 3.0, 1.0);
+	const tup = new tuples.Tuple(1.0, 2.0, 3.0, 1.0);
 
 	const actual = m.multiplyByTuple(tup);
-	const expected = tuples.Tuple(18.0, 24.0, 33.0, 1.0);
+	const expected = new tuples.Tuple(18.0, 24.0, 33.0, 1.0);
 
-	t.ok(tuples.equal(actual, expected));
+	t.ok(actual.equal(expected));
 
 	t.end();
 });
@@ -188,12 +188,12 @@ test('matrix mult, by identity', function(t) {
 });
 
 test('identity mult, by tuple', function(t) {
-	const tup = tuples.Tuple(1.0, 2.0, 3.0, 4.0);
+	const tup = new tuples.Tuple(1.0, 2.0, 3.0, 4.0);
 
 	const actual = matrices.IDENTITY_44.multiplyByTuple(tup);
 	const expected = tup;
 
-	t.ok(tuples.equal(actual, expected));
+	t.ok(actual.equal(expected));
 
 	t.end();
 });

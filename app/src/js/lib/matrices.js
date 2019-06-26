@@ -164,7 +164,7 @@ Matrix.prototype.inverse = function() {
  * Only supports 4x1 matrices.
  */
 Matrix.prototype.toTuple = function() {
-	return tuples.Tuple(this[0][0], this[1][0], this[2][0], this[3][0]);
+	return new tuples.Tuple(this[0][0], this[1][0], this[2][0], this[3][0]);
 };
 
 function tupleToMatrix(t) {

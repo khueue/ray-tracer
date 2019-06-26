@@ -30,25 +30,19 @@ export default {
 			};
 		},
 		tick(env, proj) {
-			const newPos = tuples.add(proj.position, proj.velocity);
-			const newVelocity = tuples.add(
-				tuples.add(proj.velocity, env.gravity),
-				env.wind
-			);
+			const newPos = proj.position.add(proj.velocity);
+			const newVelocity = proj.velocity.add(env.gravity).add(env.wind);
 			return this.projectile(newPos, newVelocity);
 		},
 		render() {
 			const ctx = this.canvas.getContext('2d');
 			ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-			const start = tuples.Point(0, 0, 0);
-			const velocity = tuples.mult(
-				tuples.normalize(tuples.Vector(1, 1.8, 0)),
-				11.25
-			);
+			const start = new tuples.Point(0, 0, 0);
+			const velocity = (new tuples.Vector(1, 1.8, 0).normalize()).multiply(11.25);
 			let proj = this.projectile(start, velocity);
-			const gravity = tuples.Vector(0, -0.1, 0);
-			const wind = tuples.Vector(-0.01, 0, 0);
+			const gravity = new tuples.Vector(0, -0.1, 0);
+			const wind = new tuples.Vector(-0.01, 0, 0);
 			const env = this.environment(gravity, wind);
 
 			while (proj.position.y >= 0) {
