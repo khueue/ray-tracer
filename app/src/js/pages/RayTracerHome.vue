@@ -32,11 +32,11 @@ export default {
 						getRandomInt(255),
 						getRandomInt(255)
 					);
-					this.writePixel(ctx, x, y, c);
+					this.drawPixel(ctx, x, y, c);
 				}
 			}
 		},
-		writePixel(ctx, x, y, color) {
+		drawPixel(ctx, x, y, color) {
 			ctx.fillStyle = `rgb( ${color.red}, ${color.green}, ${color.blue} )`;
 			y = this.height - y - 1; // To draw from the bottom.
 			ctx.fillRect(x, y, 1, 1);
