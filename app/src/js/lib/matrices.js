@@ -53,6 +53,10 @@ Matrix.prototype.equalSize = function(b) {
  * Only supports 4-col x 4-row matrices.
  */
 Matrix.prototype.multiply = function(b) {
+	if (tuples.isTuple(b)) {
+		return this.multiplyByTuple(b);
+	}
+
 	// Result is sized as rows of this, columns of b.
 	let c = new Matrix(this.numRows, b.numCols, 0.0);
 

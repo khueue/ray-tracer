@@ -24,14 +24,6 @@ Tuple.prototype.equal = function(b) {
 	);
 };
 
-Tuple.prototype.isPoint = function() {
-	return numbers.equal(this.w, 1.0);
-};
-
-Tuple.prototype.isVector = function() {
-	return numbers.equal(this.w, 0.0);
-};
-
 Tuple.prototype.add = function(b) {
 	return new Tuple(this.x + b.x, this.y + b.y, this.z + b.z, this.w + b.w);
 };
@@ -85,8 +77,24 @@ Tuple.prototype.cross = function(b) {
 	);
 };
 
+function isTuple(a) {
+	// NOTE: Extremely basic check.
+	return typeof a.w !== 'undefined';
+}
+
+function isPoint(a) {
+	return isTuple(a) && numbers.equal(a.w, 1.0);
+}
+
+function isVector(a) {
+	return isTuple(a) && numbers.equal(a.w, 0.0);
+}
+
 module.exports = {
 	Tuple,
 	Point,
 	Vector,
+	isTuple,
+	isPoint,
+	isVector,
 };

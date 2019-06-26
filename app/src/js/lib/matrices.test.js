@@ -163,7 +163,7 @@ test('matrix mult, by tuple', function(t) {
 	]);
 	const tup = new tuples.Tuple(1.0, 2.0, 3.0, 1.0);
 
-	const actual = m.multiplyByTuple(tup);
+	const actual = m.multiply(tup);
 	const expected = new tuples.Tuple(18.0, 24.0, 33.0, 1.0);
 
 	t.ok(actual.equal(expected));
@@ -190,7 +190,7 @@ test('matrix mult, by identity', function(t) {
 test('identity mult, by tuple', function(t) {
 	const tup = new tuples.Tuple(1.0, 2.0, 3.0, 4.0);
 
-	const actual = matrices.IDENTITY_44.multiplyByTuple(tup);
+	const actual = matrices.IDENTITY_44.multiply(tup);
 	const expected = tup;
 
 	t.ok(actual.equal(expected));

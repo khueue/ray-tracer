@@ -9,8 +9,8 @@ test('tuple with w=1.0 is a point', function(t) {
 	t.ok(numbers.equal(a.y, -4.2));
 	t.ok(numbers.equal(a.z, 3.1));
 	t.ok(numbers.equal(a.w, 1.0));
-	t.ok(a.isPoint());
-	t.ok(!a.isVector());
+	t.ok(tuples.isPoint(a));
+	t.ok(!tuples.isVector(a));
 
 	t.end();
 });
@@ -21,8 +21,8 @@ test('tuple with w=0.0 is a vector', function(t) {
 	t.ok(numbers.equal(a.y, -4.2));
 	t.ok(numbers.equal(a.z, 3.1));
 	t.ok(numbers.equal(a.w, 0.0));
-	t.ok(!a.isPoint());
-	t.ok(a.isVector());
+	t.ok(!tuples.isPoint(a));
+	t.ok(tuples.isVector(a));
 
 	t.end();
 });
