@@ -58,7 +58,7 @@ Matrix.prototype.multiply = function(b) {
 	}
 
 	// Result is sized as rows of this, columns of b.
-	let c = new Matrix(this.numRows, b.numCols, 0.0);
+	let c = new Matrix(this.numRows, b.numCols, 0);
 
 	for (let row = 0; row < this.numRows; ++row) {
 		for (let col = 0; col < b.numCols; ++col) {
@@ -80,7 +80,7 @@ Matrix.prototype.multiplyByTuple = function(t) {
 };
 
 Matrix.prototype.transpose = function() {
-	let trans = new Matrix(this.numRows, this.numCols, 0.0);
+	let trans = new Matrix(this.numRows, this.numCols, 0);
 
 	for (let row = 0; row < this.numRows; ++row) {
 		for (let col = 0; col < this.numCols; ++col) {
@@ -95,7 +95,7 @@ Matrix.prototype.determinant = function() {
 	if (this.numRows === 2) {
 		return this[0][0] * this[1][1] - this[0][1] * this[1][0];
 	} else {
-		let det = 0.0;
+		let det = 0;
 		for (let col = 0; col < this.numCols; ++col) {
 			det += this[0][col] * this.cofactor(0, col);
 		}
@@ -105,7 +105,7 @@ Matrix.prototype.determinant = function() {
 
 Matrix.prototype.submatrix = function(rowToSkip, colToSkip) {
 	// Submatrix is always one smaller than the input.
-	let sub = new Matrix(this.numRows - 1, this.numCols - 1, 0.0);
+	let sub = new Matrix(this.numRows - 1, this.numCols - 1, 0);
 
 	for (let row = 0, subRow = 0; row < this.numRows; ++row, ++subRow) {
 		if (row === rowToSkip) {
@@ -141,18 +141,18 @@ Matrix.prototype.cofactor = function(rowToSkip, colToSkip) {
 };
 
 Matrix.prototype.invertible = function() {
-	return !numbers.equal(this.determinant(), 0.0);
+	return !numbers.equal(this.determinant(), 0);
 };
 
 Matrix.prototype.inverse = function() {
 	const det = this.determinant();
 
 	// Reimplement invertible() here, to avoid double computation.
-	if (numbers.equal(det, 0.0)) {
+	if (numbers.equal(det, 0)) {
 		throw new Error('inverse() requires invertible matrix');
 	}
 
-	let inv = new Matrix(this.numRows, this.numCols, 0.0);
+	let inv = new Matrix(this.numRows, this.numCols, 0);
 
 	for (let row = 0; row < this.numRows; ++row) {
 		for (let col = 0; col < this.numCols; ++col) {
@@ -183,10 +183,10 @@ function tupleToMatrix(t) {
 const IDENTITY_44 = Object.freeze(
 	new Matrix(
 		Object.freeze([
-			Object.freeze([1.0, 0.0, 0.0, 0.0]),
-			Object.freeze([0.0, 1.0, 0.0, 0.0]),
-			Object.freeze([0.0, 0.0, 1.0, 0.0]),
-			Object.freeze([0.0, 0.0, 0.0, 1.0]),
+			Object.freeze([1, 0, 0, 0]),
+			Object.freeze([0, 1, 0, 0]),
+			Object.freeze([0, 0, 1, 0]),
+			Object.freeze([0, 0, 0, 1]),
 		])
 	)
 );

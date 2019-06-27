@@ -3,24 +3,24 @@ const test = require('tap').test;
 const numbers = require('./numbers');
 const tuples = require('./tuples');
 
-test('tuple with w=1.0 is a point', function(t) {
-	const a = new tuples.Tuple(4.3, -4.2, 3.1, 1.0);
+test('tuple with w=1 is a point', function(t) {
+	const a = new tuples.Tuple(4.3, -4.2, 3.1, 1);
 	t.ok(numbers.equal(a.x, 4.3));
 	t.ok(numbers.equal(a.y, -4.2));
 	t.ok(numbers.equal(a.z, 3.1));
-	t.ok(numbers.equal(a.w, 1.0));
+	t.ok(numbers.equal(a.w, 1));
 	t.ok(tuples.isPoint(a));
 	t.ok(!tuples.isVector(a));
 
 	t.end();
 });
 
-test('tuple with w=0.0 is a vector', function(t) {
-	const a = new tuples.Tuple(4.3, -4.2, 3.1, 0.0);
+test('tuple with w=0 is a vector', function(t) {
+	const a = new tuples.Tuple(4.3, -4.2, 3.1, 0);
 	t.ok(numbers.equal(a.x, 4.3));
 	t.ok(numbers.equal(a.y, -4.2));
 	t.ok(numbers.equal(a.z, 3.1));
-	t.ok(numbers.equal(a.w, 0.0));
+	t.ok(numbers.equal(a.w, 0));
 	t.ok(!tuples.isPoint(a));
 	t.ok(tuples.isVector(a));
 

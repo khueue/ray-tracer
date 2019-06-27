@@ -10,7 +10,7 @@ test('creating canvas', function(t) {
 	t.ok(c.height === 20);
 
 	function isBlack(c) {
-		return c.red === 0.0 && c.green === 0.0 && c.blue === 0.0;
+		return c.red === 0 && c.green === 0 && c.blue === 0;
 	}
 
 	// Suffice to check corners.
@@ -24,7 +24,7 @@ test('creating canvas', function(t) {
 
 test('writing pixel to canvas', function(t) {
 	const c = new canvases.Canvas(10, 20);
-	const red = new colors.Color(1.0, 0.0, 0.0);
+	const red = new colors.Color(1, 0, 0);
 	c[2][3] = red;
 	t.ok(c[2][3].equal(red));
 

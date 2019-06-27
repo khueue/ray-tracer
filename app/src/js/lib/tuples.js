@@ -8,11 +8,11 @@ function Tuple(x, y, z, w) {
 }
 
 function Point(x, y, z) {
-	return new Tuple(x, y, z, 1.0);
+	return new Tuple(x, y, z, 1);
 }
 
 function Vector(x, y, z) {
-	return new Tuple(x, y, z, 0.0);
+	return new Tuple(x, y, z, 0);
 }
 
 Tuple.prototype.equal = function(b) {
@@ -83,11 +83,11 @@ function isTuple(a) {
 }
 
 function isPoint(a) {
-	return isTuple(a) && numbers.equal(a.w, 1.0);
+	return isTuple(a) && numbers.equal(a.w, 1);
 }
 
 function isVector(a) {
-	return isTuple(a) && numbers.equal(a.w, 0.0);
+	return isTuple(a) && numbers.equal(a.w, 0);
 }
 
 module.exports = {

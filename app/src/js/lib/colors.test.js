@@ -27,7 +27,7 @@ test('adding colors', function(t) {
 	const result = a.add(b);
 	t.ok(numbers.equal(result.red, 1.6));
 	t.ok(numbers.equal(result.green, 0.7));
-	t.ok(numbers.equal(result.blue, 1.0));
+	t.ok(numbers.equal(result.blue, 1));
 
 	t.end();
 });
@@ -44,8 +44,8 @@ test('subtracting colors', function(t) {
 });
 
 test('multiplying colors', function(t) {
-	const a = new colors.Color(1.0, 0.2, 0.4);
-	const b = new colors.Color(0.9, 1.0, 0.1);
+	const a = new colors.Color(1, 0.2, 0.4);
+	const b = new colors.Color(0.9, 1, 0.1);
 	const result = a.multiply(b);
 	t.ok(numbers.equal(result.red, 0.9));
 	t.ok(numbers.equal(result.green, 0.2));
@@ -55,8 +55,8 @@ test('multiplying colors', function(t) {
 });
 
 test('comparing colors', function(t) {
-	const a = new colors.Color(1.0, 0.2, 0.4);
-	const b = new colors.Color(1.0, 0.2, 0.4);
+	const a = new colors.Color(1, 0.2, 0.4);
+	const b = new colors.Color(1, 0.2, 0.4);
 	t.ok(a.equal(b));
 
 	t.end();

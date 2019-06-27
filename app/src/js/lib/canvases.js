@@ -1,6 +1,6 @@
 const colors = require('./colors');
 
-const COLOR_BLACK = new colors.Color(0.0, 0.0, 0.0);
+const COLOR_BLACK = new colors.Color(0, 0, 0);
 
 function Canvas(width, height) {
 	this.width = width;
