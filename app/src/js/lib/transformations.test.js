@@ -68,3 +68,13 @@ test('multiply by inverse of scaling matrix', function(t) {
 
 	t.end();
 });
+
+test('reflection is scaling by negative value', function(t) {
+	const transform = transformations.scaling(-1, 1, 1);
+
+	const p = new tuples.Point(2, 3, 4);
+
+	t.ok(transform.multiply(p).equal(new tuples.Point(-2, 3, 4)));
+
+	t.end();
+});
