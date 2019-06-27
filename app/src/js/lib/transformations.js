@@ -19,10 +19,12 @@ function scaling(x, y, z) {
 }
 
 function rotationX(r) {
+	const cosR = Math.cos(r);
+	const sinR = Math.sin(r);
 	return new matrices.Matrix([
 		[1, 0, 0, 0],
-		[0, Math.cos(r), -Math.sin(r), 0],
-		[0, Math.sin(r), Math.cos(r), 0],
+		[0, cosR, -sinR, 0],
+		[0, sinR, cosR, 0],
 		[0, 0, 0, 1],
 	]);
 }
