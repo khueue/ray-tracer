@@ -378,7 +378,7 @@ test('matrix is not invertible', function(t) {
 	t.end();
 });
 
-test('inverse of matrix', function(t) {
+test('inverse of matrix, 1', function(t) {
 	const m = new matrices.Matrix([
 		[-5.0, 2.0, 6.0, -8.0],
 		[1.0, -5.0, 1.0, 8.0],
@@ -408,6 +408,50 @@ test('inverse of matrix', function(t) {
 	t.end();
 });
 
+test('inverse of matrix, 2', function(t) {
+	const m = new matrices.Matrix([
+		[8.0, -5.0, 9.0, 2.0],
+		[7.0, 5.0, 6.0, 1.0],
+		[-6.0, 0.0, 9.0, 6.0],
+		[-3.0, 0.0, -9.0, -4.0],
+	]);
+
+	const actual = m.inverse();
+
+	const expected = new matrices.Matrix([
+		[-0.15385, -0.15385, -0.28205, -0.53846],
+		[-0.07692, 0.12308, 0.02564, 0.03077],
+		[0.35897, 0.35897, 0.4359, 0.92308],
+		[-0.69231, -0.69231, -0.76923, -1.92308],
+	]);
+
+	t.ok(actual.equal(expected));
+
+	t.end();
+});
+
+test('inverse of matrix, 3', function(t) {
+	const m = new matrices.Matrix([
+		[9.0, 3.0, 0.0, 9.0],
+		[-5.0, -2.0, -6.0, -3.0],
+		[-4.0, 9.0, 6.0, 4.0],
+		[-7.0, 6.0, 6.0, 2.0],
+	]);
+
+	const actual = m.inverse();
+
+	const expected = new matrices.Matrix([
+		[-0.04074, -0.07778, 0.14444, -0.22222],
+		[-0.07778, 0.03333, 0.36667, -0.33333],
+		[-0.02901, -0.1463, -0.10926, 0.12963],
+		[0.17778, 0.06667, -0.26667, 0.33333],
+	]);
+
+	t.ok(actual.equal(expected));
+
+	t.end();
+});
+
 test('inverse can fail', function(t) {
 	const m = new matrices.Matrix([
 		[-4.0, 2.0, -2.0, -3.0],
@@ -421,6 +465,28 @@ test('inverse can fail', function(t) {
 	t.throws(function() {
 		m.inverse();
 	}, Error);
+
+	t.end();
+});
+
+test('multiply product by its inverse', function(t) {
+	const a = new matrices.Matrix([
+		[3.0, -9.0, 7.0, 3.0],
+		[3.0, -8.0, 2.0, -9.0],
+		[-4.0, 4.0, 4.0, 1.0],
+		[-6.0, 5.0, -1.0, 1.0],
+	]);
+
+	const b = new matrices.Matrix([
+		[8.0, 2.0, 2.0, 2.0],
+		[3.0, -1.0, 7.0, 0.0],
+		[7.0, 0.0, 5.0, 4.0],
+		[6.0, -2.0, -0.0, 5.0],
+	]);
+
+	const c = a.multiply(b);
+
+	t.ok(c.multiply(b.inverse()).equal(a));
 
 	t.end();
 });
