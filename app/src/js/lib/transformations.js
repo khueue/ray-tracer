@@ -18,7 +18,17 @@ function scaling(x, y, z) {
 	]);
 }
 
+function rotationX(r) {
+	return new matrices.Matrix([
+		[1, 0, 0, 0],
+		[0, Math.cos(r), -Math.sin(r), 0],
+		[0, Math.sin(r), Math.cos(r), 0],
+		[0, 0, 0, 1],
+	]);
+}
+
 module.exports = {
 	translation,
 	scaling,
+	rotationX,
 };

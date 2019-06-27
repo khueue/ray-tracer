@@ -78,3 +78,30 @@ test('reflection is scaling by negative value', function(t) {
 
 	t.end();
 });
+
+test('rotating point around x axis', function(t) {
+	const p = new tuples.Point(0, 1, 0);
+	let rotatedP;
+
+	const halfQuarter = transformations.rotationX(Math.PI / 4);
+	rotatedP = new tuples.Point(0, Math.sqrt(2) / 2, Math.sqrt(2) / 2);
+	t.ok(halfQuarter.multiply(p).equal(rotatedP));
+
+	const fullQuarter = transformations.rotationX(Math.PI / 2);
+	rotatedP = new tuples.Point(0, 0, 1);
+	t.ok(fullQuarter.multiply(p).equal(rotatedP));
+
+	t.end();
+});
+
+test('inverse rotation of x axis is opposite direction', function(t) {
+	const p = new tuples.Point(0, 1, 0);
+
+	const halfQuarter = transformations.rotationX(Math.PI / 4);
+	const inv = halfQuarter.inverse();
+	const rotatedP = new tuples.Point(0, Math.sqrt(2) / 2, -Math.sqrt(2) / 2);
+
+	t.ok(inv.multiply(p).equal(rotatedP));
+
+	t.end();
+});
