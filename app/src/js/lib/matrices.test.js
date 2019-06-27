@@ -490,3 +490,26 @@ test('multiply product by its inverse', function(t) {
 
 	t.end();
 });
+
+test('invert identity gives identity', function(t) {
+	const identity = matrices.IDENTITY_44;
+
+	t.ok(identity.equal(identity.inverse()));
+
+	t.end();
+});
+
+test('multiply matrix by its inverse', function(t) {
+	const a = new matrices.Matrix([
+		[3.0, -9.0, 7.0, 3.0],
+		[3.0, -8.0, 2.0, -9.0],
+		[-4.0, 4.0, 4.0, 1.0],
+		[-6.0, 5.0, -1.0, 1.0],
+	]);
+
+	const invTrans = a.inverse().transpose();
+	const transInv = a.transpose().inverse();
+	t.ok(invTrans.equal(transInv));
+
+	t.end();
+});
