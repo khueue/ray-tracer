@@ -35,3 +35,36 @@ test('translation does not affect vectors', function(t) {
 
 	t.end();
 });
+
+test('scaling applied to point', function(t) {
+	const transform = transformations.scaling(2, 3, 4);
+
+	const p = new tuples.Point(-4, 6, 8);
+	const scaledP = new tuples.Point(-8, 18, 32);
+
+	t.ok(transform.multiply(p).equal(scaledP));
+
+	t.end();
+});
+
+test('scaling applied to vector', function(t) {
+	const transform = transformations.scaling(2, 3, 4);
+
+	const v = new tuples.Vector(-4, 6, 8);
+	const scaledV = new tuples.Vector(-8, 18, 32);
+
+	t.ok(transform.multiply(v).equal(scaledV));
+
+	t.end();
+});
+
+test('multiply by inverse of scaling matrix', function(t) {
+	const transform = transformations.scaling(2, 3, 4);
+	const inv = transform.inverse();
+
+	const v = new tuples.Vector(-4, 6, 8);
+
+	t.ok(inv.multiply(v).equal(new tuples.Vector(-2, 2, 2)));
+
+	t.end();
+});

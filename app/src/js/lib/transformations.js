@@ -9,6 +9,16 @@ function translation(x, y, z) {
 	]);
 }
 
+function scaling(x, y, z) {
+	return new matrices.Matrix([
+		[x, 0, 0, 0],
+		[0, y, 0, 0],
+		[0, 0, z, 0],
+		[0, 0, 0, 1],
+	]);
+}
+
 module.exports = {
 	translation,
+	scaling,
 };
