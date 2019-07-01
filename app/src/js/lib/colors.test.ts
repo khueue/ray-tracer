@@ -1,7 +1,7 @@
-const test = require('tap').test;
+import { test } from 'tap';
 
-const numbers = require('./numbers');
-const colors = require('./colors');
+import * as numbers from './numbers';
+import * as colors from './colors';
 
 test('color are (red, green, blue) tuples', function(t) {
 	const c = new colors.Color(-0.5, 0.4, 1.7);

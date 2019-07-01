@@ -1,6 +1,6 @@
-const test = require('tap').test;
+import { test } from 'tap';
 
-const numbers = require('./numbers');
+import * as numbers from './numbers';
 
 test('epsilon comparison', function(t) {
 	t.ok(numbers.equal(1.000004, 1.000005));

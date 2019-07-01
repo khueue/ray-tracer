@@ -1,6 +1,6 @@
-const matrices = require('./matrices');
+import * as matrices from './matrices';
 
-function translation(x, y, z) {
+export function translation(x: number, y: number, z: number) {
 	return new matrices.Matrix([
 		[1, 0, 0, x],
 		[0, 1, 0, y],
@@ -9,7 +9,7 @@ function translation(x, y, z) {
 	]);
 }
 
-function scaling(x, y, z) {
+export function scaling(x: number, y: number, z: number) {
 	return new matrices.Matrix([
 		[x, 0, 0, 0],
 		[0, y, 0, 0],
@@ -18,7 +18,7 @@ function scaling(x, y, z) {
 	]);
 }
 
-function rotationX(r) {
+export function rotationX(r: number) {
 	const cosR = Math.cos(r);
 	const sinR = Math.sin(r);
 	return new matrices.Matrix([
@@ -28,9 +28,3 @@ function rotationX(r) {
 		[0, 0, 0, 1],
 	]);
 }
-
-module.exports = {
-	translation,
-	scaling,
-	rotationX,
-};

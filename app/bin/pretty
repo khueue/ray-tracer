@@ -12,5 +12,8 @@ set -o xtrace
 	--single-quote \
 	--trailing-comma es5 \
 	"./src/**/*.js" \
+	"./src/**/*.ts" \
 	"./src/**/*.vue" \
 	"./src/**/*.scss"
+
+#--no-semi \

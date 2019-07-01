@@ -1,7 +1,7 @@
-const test = require('tap').test;
+import { test } from 'tap';
 
-const colors = require('./colors');
-const canvases = require('./canvases');
+import * as colors from './colors';
+import * as canvases from './canvases';
 
 test('creating canvas', function(t) {
 	const c = new canvases.Canvas(10, 20);

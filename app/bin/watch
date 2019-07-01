@@ -7,5 +7,5 @@ set -o xtrace
 
 ./node_modules/.bin/nodemon \
 	--delay 500ms \
-	--ext js,vue,scss,pug \
+	--ext js,ts,vue,scss,pug \
 	--exec "./bin/pretty && ./bin/coverage"

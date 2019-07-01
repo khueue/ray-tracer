@@ -1,7 +1,7 @@
-const test = require('tap').test;
+import { test } from 'tap';
 
-const numbers = require('./numbers');
-const tuples = require('./tuples');
+import * as numbers from './numbers';
+import * as tuples from './tuples';
 
 test('tuple with w=1 is a point', function(t) {
 	const a = new tuples.Tuple(4.3, -4.2, 3.1, 1);

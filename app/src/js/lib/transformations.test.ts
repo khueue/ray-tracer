@@ -1,7 +1,7 @@
-const test = require('tap').test;
+import { test } from 'tap';
 
-const tuples = require('./tuples');
-const transformations = require('./transformations');
+import * as tuples from './tuples';
+import * as transformations from './transformations';
 
 test('multiplying by translation matrix', function(t) {
 	const transform = transformations.translation(5, -3, 2);
