@@ -31,6 +31,8 @@ test('Point() creates a point', function(t) {
 	const a = new tuples.Point(4, -4, 3);
 	const b = new tuples.Tuple(4, -4, 3, 1);
 	t.ok(a.equal(b));
+	t.ok(tuples.isTuple(a));
+	t.ok(tuples.isPoint(a));
 
 	t.end();
 });
@@ -39,6 +41,8 @@ test('Vector() creates a vector', function(t) {
 	const a = new tuples.Vector(4, -4, 3);
 	const b = new tuples.Tuple(4, -4, 3, 0);
 	t.ok(a.equal(b));
+	t.ok(tuples.isTuple(a));
+	t.ok(tuples.isVector(a));
 
 	t.end();
 });
@@ -227,12 +231,12 @@ test('fire projectile', function(t) {
 		new tuples.Vector(1, 1, 0).normalize()
 	);
 
-	console.log('x, y:', proj.position.x, proj.position.y);
+	// console.log('x, y:', proj.position.x, proj.position.y);
 	let numTicks = 0;
 	while (proj.position.y >= 0) {
 		proj = tick(env, proj);
 		++numTicks;
-		console.log('x, y:', proj.position.x, proj.position.y);
+		// console.log('x, y:', proj.position.x, proj.position.y);
 	}
 
 	t.ok(numTicks == 17, 'should hit the ground');

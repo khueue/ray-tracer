@@ -6,5 +6,5 @@ set -o nounset
 set -o xtrace
 
 ./node_modules/.bin/ts-node ./node_modules/.bin/tape \
-	"./src/js/**/*.test.js" \
+	"./src/js/**/*.test.ts" \
 | ./node_modules/.bin/tap-spec

@@ -6,6 +6,6 @@ set -o nounset
 set -o xtrace
 
 ./node_modules/.bin/nodemon \
-	--delay 500ms \
+	--delay 300ms \
 	--ext js,ts,vue,scss,pug \
-	--exec "./bin/pretty && ./bin/coverage"
+	--exec "./bin/pretty && ./bin/test"

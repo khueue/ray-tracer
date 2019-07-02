@@ -38,13 +38,13 @@ IMAGE_TAG_APP=ray-tracer-app
 
 app-cmd: app-docker-build
 	docker run --interactive --tty --rm \
-		--mount type="bind",source="$(PWD)/app",target="/workdir" \
+		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency=cached \
 		$(IMAGE_TAG_APP) \
 		bash -c "$(cmd)"
 
 app-cmd-with-ports: app-docker-build
 	docker run --interactive --tty --rm \
-		--mount type="bind",source="$(PWD)/app",target="/workdir" \
+		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency=cached \
 		--publish 1234:1234 \
 		--publish 4321:4321 \
 		$(IMAGE_TAG_APP) \
