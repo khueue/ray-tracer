@@ -88,7 +88,7 @@ export class Matrix {
 
 	multiplyByTuple(t: tuples.Tuple) {
 		const b = tupleToMatrix(t);
-		const c = this.multiply(b);
+		const c = this.multiplyByMatrix(b);
 		return c.toTuple();
 	}
 
