@@ -1,20 +1,20 @@
 import * as numbers from './numbers';
 import * as tuples from './tuples';
 
-/**
- * Matrix constructor supporting two forms:
- *
- * Literal:
- * - new Matrix([[...], ...])
- *
- * Dimensions and init value:
- * - new Matrix(4, 1, 0.0)
- */
 export class Matrix {
 	numRows: number;
 	numCols: number;
 	[m: number]: number[];
 
+	/**
+	 * Matrix constructor supporting two forms:
+	 *
+	 * Literal:
+	 * - new Matrix([[...], ...])
+	 *
+	 * Dimensions and init value:
+	 * - new Matrix(4, 1, 0.0)
+	 */
 	constructor(m: number[][], _?: any, __?: any);
 	constructor(rows: number, cols: number, init?: any);
 	constructor(rows: any, cols: any, init: any = 0) {
@@ -23,7 +23,7 @@ export class Matrix {
 			this.numRows = m.length;
 			this.numCols = m[0].length;
 			for (let row = 0; row < this.numRows; ++row) {
-				this[row] = [];
+				this[row] = Array(this.numCols);
 				for (let col = 0; col < this.numCols; ++col) {
 					this[row][col] = m[row][col];
 				}
@@ -32,7 +32,10 @@ export class Matrix {
 			this.numRows = rows;
 			this.numCols = cols;
 			for (let row = 0; row < this.numRows; ++row) {
-				this[row] = new Array(this.numCols).fill(init);
+				this[row] = Array(this.numCols);
+				for (let col = 0; col < this.numCols; ++col) {
+					this[row][col] = init;
+				}
 			}
 		}
 	}
