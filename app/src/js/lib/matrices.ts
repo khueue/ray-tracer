@@ -13,8 +13,9 @@ import * as tuples from './tuples';
 export class Matrix {
 	numRows: number;
 	numCols: number;
+	[m: number]: number[];
 
-	constructor(m: number[][], _?, __?);
+	constructor(m: number[][], _?: any, __?: any);
 	constructor(rows: number, cols: number, init?: any);
 	constructor(rows: any, cols: any, init: any = 0) {
 		if (Array.isArray(rows)) {
@@ -170,7 +171,7 @@ export class Matrix {
 	}
 
 	/**
-	 * Only supports 4x1 matrices.
+	 * Only supports 4x1 (one-column) matrices.
 	 */
 	toTuple() {
 		return new tuples.Tuple(this[0][0], this[1][0], this[2][0], this[3][0]);

@@ -9,7 +9,7 @@ test('creating canvas', function(t) {
 	t.ok(c.width === 10);
 	t.ok(c.height === 20);
 
-	function isBlack(c) {
+	function isBlack(c: colors.Color) {
 		return c.red === 0 && c.green === 0 && c.blue === 0;
 	}
 
