@@ -88,14 +88,14 @@ export class Vector extends Tuple {
 	}
 }
 
-export function isTuple(a: any): boolean {
+export function isTuple(a: any): a is Tuple {
 	return a instanceof Tuple;
 }
 
-export function isPoint(a: any): boolean {
+export function isPoint(a: any): a is Point {
 	return a instanceof Tuple && numbers.equal(a.w, 1);
 }
 
-export function isVector(a: any): boolean {
+export function isVector(a: any): a is Vector {
 	return a instanceof Tuple && numbers.equal(a.w, 0);
 }
