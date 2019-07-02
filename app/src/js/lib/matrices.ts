@@ -59,13 +59,17 @@ export class Matrix {
 		return this.numRows === b.numRows && this.numCols === b.numCols;
 	}
 
-	multiply(b: tuples.Tuple): tuples.Tuple;
 	multiply(b: Matrix): Matrix;
+	multiply(b: tuples.Tuple): tuples.Tuple;
 	multiply(b: any) {
-		if (b instanceof tuples.Tuple) {
+		if (b instanceof Matrix) {
+			return this.multiplyByMatrix(b);
+		} else {
 			return this.multiplyByTuple(b);
 		}
+	}
 
+	multiplyByMatrix(b: Matrix) {
 		// Result is sized as: rows of this, columns of b.
 		let c = new Matrix(this.numRows, b.numCols, 0);
 
