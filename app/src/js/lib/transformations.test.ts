@@ -135,3 +135,57 @@ test('rotating point around z axis', function(t) {
 
 	t.end();
 });
+
+test('shearing moves x in proportion to y', function(t) {
+	const shearing = transformations.shearing(1, 0, 0, 0, 0, 0);
+	const p = new tuples.Point(2, 3, 4);
+
+	t.ok(shearing.multiply(p).equal(new tuples.Point(5, 3, 4)));
+
+	t.end();
+});
+
+test('shearing moves x in proportion to z', function(t) {
+	const shearing = transformations.shearing(0, 1, 0, 0, 0, 0);
+	const p = new tuples.Point(2, 3, 4);
+
+	t.ok(shearing.multiply(p).equal(new tuples.Point(6, 3, 4)));
+
+	t.end();
+});
+
+test('shearing moves y in proportion to x', function(t) {
+	const shearing = transformations.shearing(0, 0, 1, 0, 0, 0);
+	const p = new tuples.Point(2, 3, 4);
+
+	t.ok(shearing.multiply(p).equal(new tuples.Point(2, 5, 4)));
+
+	t.end();
+});
+
+test('shearing moves y in proportion to z', function(t) {
+	const shearing = transformations.shearing(0, 0, 0, 1, 0, 0);
+	const p = new tuples.Point(2, 3, 4);
+
+	t.ok(shearing.multiply(p).equal(new tuples.Point(2, 7, 4)));
+
+	t.end();
+});
+
+test('shearing moves z in proportion to x', function(t) {
+	const shearing = transformations.shearing(0, 0, 0, 0, 1, 0);
+	const p = new tuples.Point(2, 3, 4);
+
+	t.ok(shearing.multiply(p).equal(new tuples.Point(2, 3, 6)));
+
+	t.end();
+});
+
+test('shearing moves z in proportion to y', function(t) {
+	const shearing = transformations.shearing(0, 0, 0, 0, 0, 1);
+	const p = new tuples.Point(2, 3, 4);
+
+	t.ok(shearing.multiply(p).equal(new tuples.Point(2, 3, 7)));
+
+	t.end();
+});
