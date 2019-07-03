@@ -1,9 +1,11 @@
 <script lang="js">
-const colors = require('/js/lib/colors');
-const tuples = require('/js/lib/tuples');
-const matrices = require('/js/lib/matrices');
+import Vue from 'vue';
 
-export default {
+import * as colors from '../lib/colors';
+import * as tuples from '../lib/tuples';
+import * as matrices from '../lib/matrices';
+
+export default Vue.extend({
 	data() {
 		return {
 			id: 'projectile',
@@ -56,7 +58,7 @@ export default {
 			}
 		},
 	},
-};
+});
 </script>
 
 <template lang="pug">
