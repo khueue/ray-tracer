@@ -1,6 +1,7 @@
 import { test } from 'tap';
 
 import * as tuples from './tuples';
+import * as matrices from './matrices';
 import * as transformations from './transformations';
 
 test('multiplying by translation matrix', function(t) {
@@ -186,6 +187,59 @@ test('shearing moves z in proportion to y', function(t) {
 	const p = new tuples.Point(2, 3, 4);
 
 	t.ok(shearing.multiply(p).equal(new tuples.Point(2, 3, 7)));
+
+	t.end();
+});
+
+test('individual transformations are applied in sequence', function(t) {
+	const p = new tuples.Point(1, 0, 1);
+
+	// Desired order.
+	const a = transformations.rotationX(Math.PI / 2);
+	const b = transformations.scaling(5, 5, 5);
+	const c = transformations.translation(10, 5, 7);
+
+	// Rotate.
+	const p2 = a.multiply(p);
+	t.ok(p2.equal(new tuples.Point(1, -1, 0)));
+
+	// Scale.
+	const p3 = b.multiply(p2);
+	t.ok(p3.equal(new tuples.Point(5, -5, 0)));
+
+	// Transform.
+	const p4 = c.multiply(p3);
+	t.ok(p4.equal(new tuples.Point(15, 0, 7)));
+
+	t.end();
+});
+
+test('chained transformations must be applied in order', function(t) {
+	const p = new tuples.Point(1, 0, 1);
+
+	// Desired order.
+	const a = transformations.rotationX(Math.PI / 2);
+	const b = transformations.scaling(5, 5, 5);
+	const c = transformations.translation(10, 5, 7);
+
+	// Combined multiplication must be in reverse order.
+	const combined = c.multiply(b).multiply(a);
+	t.ok(combined.multiply(p).equal(new tuples.Point(15, 0, 7)));
+
+	// Not commutative.
+	const wrong = a.multiply(b).multiply(c);
+	t.ok(!wrong.multiply(p).equal(new tuples.Point(15, 0, 7)));
+
+	t.end();
+});
+
+test('chained transformations using matrix methods', function(t) {
+	const p = new tuples.Point(1, 0, 1);
+
+	const combined = matrices.IDENTITY_44.rotateX(Math.PI / 2)
+		.scale(5, 5, 5)
+		.translate(10, 5, 7);
+	t.ok(combined.multiply(p).equal(new tuples.Point(15, 0, 7)));
 
 	t.end();
 });

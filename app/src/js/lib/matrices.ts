@@ -1,5 +1,7 @@
 import * as numbers from './numbers';
 import * as tuples from './tuples';
+// XXX Think about this circular dependency:
+import * as transformations from './transformations';
 
 export class Matrix {
 	numRows: number;
@@ -182,6 +184,26 @@ export class Matrix {
 	 */
 	toTuple() {
 		return new tuples.Tuple(this[0][0], this[1][0], this[2][0], this[3][0]);
+	}
+
+	rotateX(r: number) {
+		return transformations.rotationX(r).multiply(this);
+	}
+
+	rotateY(r: number) {
+		return transformations.rotationY(r).multiply(this);
+	}
+
+	rotateZ(r: number) {
+		return transformations.rotationZ(r).multiply(this);
+	}
+
+	scale(x: number, y: number, z: number) {
+		return transformations.scaling(x, y, z).multiply(this);
+	}
+
+	translate(x: number, y: number, z: number) {
+		return transformations.translation(x, y, z).multiply(this);
 	}
 }
 
