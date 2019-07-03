@@ -1,4 +1,4 @@
-<script lang="js">
+<script lang="ts">
 import Vue from 'vue';
 
 import * as colors from '../lib/colors';
