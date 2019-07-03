@@ -236,9 +236,10 @@ test('chained transformations must be applied in order', function(t) {
 test('chained transformations using matrix methods', function(t) {
 	const p = new tuples.Point(1, 0, 1);
 
-	const combined = matrices.IDENTITY_44.rotateX(Math.PI / 2)
+	const combined = matrices.IDENTITY_44
+		.rotateX(Math.PI / 2)
 		.scale(5, 5, 5)
-		.translate(10, 5, 7);
+		.translate(10, 5, 7); // prettier-ignore
 	t.ok(combined.multiply(p).equal(new tuples.Point(15, 0, 7)));
 
 	t.end();
