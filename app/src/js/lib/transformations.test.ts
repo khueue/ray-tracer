@@ -207,7 +207,7 @@ test('individual transformations are applied in sequence', function(t) {
 	const p3 = b.multiply(p2);
 	t.ok(p3.equal(new tuples.Point(5, -5, 0)));
 
-	// Transform.
+	// Translate.
 	const p4 = c.multiply(p3);
 	t.ok(p4.equal(new tuples.Point(15, 0, 7)));
 

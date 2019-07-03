@@ -51,7 +51,7 @@ export default {
 			}
 		},
 		drawPixel(ctx, x, y, color) {
-			if (0 <= x < this.canvas.width && 0 <= y < this.canvas.height) {
+			if (0 <= x && x < this.canvas.width && 0 <= y && y < this.canvas.height) {
 				ctx.fillStyle = `rgb(${color.red}, ${color.green}, ${color.blue})`;
 				y = this.height - y - 1; // To draw from the bottom.
 				ctx.fillRect(x, y, 1, 1);

@@ -7,6 +7,12 @@ const router = new VueRouter({
 	mode: 'history',
 	routes: [
 		{
+			path: '/clock',
+			component: function() {
+				return import('/js/pages/ClockHome');
+			},
+		},
+		{
 			path: '/projectile',
 			component: function() {
 				return import('/js/pages/ProjectileHome');
