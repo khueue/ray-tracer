@@ -81,7 +81,7 @@ test('reflection is scaling by negative value', function(t) {
 
 test('rotating point around x axis', function(t) {
 	const p = new tuples.Point(0, 1, 0);
-	let rotatedP;
+	let rotatedP: tuples.Point;
 
 	const halfQuarter = transformations.rotationX(Math.PI / 4);
 	rotatedP = new tuples.Point(0, Math.sqrt(2) / 2, Math.sqrt(2) / 2);
@@ -102,6 +102,36 @@ test('inverse rotation of x axis is opposite direction', function(t) {
 	const rotatedP = new tuples.Point(0, Math.sqrt(2) / 2, -Math.sqrt(2) / 2);
 
 	t.ok(inv.multiply(p).equal(rotatedP));
+
+	t.end();
+});
+
+test('rotating point around y axis', function(t) {
+	const p = new tuples.Point(0, 0, 1);
+	let rotatedP: tuples.Point;
+
+	const halfQuarter = transformations.rotationY(Math.PI / 4);
+	rotatedP = new tuples.Point(Math.sqrt(2) / 2, 0, Math.sqrt(2) / 2);
+	t.ok(halfQuarter.multiply(p).equal(rotatedP));
+
+	const fullQuarter = transformations.rotationY(Math.PI / 2);
+	rotatedP = new tuples.Point(1, 0, 0);
+	t.ok(fullQuarter.multiply(p).equal(rotatedP));
+
+	t.end();
+});
+
+test('rotating point around z axis', function(t) {
+	const p = new tuples.Point(0, 1, 0);
+	let rotatedP: tuples.Point;
+
+	const halfQuarter = transformations.rotationZ(Math.PI / 4);
+	rotatedP = new tuples.Point(-Math.sqrt(2) / 2, Math.sqrt(2) / 2, 0);
+	t.ok(halfQuarter.multiply(p).equal(rotatedP));
+
+	const fullQuarter = transformations.rotationZ(Math.PI / 2);
+	rotatedP = new tuples.Point(-1, 0, 0);
+	t.ok(fullQuarter.multiply(p).equal(rotatedP));
 
 	t.end();
 });
