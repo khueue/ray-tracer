@@ -238,6 +238,8 @@ test('chained transformations using matrix methods', function(t) {
 
 	const combined = matrices.IDENTITY_44
 		.rotateX(Math.PI / 2)
+		.rotateY(0)
+		.rotateZ(0)
 		.scale(5, 5, 5)
 		.translate(10, 5, 7); // prettier-ignore
 	t.ok(combined.multiply(p).equal(new tuples.Point(15, 0, 7)));
