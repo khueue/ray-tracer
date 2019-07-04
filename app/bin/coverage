@@ -6,6 +6,8 @@ set -o nounset
 set -o xtrace
 
 ./node_modules/.bin/tap \
+	--files "./src/js/**/*.test.ts" \
 	--100 \
+	--jobs=8 \
 	--coverage-report html \
-	"./src/js/**/*.test.ts"
+	--no-browser
