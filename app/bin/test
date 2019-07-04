@@ -3,8 +3,12 @@
 set -o errexit
 set -o pipefail
 set -o nounset
-set -o xtrace
+# set -o xtrace
+
+echo "--- Running tests ..."
 
 ./node_modules/.bin/ts-node ./node_modules/.bin/tape \
 	"./src/js/**/*.test.ts" \
-| ./node_modules/.bin/faucet
+| ./node_modules/.bin/tap-pessimist
+
+echo "--- Finished running tests."

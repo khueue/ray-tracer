@@ -3,7 +3,9 @@
 set -o errexit
 set -o pipefail
 set -o nounset
-set -o xtrace
+# set -o xtrace
+
+echo "--- Watching for changes ..."
 
 ./node_modules/.bin/nodemon \
 	--delay 300ms \

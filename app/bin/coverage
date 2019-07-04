@@ -3,7 +3,9 @@
 set -o errexit
 set -o pipefail
 set -o nounset
-set -o xtrace
+# set -o xtrace
+
+echo "--- Running coverage ..."
 
 ./node_modules/.bin/tap \
 	--files "./src/js/**/*.test.ts" \
@@ -11,3 +13,5 @@ set -o xtrace
 	--jobs=8 \
 	--coverage-report html \
 	--no-browser
+
+echo "--- Finished running coverage."
