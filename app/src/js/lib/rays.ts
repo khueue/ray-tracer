@@ -12,8 +12,7 @@ export class Ray {
 
 	position(t: number) {
 		const distance = this.direction.multiply(t);
-		const position = this.origin.add(distance);
-		return position;
+		return this.origin.add(distance);
 	}
 
 	intersects(s: spheres.Sphere) {
@@ -23,14 +22,15 @@ export class Ray {
 		const c = sphereToRay.dot(sphereToRay) - 1;
 		const discriminant = b * b - 4 * a * c;
 
+		// Check for intersections.
 		if (discriminant < 0) {
 			return [];
 		}
 
-		// Should these calulations be broken out and reused?
-		const x1 = (-b - Math.sqrt(discriminant)) / (2 * a);
-		const x2 = (-b + Math.sqrt(discriminant)) / (2 * a);
+		// Should these sub-calulations be broken out and reused?
+		const t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
+		const t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
 
-		return [x1, x2];
+		return [t1, t2];
 	}
 }

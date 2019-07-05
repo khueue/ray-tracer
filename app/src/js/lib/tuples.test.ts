@@ -231,12 +231,12 @@ test('fire projectile', function(t) {
 		new tuples.Vector(1, 1, 0).normalize()
 	);
 
-	// console.log('x, y:', proj.position.x, proj.position.y);
+	// console.error('x, y:', proj.position.x, proj.position.y);
 	let numTicks = 0;
 	while (proj.position.y >= 0) {
 		proj = tick(env, proj);
 		++numTicks;
-		// console.log('x, y:', proj.position.x, proj.position.y);
+		// console.error('x, y:', proj.position.x, proj.position.y);
 	}
 
 	t.ok(numTicks == 17, 'should hit the ground');
