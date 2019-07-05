@@ -4,6 +4,7 @@ import * as numbers from './numbers';
 import * as tuples from './tuples';
 import * as rays from './rays';
 import * as spheres from './spheres';
+import * as intersections from './intersections';
 
 test('creating ray', function(t) {
 	const origin = new tuples.Point(1, 2, 3);
@@ -39,8 +40,8 @@ test('ray intersects sphere at two points', function(t) {
 	const xs = r.intersects(s);
 
 	t.ok(xs.length === 2);
-	t.ok(numbers.equal(xs[0], 4.0));
-	t.ok(numbers.equal(xs[1], 6.0));
+	t.ok(numbers.equal(xs[0].t, 4.0));
+	t.ok(numbers.equal(xs[1].t, 6.0));
 
 	t.end();
 });
@@ -54,8 +55,8 @@ test('ray intersects sphere at tangent', function(t) {
 	const xs = r.intersects(s);
 
 	t.ok(xs.length === 2);
-	t.ok(numbers.equal(xs[0], 5.0));
-	t.ok(numbers.equal(xs[1], 5.0));
+	t.ok(numbers.equal(xs[0].t, 5.0));
+	t.ok(numbers.equal(xs[1].t, 5.0));
 
 	t.end();
 });
@@ -82,8 +83,8 @@ test('ray originates inside sphere', function(t) {
 	const xs = r.intersects(s);
 
 	t.ok(xs.length === 2);
-	t.ok(numbers.equal(xs[0], -1.0));
-	t.ok(numbers.equal(xs[1], 1.0));
+	t.ok(numbers.equal(xs[0].t, -1.0));
+	t.ok(numbers.equal(xs[1].t, 1.0));
 
 	t.end();
 });
@@ -97,8 +98,8 @@ test('ray is passed sphere', function(t) {
 	const xs = r.intersects(s);
 
 	t.ok(xs.length === 2);
-	t.ok(numbers.equal(xs[0], -6.0));
-	t.ok(numbers.equal(xs[1], -4.0));
+	t.ok(numbers.equal(xs[0].t, -6.0));
+	t.ok(numbers.equal(xs[1].t, -4.0));
 
 	t.end();
 });
