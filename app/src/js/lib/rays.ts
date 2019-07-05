@@ -21,7 +21,7 @@ export class Ray {
 		const a = this.direction.dot(this.direction);
 		const b = this.direction.dot(sphereToRay) * 2;
 		const c = sphereToRay.dot(sphereToRay) - 1;
-		const discriminant = b * b - 4 * a * c;
+		const discriminant = b ** 2 - 4 * a * c;
 
 		// Check if we have any intersections.
 		if (discriminant < 0) {
