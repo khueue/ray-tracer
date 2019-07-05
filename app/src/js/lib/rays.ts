@@ -16,6 +16,7 @@ export class Ray {
 		return this.origin.add(distance);
 	}
 
+	// NOTE: Only designed for spheres now.
 	intersects(s: spheres.Sphere) {
 		const sphereToRay = this.origin.subtract(new tuples.Point(0, 0, 0));
 		const a = this.direction.dot(this.direction);
@@ -25,7 +26,7 @@ export class Ray {
 
 		// Check if we have any intersections.
 		if (discriminant < 0) {
-			return new intersections.Intersections([]);
+			return new intersections.Intersections();
 		}
 
 		// Should these sub-calulations be broken out and reused?
@@ -35,6 +36,6 @@ export class Ray {
 		const t2 = (-b + Math.sqrt(discriminant)) / (2 * a);
 		const x2 = new intersections.Intersection(t2, s);
 
-		return new intersections.Intersections([x1, x2]);
+		return new intersections.Intersections(x1, x2);
 	}
 }
