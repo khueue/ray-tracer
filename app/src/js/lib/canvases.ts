@@ -3,8 +3,8 @@ import * as colors from './colors';
 const COLOR_BLACK = new colors.Color(0, 0, 0);
 
 export class Canvas {
-	width: number;
-	height: number;
+	readonly width: number;
+	readonly height: number;
 	[m: number]: colors.Color[];
 
 	constructor(width: number, height: number) {

@@ -1,10 +1,10 @@
 import * as numbers from './numbers';
 
 export class Tuple {
-	x: number;
-	y: number;
-	z: number;
-	w: number;
+	readonly x: number;
+	readonly y: number;
+	readonly z: number;
+	readonly w: number;
 
 	constructor(x: number, y: number, z: number, w: number) {
 		this.x = x;
@@ -88,14 +88,14 @@ export class Vector extends Tuple {
 	}
 }
 
-export function isTuple(a: any): a is Tuple {
+export function isTuple(a: unknown): a is Tuple {
 	return a instanceof Tuple;
 }
 
-export function isPoint(a: any): a is Point {
+export function isPoint(a: unknown): a is Point {
 	return a instanceof Tuple && numbers.equal(a.w, 1);
 }
 
-export function isVector(a: any): a is Vector {
+export function isVector(a: unknown): a is Vector {
 	return a instanceof Tuple && numbers.equal(a.w, 0);
 }

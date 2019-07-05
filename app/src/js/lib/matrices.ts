@@ -4,8 +4,8 @@ import * as tuples from './tuples';
 import * as transformations from './transformations';
 
 export class Matrix {
-	numRows: number;
-	numCols: number;
+	readonly numRows: number;
+	readonly numCols: number;
 	[m: number]: number[];
 
 	/**
@@ -17,8 +17,8 @@ export class Matrix {
 	 * Dimensions and init value:
 	 * - new Matrix(4, 1, 0.0)
 	 */
-	constructor(m: number[][], _?: any, __?: any);
-	constructor(rows: number, cols: number, init?: any);
+	constructor(m: readonly number[][], _?: unknown, __?: unknown);
+	constructor(rows: number, cols: number, init?: number);
 	constructor(rows: any, cols: any, init: any = 0) {
 		if (Array.isArray(rows)) {
 			const m = rows;

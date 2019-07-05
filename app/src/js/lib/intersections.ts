@@ -1,6 +1,6 @@
 export class Intersection {
-	t: number;
-	obj: object;
+	readonly t: number;
+	readonly obj: object;
 
 	constructor(t: number, obj: object) {
 		this.t = t;
@@ -9,7 +9,7 @@ export class Intersection {
 }
 
 export class Intersections {
-	length: number;
+	readonly length: number;
 	[xs: number]: Intersection;
 
 	constructor(xs: Intersection[]) {

@@ -1,5 +1,3 @@
-import * as tuples from './tuples';
-
 let UNIQUE_ID = 0;
 
 function nextId() {
@@ -7,7 +5,7 @@ function nextId() {
 }
 
 export class Sphere {
-	id: number;
+	readonly id: number;
 
 	constructor() {
 		this.id = nextId();

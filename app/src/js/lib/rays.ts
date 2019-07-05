@@ -3,8 +3,8 @@ import * as spheres from './spheres';
 import * as intersections from './intersections';
 
 export class Ray {
-	origin: tuples.Point;
-	direction: tuples.Vector;
+	readonly origin: tuples.Point;
+	readonly direction: tuples.Vector;
 
 	constructor(origin: tuples.Point, direction: tuples.Vector) {
 		this.origin = origin;
@@ -16,7 +16,7 @@ export class Ray {
 		return this.origin.add(distance);
 	}
 
-	intersects(s: object) {
+	intersects(s: spheres.Sphere) {
 		const sphereToRay = this.origin.subtract(new tuples.Point(0, 0, 0));
 		const a = this.direction.dot(this.direction);
 		const b = this.direction.dot(sphereToRay) * 2;
