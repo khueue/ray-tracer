@@ -1,6 +1,3 @@
-// import * as tuples from './tuples';
-// import * as spheres from './spheres';
-
 export class Intersection {
 	t: number;
 	obj: object;
