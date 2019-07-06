@@ -11,6 +11,8 @@ CACHE_DIR="${OUT_DIR}.cache"
 rm -rf "${OUT_DIR}"
 mkdir -p "${OUT_DIR}"
 
+echo "--- Starting server ..."
+
 ./node_modules/.bin/parcel serve ./src/index.pug \
 	--out-dir "${OUT_DIR}" \
 	--cache-dir "${CACHE_DIR}" \
