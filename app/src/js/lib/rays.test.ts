@@ -4,7 +4,6 @@ import * as numbers from './numbers';
 import * as tuples from './tuples';
 import * as rays from './rays';
 import * as spheres from './spheres';
-import * as intersections from './intersections';
 
 test('creating ray', function(t) {
 	const origin = new tuples.Point(1, 2, 3);
