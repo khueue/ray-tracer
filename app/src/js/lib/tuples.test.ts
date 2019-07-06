@@ -1,4 +1,4 @@
-import { test } from 'tap';
+import * as test from 'tape';
 
 import * as numbers from './numbers';
 import * as tuples from './tuples';
@@ -202,21 +202,21 @@ test('cross product of two vectors', function(t) {
 });
 
 test('fire projectile', function(t) {
-	function projectile(position, velocity) {
+	function projectile(position: tuples.Point, velocity: tuples.Vector) {
 		return {
 			position,
 			velocity,
 		};
 	}
 
-	function environment(gravity, wind) {
+	function environment(gravity: tuples.Vector, wind: tuples.Vector) {
 		return {
 			gravity,
 			wind,
 		};
 	}
 
-	function tick(env, proj) {
+	function tick(env: any, proj: any) {
 		const newPos = proj.position.add(proj.velocity);
 		const newVelocity = proj.velocity.add(env.gravity).add(env.wind);
 		return projectile(newPos, newVelocity);

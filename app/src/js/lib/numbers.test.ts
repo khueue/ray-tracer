@@ -1,4 +1,4 @@
-import { test } from 'tap';
+import * as test from 'tape';
 
 import * as numbers from './numbers';
 
