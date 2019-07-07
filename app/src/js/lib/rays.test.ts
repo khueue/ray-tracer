@@ -4,6 +4,7 @@ import * as numbers from './numbers';
 import * as tuples from './tuples';
 import * as rays from './rays';
 import * as spheres from './spheres';
+import * as transformations from './transformations';
 
 test('creating ray', function(t) {
 	const origin = new tuples.Point(1, 2, 3);
@@ -99,6 +100,34 @@ test('ray is passed sphere', function(t) {
 	t.ok(xs.length === 2);
 	t.ok(numbers.equal(xs[0].t, -6.0));
 	t.ok(numbers.equal(xs[1].t, -4.0));
+
+	t.end();
+});
+
+test('translating ray', function(t) {
+	const r = new rays.Ray(
+		new tuples.Point(1, 2, 3),
+		new tuples.Vector(0, 1, 0)
+	);
+	const m = transformations.translation(3, 4, 5);
+	const r2 = r.transform(m);
+
+	t.ok(r2.origin.equal(new tuples.Point(4, 6, 8)));
+	t.ok(r2.direction.equal(new tuples.Vector(0, 1, 0)));
+
+	t.end();
+});
+
+test('scaling ray', function(t) {
+	const r = new rays.Ray(
+		new tuples.Point(1, 2, 3),
+		new tuples.Vector(0, 1, 0)
+	);
+	const m = transformations.scaling(2, 3, 4);
+	const r2 = r.transform(m);
+
+	t.ok(r2.origin.equal(new tuples.Point(2, 6, 12)));
+	t.ok(r2.direction.equal(new tuples.Vector(0, 3, 0)));
 
 	t.end();
 });

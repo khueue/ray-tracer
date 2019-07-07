@@ -1,6 +1,7 @@
 import * as tuples from './tuples';
 import * as spheres from './spheres';
 import * as intersections from './intersections';
+import * as matrices from './matrices';
 
 export class Ray {
 	readonly origin: tuples.Point;
@@ -37,5 +38,11 @@ export class Ray {
 		const x2 = new intersections.Intersection(t2, s);
 
 		return new intersections.Intersections(x1, x2);
+	}
+
+	transform(m: matrices.Matrix) {
+		const origin = m.multiplyByTuple(this.origin);
+		const direction = m.multiplyByTuple(this.direction);
+		return new Ray(origin, direction);
 	}
 }
