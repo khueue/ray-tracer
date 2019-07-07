@@ -30,7 +30,7 @@ export class Ray {
 			return new intersections.Intersections();
 		}
 
-		// Should these sub-calulations be broken out and reused?
+		// Should these sub-calculations be broken out and reused?
 		const t1 = (-b - Math.sqrt(discriminant)) / (2 * a);
 		const x1 = new intersections.Intersection(t1, s);
 
