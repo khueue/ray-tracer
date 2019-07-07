@@ -1,8 +1,10 @@
-<script lang="js">
-const colors = require('/js/lib/colors');
-const tuples = require('/js/lib/tuples');
+<script lang="ts">
+import Vue from 'vue';
 
-export default {
+import * as colors from '../lib/colors';
+import * as tuples from '../lib/tuples';
+
+export default Vue.extend({
 	data() {
 		return {
 			id: 'ray-tracer',
@@ -42,7 +44,7 @@ export default {
 			ctx.fillRect(x, y, 1, 1);
 		},
 	},
-};
+});
 </script>
 
 <template lang="pug">
