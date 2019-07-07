@@ -205,6 +205,17 @@ export class Matrix {
 	translate(x: number, y: number, z: number) {
 		return transformations.translation(x, y, z).multiply(this);
 	}
+
+	shear(
+		xy: number,
+		xz: number,
+		yx: number,
+		yz: number,
+		zx: number,
+		zy: number
+	) {
+		return transformations.shearing(xy, xz, yx, yz, zx, zy).multiply(this);
+	}
 }
 
 export function tupleToMatrix(t: tuples.Tuple) {
