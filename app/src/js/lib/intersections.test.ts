@@ -87,3 +87,11 @@ test('hit with only negatives means no hit', function(t) {
 
 	t.end();
 });
+
+test('no intersections means no hit', function(t) {
+	const xs = new intersections.Intersections();
+
+	t.ok(!xs.hit());
+
+	t.end();
+});
