@@ -11,19 +11,30 @@ import * as transformations from '../lib/transformations';
 export default Vue.extend({
 	data() {
 		return {
-			id: 'projectile',
+			id: 'sphere',
 			width: 400,
 			height: 400,
 			canvas: null,
+			progressPercent: 0,
+			progressTimeMs: 0,
 		};
+	},
+	computed: {
+		progressTimeTakenSeconds() {
+			return Math.round(this.progressTimeMs / 100) * 100 / 1000;
+		},
 	},
 	mounted() {
 		const canvas = this.$refs[this.id];
 		this.canvas = canvas;
-		this.render();
+		setTimeout(this.render, 0);
 	},
 	methods: {
 		render() {
+			const self = this;
+			self.progressPercent = 0;
+			self.progressTimeMs = 0;
+
 			const ctx = this.canvas.getContext('2d');
 			ctx.fillStyle = `rgb(0, 0, 0)`;
 			ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -37,11 +48,11 @@ export default Vue.extend({
 			const shape = new spheres.Sphere();
 
 			// Try transformations:
-			// shape.transformation = matrices.IDENTITY_44.scale(0.5, 1, 1);
+			// shape.transformation = matrices.IDENTITY_44.scale(1, 0.4, 1);
 
-			for (let y = 0; y < this.canvas.height; ++y) {
+			const renderRow = function (y: number) {
 				const worldY = half - pixelSize * y;
-				for (let x = 0; x < this.canvas.width; ++x) {
+				for (let x = 0; x < self.canvas.width; ++x) {
 					const worldX = -half + pixelSize * x;
 					const position = new tuples.Point(worldX, worldY, wallZ);
 					const r = new rays.Ray(
@@ -50,9 +61,22 @@ export default Vue.extend({
 					);
 					const xs = r.intersects(shape);
 					if (xs.hit()) {
-						this.drawPixel(ctx, x, y, color);
+						self.drawPixel(ctx, x, y, color);
 					}
 				}
+			}
+
+			const before = new Date() as any;
+			for (let y = 0; y < self.canvas.height; ++y) {
+				setTimeout(function () {
+					renderRow(y);
+
+					const percent = Math.round((y + 1) / self.canvas.height * 100);
+					self.progressPercent = percent;
+
+					const after = new Date() as any;
+					self.progressTimeMs = after - before;
+				}, 0);
 			}
 		},
 		drawPixel(ctx, x, y, color) {
@@ -77,22 +101,26 @@ export default Vue.extend({
 </script>
 
 <template lang="pug">
-section
-	h1.title Circle
-	canvas(
-		:ref="id"
-		:id="id"
-		:width="width"
-		:height="height"
-	)
+div.columns.is-vcentered
+	div.column
+		div.container.has-text-centered
+			h1.title Sphere
+			p.subtitle {{ progressPercent }} % | {{ progressTimeTakenSeconds }} s
+			canvas(
+				:ref="id"
+				:id="id"
+				:width="width"
+				:height="height"
+				@click="render()"
+			)
 </template>
 
 <style lang="scss" scoped>
-section {
-	text-align: center;
+.columns {
+	height: 100%;
 }
 
 canvas {
-	border: 1px solid grey;
+	border: 1px solid black;
 }
 </style>

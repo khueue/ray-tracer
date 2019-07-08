@@ -11,4 +11,9 @@ section
 	router-view()
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+section {
+	height: 100%;
+	width: 100%;
+}
+</style>

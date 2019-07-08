@@ -7,9 +7,9 @@ const router = new VueRouter({
 	mode: 'history',
 	routes: [
 		{
-			path: '/circle',
+			path: '/sphere',
 			component: function() {
-				return import('/js/pages/CircleHome');
+				return import('/js/pages/SphereHome');
 			},
 		},
 		{
