@@ -1,5 +1,7 @@
 import * as colors from './colors';
 import * as numbers from './numbers';
+import * as tuples from './tuples';
+import * as lights from './lights';
 
 export class Material {
 	color: colors.Color;
@@ -24,5 +26,46 @@ export class Material {
 			numbers.equal(this.specular, b.specular) &&
 			numbers.equal(this.shininess, b.shininess)
 		);
+	}
+
+	lighting(
+		light: lights.PointLight,
+		point: tuples.Point,
+		eyeV: tuples.Vector,
+		normalV: tuples.Vector
+	) {
+		const effectiveColor = this.color.multiply(light.intensity);
+		const lightV = light.position.subtract(point).normalize();
+		const lightDotNormal = lightV.dot(normalV);
+
+		const ambient = effectiveColor.multiply(
+			new colors.Color(this.ambient, this.ambient, this.ambient)
+		);
+		let diffuse: colors.Color;
+		let specular: colors.Color;
+
+		if (lightDotNormal < 0) {
+			diffuse = colors.BLACK;
+			specular = colors.BLACK;
+		} else {
+			diffuse = effectiveColor
+				.multiply(new colors.Color(this.diffuse, this.diffuse, this.diffuse))
+				.multiply(
+					new colors.Color(lightDotNormal, lightDotNormal, lightDotNormal)
+				);
+			const reflectV = lightV.multiply(-1).reflect(normalV);
+			const reflectDotEye = reflectV.dot(eyeV);
+			if (reflectDotEye <= 0) {
+				specular = colors.BLACK;
+			} else {
+				const factor = reflectDotEye ** this.shininess;
+				specular = light.intensity
+					.multiply(
+						new colors.Color(this.specular, this.specular, this.specular)
+					)
+					.multiply(new colors.Color(factor, factor, factor));
+			}
+		}
+		return ambient.add(diffuse).add(specular);
 	}
 }
