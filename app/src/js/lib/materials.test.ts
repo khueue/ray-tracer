@@ -115,20 +115,19 @@ test('lighting with light behind surface', function(t) {
 	t.end();
 });
 
-// Not entirely sure about this case. Created it for coverage.
-test('lighting with eye behind surface', function(t) {
+test('lighting with light reflecting away from eye', function(t) {
 	const m = new materials.Material();
 	const position = tuples.POINT_ZERO;
 
-	const eyeV = new tuples.Vector(0, 0, 1);
+	const eyeV = new tuples.Vector(0, Math.SQRT2 / 2, -Math.SQRT2 / 2);
 	const normalV = new tuples.Vector(0, 0, -1);
 	const light = new lights.PointLight(
-		new tuples.Point(0, 0, 10),
+		new tuples.Point(0, 10, -10),
 		colors.WHITE
 	);
 	const result = m.lighting(light, position, eyeV, normalV);
 
-	t.ok(result.equal(new colors.Color(0.1, 0.1, 0.1)));
+	t.ok(result.equal(new colors.Color(0.7364, 0.7364, 0.7364)));
 
 	t.end();
 });
