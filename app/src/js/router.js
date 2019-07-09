@@ -13,6 +13,12 @@ const router = new VueRouter({
 			},
 		},
 		{
+			path: '/circle',
+			component: function() {
+				return import('/js/pages/CircleHome');
+			},
+		},
+		{
 			path: '/clock',
 			component: function() {
 				return import('/js/pages/ClockHome');
