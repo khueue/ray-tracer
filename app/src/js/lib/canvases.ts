@@ -1,7 +1,5 @@
 import * as colors from './colors';
 
-const COLOR_BLACK = new colors.Color(0, 0, 0);
-
 export class Canvas {
 	readonly width: number;
 	readonly height: number;
@@ -13,7 +11,7 @@ export class Canvas {
 		for (let x = 0; x < width; ++x) {
 			this[x] = [];
 			for (let y = 0; y < height; ++y) {
-				this[x][y] = COLOR_BLACK;
+				this[x][y] = colors.BLACK;
 			}
 		}
 	}

@@ -6,7 +6,7 @@ import * as tuples from './tuples';
 
 test('point light has position and intensity', function(t) {
 	const position = tuples.POINT_ZERO;
-	const intensity = new colors.Color(1, 1, 1);
+	const intensity = colors.WHITE;
 	const light = new lights.PointLight(position, intensity);
 
 	t.ok(light.position.equal(position));
