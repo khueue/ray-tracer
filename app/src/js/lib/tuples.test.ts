@@ -213,7 +213,7 @@ test('reflecting vector approaching at 45 degrees', function(t) {
 
 test('reflecting vector off slanted surface', function(t) {
 	const v = new tuples.Vector(0, -1, 0);
-	const n = new tuples.Vector(Math.sqrt(2) / 2, Math.sqrt(2) / 2, 0);
+	const n = new tuples.Vector(Math.SQRT2 / 2, Math.SQRT2 / 2, 0);
 	const r = v.reflect(n);
 
 	t.ok(r.equal(new tuples.Vector(1, 0, 0)));

@@ -39,7 +39,7 @@ test('lighting with eye between light and surface, eye offset 45 degrees', funct
 	const m = new materials.Material();
 	const position = tuples.POINT_ZERO;
 
-	const eyeV = new tuples.Vector(0, Math.sqrt(2) / 2, -Math.sqrt(2) / 2);
+	const eyeV = new tuples.Vector(0, Math.SQRT2 / 2, -Math.SQRT2 / 2);
 	const normalV = new tuples.Vector(0, 0, -1);
 	const light = new lights.PointLight(
 		new tuples.Point(0, 0, -10),
@@ -73,7 +73,7 @@ test('lighting with eye in path of reflection vector', function(t) {
 	const m = new materials.Material();
 	const position = tuples.POINT_ZERO;
 
-	const eyeV = new tuples.Vector(0, -Math.sqrt(2) / 2, -Math.sqrt(2) / 2);
+	const eyeV = new tuples.Vector(0, -Math.SQRT2 / 2, -Math.SQRT2 / 2);
 	const normalV = new tuples.Vector(0, 0, -1);
 	const light = new lights.PointLight(
 		new tuples.Point(0, 10, -10),

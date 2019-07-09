@@ -124,9 +124,7 @@ test('normal on translated sphere', function(t) {
 test('normal on transformed sphere', function(t) {
 	const s = new spheres.Sphere();
 	s.transformation = s.transformation.rotateZ(Math.PI / 5).scale(1, 0.5, 1);
-	const n = s.normalAt(
-		new tuples.Point(0, Math.sqrt(2) / 2, -Math.sqrt(2) / 2)
-	);
+	const n = s.normalAt(new tuples.Point(0, Math.SQRT2 / 2, -Math.SQRT2 / 2));
 
 	t.ok(n.equal(new tuples.Vector(0, 0.97014, -0.24254)));
 

@@ -85,7 +85,7 @@ test('rotating point around x axis', function(t) {
 	let rotatedP: tuples.Point;
 
 	const halfQuarter = transformations.rotationX(Math.PI / 4);
-	rotatedP = new tuples.Point(0, Math.sqrt(2) / 2, Math.sqrt(2) / 2);
+	rotatedP = new tuples.Point(0, Math.SQRT2 / 2, Math.SQRT2 / 2);
 	t.ok(halfQuarter.multiply(p).equal(rotatedP));
 
 	const fullQuarter = transformations.rotationX(Math.PI / 2);
@@ -100,7 +100,7 @@ test('inverse rotation of x axis is opposite direction', function(t) {
 
 	const halfQuarter = transformations.rotationX(Math.PI / 4);
 	const inv = halfQuarter.inverse();
-	const rotatedP = new tuples.Point(0, Math.sqrt(2) / 2, -Math.sqrt(2) / 2);
+	const rotatedP = new tuples.Point(0, Math.SQRT2 / 2, -Math.SQRT2 / 2);
 
 	t.ok(inv.multiply(p).equal(rotatedP));
 
@@ -112,7 +112,7 @@ test('rotating point around y axis', function(t) {
 	let rotatedP: tuples.Point;
 
 	const halfQuarter = transformations.rotationY(Math.PI / 4);
-	rotatedP = new tuples.Point(Math.sqrt(2) / 2, 0, Math.sqrt(2) / 2);
+	rotatedP = new tuples.Point(Math.SQRT2 / 2, 0, Math.SQRT2 / 2);
 	t.ok(halfQuarter.multiply(p).equal(rotatedP));
 
 	const fullQuarter = transformations.rotationY(Math.PI / 2);
@@ -127,7 +127,7 @@ test('rotating point around z axis', function(t) {
 	let rotatedP: tuples.Point;
 
 	const halfQuarter = transformations.rotationZ(Math.PI / 4);
-	rotatedP = new tuples.Point(-Math.sqrt(2) / 2, Math.sqrt(2) / 2, 0);
+	rotatedP = new tuples.Point(-Math.SQRT2 / 2, Math.SQRT2 / 2, 0);
 	t.ok(halfQuarter.multiply(p).equal(rotatedP));
 
 	const fullQuarter = transformations.rotationZ(Math.PI / 2);
