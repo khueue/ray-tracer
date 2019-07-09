@@ -63,16 +63,49 @@ test('intersecting translated sphere with ray', function(t) {
 	t.end();
 });
 
-test('intersecting translated sphere with ray', function(t) {
-	const r = new rays.Ray(
-		new tuples.Point(0, 0, -5),
-		new tuples.Vector(0, 0, 1)
-	);
+test('normal on sphere at point on x-axis', function(t) {
 	const s = new spheres.Sphere();
-	s.transformation = transformations.translation(5, 0, 0);
-	const xs = r.intersects(s);
+	const n = s.normalAt(new tuples.Point(1, 0, 0));
 
-	t.ok(xs.length === 0);
+	t.ok(n.equal(new tuples.Vector(1, 0, 0)));
+
+	t.end();
+});
+
+test('normal on sphere at point on y-axis', function(t) {
+	const s = new spheres.Sphere();
+	const n = s.normalAt(new tuples.Point(0, 1, 0));
+
+	t.ok(n.equal(new tuples.Vector(0, 1, 0)));
+
+	t.end();
+});
+
+test('normal on sphere at point on z-axis', function(t) {
+	const s = new spheres.Sphere();
+	const n = s.normalAt(new tuples.Point(0, 0, 1));
+
+	t.ok(n.equal(new tuples.Vector(0, 0, 1)));
+
+	t.end();
+});
+
+test('normal on sphere at nonaxial point', function(t) {
+	const s = new spheres.Sphere();
+	const expr = Math.sqrt(3) / 3;
+	const n = s.normalAt(new tuples.Point(expr, expr, expr));
+
+	t.ok(n.equal(new tuples.Vector(expr, expr, expr)));
+
+	t.end();
+});
+
+test('normal is normalized', function(t) {
+	const s = new spheres.Sphere();
+	const expr = Math.sqrt(3) / 3;
+	const n = s.normalAt(new tuples.Point(expr, expr, expr));
+
+	t.ok(n.equal(n.normalize()));
 
 	t.end();
 });

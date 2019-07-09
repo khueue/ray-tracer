@@ -97,3 +97,5 @@ export function isPoint(a: unknown): a is Point {
 export function isVector(a: unknown): a is Vector {
 	return a instanceof Tuple && numbers.equal(a.w, 0);
 }
+
+export const POINT_ZERO = new Point(0, 0, 0);

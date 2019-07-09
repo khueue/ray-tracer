@@ -1,4 +1,5 @@
 import * as matrices from './matrices';
+import * as tuples from './tuples';
 
 let UNIQUE_ID = 0;
 
@@ -13,5 +14,9 @@ export class Sphere {
 	constructor() {
 		this.id = nextId();
 		this.transformation = matrices.IDENTITY_44;
+	}
+
+	normalAt(p: tuples.Point) {
+		return p.subtract(tuples.POINT_ZERO).normalize();
 	}
 }
