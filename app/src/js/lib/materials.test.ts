@@ -18,6 +18,15 @@ test('default material', function(t) {
 	t.end();
 });
 
+test('materials can be compared', function(t) {
+	const m1 = new materials.Material();
+	const m2 = new materials.Material();
+
+	t.ok(m1.equal(m2));
+
+	t.end();
+});
+
 test('lighting with eye between light and surface', function(t) {
 	const m = new materials.Material();
 	const position = tuples.POINT_ZERO;
