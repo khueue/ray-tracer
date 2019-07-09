@@ -2,14 +2,14 @@ import '../../node_modules/@fortawesome/fontawesome-free/js/all.min.js';
 
 import Vue from 'vue';
 
-import router from '/js/router.js';
-import store from '/js/store.js';
+import router from '/js/router';
+import store from '/js/store';
 
 import App from '/js/components/App.vue';
 
 Vue.config.productionTip = false;
 
-window.app = new Vue({
+const app = new Vue({
 	router,
 	store,
 	render(h) {
@@ -17,4 +17,4 @@ window.app = new Vue({
 	},
 });
 
-window.app.$mount('#app');
+app.$mount('#app');
