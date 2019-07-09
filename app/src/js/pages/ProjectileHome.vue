@@ -54,7 +54,7 @@ export default Vue.extend({
 					ctx,
 					proj.position.x,
 					proj.position.y,
-					new colors.Color(0.0, 0.0, 0.0)
+					new colors.Color(1.0, 1.0, 1.0)
 				);
 				proj = this.tick(env, proj);
 			}
@@ -66,9 +66,12 @@ export default Vue.extend({
 				0 <= y &&
 				y < this.canvas.height
 			) {
-				ctx.fillStyle = `rgb(${color.red}, ${color.green}, ${color.blue})`;
+				const red = color.red * 255;
+				const green = color.green * 255;
+				const blue = color.blue * 255;
+				ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
 				y = this.height - y - 1; // To draw from the bottom.
-				ctx.fillRect(x, y, 1, 1);
+				ctx.fillRect(x, y, 2, 2);
 			}
 		},
 	},

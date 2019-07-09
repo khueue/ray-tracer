@@ -6,7 +6,9 @@ import * as tuples from '../lib/tuples';
 import * as matrices from '../lib/matrices';
 import * as spheres from '../lib/spheres';
 import * as rays from '../lib/rays';
+import * as materials from '../lib/materials';
 import * as transformations from '../lib/transformations';
+import * as lights from '../lib/lights';
 
 export default Vue.extend({
 	data() {
@@ -37,6 +39,7 @@ export default Vue.extend({
 
 			const ctx = this.canvas.getContext('2d');
 			ctx.fillStyle = `rgb(0, 0, 0)`;
+			// ctx.fillStyle = `rgb(255, 255, 255)`;
 			ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
 			const rayOrigin = new tuples.Point(0, 0, -5);
@@ -44,11 +47,17 @@ export default Vue.extend({
 			const wallSize = 7;
 			const half = wallSize / 2;
 			const pixelSize = wallSize / this.canvas.width;
-			const color = new colors.Color(1, 0.6, 0.4);
-			const shape = new spheres.Sphere();
 
-			// Try transformations:
-			// shape.transformation = matrices.IDENTITY_44.scale(1, 0.4, 1);
+			const shape = new spheres.Sphere();
+			shape.material.ambient = 0.1;
+			shape.material.specular = 0.8;
+			shape.material.shininess = 100;
+			shape.material.color = new colors.Color(1, 0.3, 0.2);
+			// shape.transformation = matrices.IDENTITY_44.shear(0.3,0.3,0,0,0,0);
+
+			const lightPosition = new tuples.Point(-10, 10, -10);
+			const lightColor = new colors.Color(1, 1, 1);
+			const light = new lights.PointLight(lightPosition, lightColor);
 
 			const renderRow = function(y: number) {
 				const worldY = half - pixelSize * y;
@@ -60,7 +69,12 @@ export default Vue.extend({
 						position.subtract(rayOrigin).normalize()
 					);
 					const xs = r.intersects(shape);
-					if (xs.hit()) {
+					const hit = xs.hit();
+					if (hit) {
+						const point = r.position(hit.t);
+						const normal = hit.obj.normalAt(point);
+						const eye = r.direction.multiply(-1);
+						const color = hit.obj.material.lighting(light, point, eye, normal);
 						self.drawPixel(ctx, x, y, color);
 					}
 				}
@@ -93,7 +107,7 @@ export default Vue.extend({
 				// y = this.height - y - 1; // To draw from the bottom.
 				ctx.fillRect(x, y, 1, 1);
 			} else {
-				console.error(`Point (${x},${y}) is outside canvas`);
+				console.error(`Point (${x}, ${y}) is outside canvas`);
 			}
 		},
 	},
@@ -104,8 +118,8 @@ export default Vue.extend({
 div.columns.is-vcentered
 	div.column
 		div.container.has-text-centered
-			h1.title Sphere
-			p.subtitle {{ progressPercent }} % | {{ progressTimeTakenSeconds }} s
+			h1.title.has-text-grey-lighter Sphere
+			p.subtitle.has-text-grey {{ progressPercent }}% &mdash; {{ progressTimeTakenSeconds }}s
 			canvas(
 				:ref="id"
 				:id="id"

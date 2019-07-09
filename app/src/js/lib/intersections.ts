@@ -1,8 +1,10 @@
+import * as spheres from './spheres';
+
 export class Intersection {
 	readonly t: number;
-	readonly obj: object;
+	readonly obj: spheres.Sphere;
 
-	constructor(t: number, obj: object) {
+	constructor(t: number, obj: spheres.Sphere) {
 		this.t = t;
 		this.obj = obj;
 	}
