@@ -56,6 +56,7 @@ export class Material {
 				specular = light.intensity.scale(this.specular).scale(factor);
 			}
 		}
+
 		return ambient.add(diffuse).add(specular);
 	}
 }

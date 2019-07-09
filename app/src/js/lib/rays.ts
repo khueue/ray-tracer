@@ -20,7 +20,7 @@ export class Ray {
 	// NOTE: Only designed for spheres now.
 	intersects(s: spheres.Sphere) {
 		const ray = this.transform(s.transformation.inverse());
-		const sphereToRay = ray.origin.subtract(new tuples.Point(0, 0, 0));
+		const sphereToRay = ray.origin.subtract(tuples.POINT_ZERO);
 		const a = ray.direction.dot(ray.direction);
 		const b = ray.direction.dot(sphereToRay) * 2;
 		const c = sphereToRay.dot(sphereToRay) - 1;
