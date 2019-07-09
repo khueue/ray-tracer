@@ -62,3 +62,17 @@ test('intersecting translated sphere with ray', function(t) {
 
 	t.end();
 });
+
+test('intersecting translated sphere with ray', function(t) {
+	const r = new rays.Ray(
+		new tuples.Point(0, 0, -5),
+		new tuples.Vector(0, 0, 1)
+	);
+	const s = new spheres.Sphere();
+	s.transformation = transformations.translation(5, 0, 0);
+	const xs = r.intersects(s);
+
+	t.ok(xs.length === 0);
+
+	t.end();
+});

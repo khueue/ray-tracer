@@ -10,6 +10,12 @@ default:
 npm-install:
 	make app-cmd cmd="npm install"
 
+npm-outdated:
+	make app-cmd cmd="npm outdated"
+
+npm-prune:
+	make app-cmd cmd="npm prune"
+
 server:
 	make app-cmd-with-ports cmd=./bin/server
 

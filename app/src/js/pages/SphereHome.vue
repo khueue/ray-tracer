@@ -21,7 +21,7 @@ export default Vue.extend({
 	},
 	computed: {
 		progressTimeTakenSeconds() {
-			return Math.round(this.progressTimeMs / 100) * 100 / 1000;
+			return (Math.round(this.progressTimeMs / 100) * 100) / 1000;
 		},
 	},
 	mounted() {
@@ -50,7 +50,7 @@ export default Vue.extend({
 			// Try transformations:
 			// shape.transformation = matrices.IDENTITY_44.scale(1, 0.4, 1);
 
-			const renderRow = function (y: number) {
+			const renderRow = function(y: number) {
 				const worldY = half - pixelSize * y;
 				for (let x = 0; x < self.canvas.width; ++x) {
 					const worldX = -half + pixelSize * x;
@@ -64,14 +64,14 @@ export default Vue.extend({
 						self.drawPixel(ctx, x, y, color);
 					}
 				}
-			}
+			};
 
 			const before = new Date() as any;
 			for (let y = 0; y < self.canvas.height; ++y) {
-				setTimeout(function () {
+				setTimeout(function() {
 					renderRow(y);
 
-					const percent = Math.round((y + 1) / self.canvas.height * 100);
+					const percent = Math.round(((y + 1) / self.canvas.height) * 100);
 					self.progressPercent = percent;
 
 					const after = new Date() as any;
