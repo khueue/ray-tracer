@@ -61,3 +61,11 @@ test('comparing colors', function(t) {
 
 	t.end();
 });
+
+test('scaling color', function(t) {
+	const a = new colors.Color(1, 0.2, 0.4);
+	const a2 = a.scale(0.5);
+	t.ok(a2.equal(new colors.Color(0.5, 0.1, 0.2)));
+
+	t.end();
+});
