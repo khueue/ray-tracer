@@ -8,9 +8,9 @@ set -o nounset
 echo "--- Running coverage ..."
 
 ./node_modules/.bin/tap \
-	--files "./src/js/**/*.test.ts" \
+	--files "./src/js/**/*.ts" \
 	--100 \
-	--jobs=8 \
+	--jobs=4 \
 	--coverage-report html \
 	--no-browser
 
