@@ -38,9 +38,7 @@ export class Material {
 		const lightV = light.position.subtract(point).normalize();
 		const lightDotNormal = lightV.dot(normalV);
 
-		const ambient = effectiveColor.multiply(
-			new colors.Color(this.ambient, this.ambient, this.ambient)
-		);
+		const ambient = effectiveColor.scale(this.ambient);
 		let diffuse: colors.Color;
 		let specular: colors.Color;
 
