@@ -16,7 +16,16 @@ export class Sphere {
 		this.transformation = matrices.IDENTITY_44;
 	}
 
-	normalAt(p: tuples.Point) {
-		return p.subtract(tuples.POINT_ZERO).normalize();
+	normalAt(worldPoint: tuples.Point) {
+		const inverseTransformation = this.transformation.inverse();
+
+		const objectPoint = inverseTransformation.multiplyByTuple(worldPoint);
+		const objectNormal = objectPoint.subtract(tuples.POINT_ZERO);
+
+		const worldNormal = inverseTransformation
+			.transpose()
+			.multiplyByTuple(objectNormal);
+		worldNormal.w = 0;
+		return worldNormal.normalize();
 	}
 }

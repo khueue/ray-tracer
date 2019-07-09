@@ -4,7 +4,7 @@ export class Tuple {
 	readonly x: number;
 	readonly y: number;
 	readonly z: number;
-	readonly w: number;
+	w: number;
 
 	constructor(x: number, y: number, z: number, w: number) {
 		this.x = x;

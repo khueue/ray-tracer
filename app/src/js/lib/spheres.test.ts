@@ -109,3 +109,25 @@ test('normal is normalized', function(t) {
 
 	t.end();
 });
+
+test('normal on translated sphere', function(t) {
+	const s = new spheres.Sphere();
+	s.transformation = s.transformation.translate(0, 1, 0);
+	const n = s.normalAt(new tuples.Point(0, 1.70711, -0.70711));
+
+	t.ok(n.equal(new tuples.Vector(0, 0.70711, -0.70711)));
+
+	t.end();
+});
+
+test('normal on transformed sphere', function(t) {
+	const s = new spheres.Sphere();
+	s.transformation = s.transformation.rotateZ(Math.PI / 5).scale(1, 0.5, 1);
+	const n = s.normalAt(
+		new tuples.Point(0, Math.sqrt(2) / 2, -Math.sqrt(2) / 2)
+	);
+
+	t.ok(n.equal(new tuples.Vector(0, 0.97014, -0.24254)));
+
+	t.end();
+});
