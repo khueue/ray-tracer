@@ -4,7 +4,7 @@ export class Tuple {
 	readonly x: number;
 	readonly y: number;
 	readonly z: number;
-	w: number;
+	w: number; // NOTE: See Sphere.normalAt().
 
 	constructor(x: number, y: number, z: number, w: number) {
 		this.x = x;
@@ -71,6 +71,10 @@ export class Tuple {
 			this.z * b.x - this.x * b.z,
 			this.x * b.y - this.y * b.x
 		);
+	}
+
+	reflect(normal: Vector): Vector {
+		return this.subtract(normal.multiply(2).multiply(this.dot(normal)));
 	}
 }
 
