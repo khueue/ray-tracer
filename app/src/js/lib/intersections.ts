@@ -24,8 +24,9 @@ export class Intersections {
 
 	hit(): Intersection | null {
 		for (let i = 0; i < this.length; ++i) {
-			if (this[i].t >= 0) {
-				return this[i];
+			const x = this[i];
+			if (x.t >= 0) {
+				return x;
 			}
 		}
 		return null;
