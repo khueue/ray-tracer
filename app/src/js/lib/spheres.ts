@@ -1,5 +1,6 @@
 import * as matrices from './matrices';
 import * as tuples from './tuples';
+import * as materials from './materials';
 
 let UNIQUE_ID = 0;
 
@@ -10,10 +11,12 @@ function nextId() {
 export class Sphere {
 	readonly id: number;
 	transformation: matrices.Matrix;
+	material: materials.Material;
 
 	constructor() {
 		this.id = nextId();
 		this.transformation = matrices.IDENTITY_44;
+		this.material = new materials.Material();
 	}
 
 	normalAt(worldPoint: tuples.Point) {

@@ -1,4 +1,5 @@
 import * as colors from './colors';
+import * as numbers from './numbers';
 
 export class Material {
 	color: colors.Color;
@@ -13,5 +14,15 @@ export class Material {
 		this.diffuse = 0.9;
 		this.specular = 0.9;
 		this.shininess = 200.0;
+	}
+
+	equal(b: Material) {
+		return (
+			this.color.equal(b.color) &&
+			numbers.equal(this.ambient, b.ambient) &&
+			numbers.equal(this.diffuse, b.diffuse) &&
+			numbers.equal(this.specular, b.specular) &&
+			numbers.equal(this.shininess, b.shininess)
+		);
 	}
 }

@@ -6,6 +6,7 @@ import * as rays from './rays';
 import * as tuples from './tuples';
 import * as matrices from './matrices';
 import * as transformations from './transformations';
+import * as materials from './materials';
 
 test('each sphere is unique', function(t) {
 	const a = new spheres.Sphere();
@@ -128,6 +129,26 @@ test('normal on transformed sphere', function(t) {
 	);
 
 	t.ok(n.equal(new tuples.Vector(0, 0.97014, -0.24254)));
+
+	t.end();
+});
+
+test('sphere has default material', function(t) {
+	const s = new spheres.Sphere();
+	const m = new materials.Material();
+
+	t.ok(s.material.equal(m));
+
+	t.end();
+});
+
+test('sphere may be assigned material', function(t) {
+	const s = new spheres.Sphere();
+	const m = new materials.Material();
+	m.ambient = 1;
+	s.material = m;
+
+	t.ok(s.material.equal(m));
 
 	t.end();
 });
