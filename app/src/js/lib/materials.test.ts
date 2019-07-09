@@ -19,10 +19,13 @@ test('default material', function(t) {
 });
 
 test('materials can be compared', function(t) {
-	const m1 = new materials.Material();
-	const m2 = new materials.Material();
+	const a = new materials.Material();
+	const b = new materials.Material();
+	const c = new materials.Material();
+	c.ambient = 0.5
 
-	t.ok(m1.equal(m2));
+	t.ok(a.equal(b));
+	t.ok(!a.equal(c));
 
 	t.end();
 });
