@@ -10,7 +10,7 @@ echo "--- Running tests ..."
 ./node_modules/.bin/ts-node \
 	--project ./tsconfig.json \
 	--pretty \
-		./node_modules/.bin/tape "./src/js/**/*.test.ts" \
+		./node_modules/.bin/tape "./src/js/**/*.ts" \
 | ./node_modules/.bin/tap-summary
 
 echo "--- Finished running tests."
