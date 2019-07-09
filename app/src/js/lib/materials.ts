@@ -48,22 +48,14 @@ export class Material {
 			diffuse = colors.BLACK;
 			specular = colors.BLACK;
 		} else {
-			diffuse = effectiveColor
-				.multiply(new colors.Color(this.diffuse, this.diffuse, this.diffuse))
-				.multiply(
-					new colors.Color(lightDotNormal, lightDotNormal, lightDotNormal)
-				);
+			diffuse = effectiveColor.scale(this.diffuse).scale(lightDotNormal);
 			const reflectV = lightV.multiply(-1).reflect(normalV);
 			const reflectDotEye = reflectV.dot(eyeV);
 			if (reflectDotEye <= 0) {
 				specular = colors.BLACK;
 			} else {
 				const factor = reflectDotEye ** this.shininess;
-				specular = light.intensity
-					.multiply(
-						new colors.Color(this.specular, this.specular, this.specular)
-					)
-					.multiply(new colors.Color(factor, factor, factor));
+				specular = light.intensity.scale(this.specular).scale(factor);
 			}
 		}
 		return ambient.add(diffuse).add(specular);

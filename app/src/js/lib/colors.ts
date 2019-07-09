@@ -42,6 +42,12 @@ export class Color {
 			this.blue * b.blue
 		);
 	}
+
+	// NOTE: Not obvious from book that this functionality is needed
+	// (multiplying color components by a constant).
+	scale(x: number) {
+		return new Color(this.red * x, this.green * x, this.blue * x);
+	}
 }
 
 export const BLACK = new Color(0, 0, 0);
