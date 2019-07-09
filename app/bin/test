@@ -5,12 +5,30 @@ set -o pipefail
 set -o nounset
 # set -o xtrace
 
-echo "--- Running tests ..."
+NODE_V8_COVERAGE=./cov-c8/
+REPORT_DIR=./cov-report/
 
+rm -rf "${NODE_V8_COVERAGE}"
+mkdir -p "${NODE_V8_COVERAGE}"
+
+rm -rf "${REPORT_DIR}"
+mkdir -p "${REPORT_DIR}"
+
+export NODE_V8_COVERAGE
+
+echo "--- Running tests ..."
 ./node_modules/.bin/ts-node \
-	--project ./tsconfig.json \
-	--pretty \
-		./node_modules/.bin/tape "./src/js/**/*.ts" \
+		--project "./tsconfig.json" \
+		--pretty \
+	./node_modules/.bin/tape "./src/js/**/*.ts" \
 | ./node_modules/.bin/tap-summary
+
+echo "--- Coverage ..."
+./node_modules/.bin/c8 report
+
+echo "--- Generating coverage HTML report ..."
+./node_modules/.bin/c8 report \
+	--report-dir "${REPORT_DIR}" \
+	--reporter html
 
 echo "--- Finished running tests."

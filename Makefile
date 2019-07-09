@@ -32,7 +32,7 @@ coverage:
 	make app-cmd cmd=./bin/coverage
 
 open-coverage:
-	open ./app/coverage/lcov-report/index.html
+	open ./app/cov-report/index.html
 
 # Application tooling.
 #
