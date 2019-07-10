@@ -39,7 +39,6 @@ export default Vue.extend({
 
 			const ctx = this.canvas.getContext('2d');
 			ctx.fillStyle = `rgb(0, 0, 0)`;
-			// ctx.fillStyle = `rgb(255, 255, 255)`;
 			ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
 			const rayOrigin = new tuples.Point(0, 0, -5);
@@ -50,10 +49,10 @@ export default Vue.extend({
 
 			const shape = new spheres.Sphere();
 			shape.material.ambient = 0.1;
-			shape.material.specular = 0.8;
+			shape.material.specular = 0.7;
 			shape.material.shininess = 100;
 			shape.material.color = new colors.Color(1, 0.3, 0.2);
-			// shape.transformation = matrices.IDENTITY_44.shear(0.3,0.3,0,0,0,0);
+			// shape.transformation = matrices.IDENTITY_44.scale(1, 0.5, 1).rotateZ(Math.PI / 6)
 
 			const lightPosition = new tuples.Point(-10, 10, -10);
 			const lightColor = new colors.Color(1, 1, 1);
@@ -64,16 +63,16 @@ export default Vue.extend({
 				for (let x = 0; x < self.canvas.width; ++x) {
 					const worldX = -half + pixelSize * x;
 					const position = new tuples.Point(worldX, worldY, wallZ);
-					const r = new rays.Ray(
+					const ray = new rays.Ray(
 						rayOrigin,
 						position.subtract(rayOrigin).normalize()
 					);
-					const xs = r.intersects(shape);
+					const xs = ray.intersects(shape);
 					const hit = xs.hit();
 					if (hit) {
-						const point = r.position(hit.t);
+						const point = ray.position(hit.t);
 						const normal = hit.obj.normalAt(point);
-						const eye = r.direction.multiply(-1);
+						const eye = ray.direction.multiply(-1);
 						const color = hit.obj.material.lighting(light, point, eye, normal);
 						self.drawPixel(ctx, x, y, color);
 					}
