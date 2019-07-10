@@ -7,10 +7,15 @@ set -o nounset
 
 echo "--- Running coverage ..."
 
+# Use this to grab all files, even those without tests:
+GLOB_ALL="./src/js/**/*.ts"
+# Use this for speed:
+GLOB_TESTS_ONLY="./src/js/**/*.test.ts"
+
 ./node_modules/.bin/tap \
-	--files "./src/js/**/*.ts" \
+	--files "${GLOB_TESTS_ONLY}" \
 	--100 \
-	--jobs=4 \
+	--jobs 8 \
 	--coverage-report html \
 	--no-browser
 
