@@ -73,7 +73,12 @@ export default Vue.extend({
 						const point = ray.position(hit.t);
 						const normal = hit.obj.normalAt(point);
 						const eye = ray.direction.multiply(-1);
-						const color = hit.obj.material.lighting(light, point, eye, normal);
+						const color = hit.obj.material.lighting(
+							light,
+							point,
+							eye,
+							normal
+						);
 						self.drawPixel(ctx, x, y, color);
 					}
 				}

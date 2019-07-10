@@ -22,7 +22,7 @@ test('materials can be compared', function(t) {
 	const a = new materials.Material();
 	const b = new materials.Material();
 	const c = new materials.Material();
-	c.ambient = 0.5
+	c.ambient = 0.5;
 
 	t.ok(a.equal(b));
 	t.ok(!a.equal(c));
