@@ -33,7 +33,7 @@ const router = new VueRouter({
 		{
 			path: '*',
 			component: function() {
-				return import('/js/pages/RayTracerHome');
+				return import('/js/pages/SphereHome');
 			},
 		},
 	],

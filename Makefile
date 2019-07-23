@@ -8,7 +8,7 @@ default:
 # make npm-install
 
 npm-install:
-	make app-cmd cmd="npm install"
+	make app-cmd cmd="npm install && npm prune"
 
 npm-outdated:
 	make app-cmd cmd="npm outdated"
@@ -18,6 +18,9 @@ npm-prune:
 
 server:
 	make app-cmd-with-ports cmd=./bin/server
+
+build:
+	make app-cmd-with-ports cmd=./bin/build
 
 pretty:
 	make app-cmd cmd=./bin/pretty
@@ -44,13 +47,13 @@ IMAGE_TAG_APP=ray-tracer-app
 
 app-cmd: app-docker-build
 	docker run --interactive --tty --rm \
-		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency="cached" \
+		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency="consistent" \
 		$(IMAGE_TAG_APP) \
 		bash -c "$(cmd)"
 
 app-cmd-with-ports: app-docker-build
 	docker run --interactive --tty --rm \
-		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency="cached" \
+		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency="consistent" \
 		--publish 1234:1234 \
 		--publish 4321:4321 \
 		$(IMAGE_TAG_APP) \

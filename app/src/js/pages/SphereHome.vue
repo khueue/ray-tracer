@@ -2,6 +2,7 @@
 import Vue from 'vue';
 
 import * as colors from '../lib/colors';
+import * as numbers from '../lib/numbers';
 import * as tuples from '../lib/tuples';
 import * as matrices from '../lib/matrices';
 import * as spheres from '../lib/spheres';
@@ -23,7 +24,7 @@ export default Vue.extend({
 	},
 	computed: {
 		progressTimeTakenSeconds() {
-			return (Math.round(this.progressTimeMs / 100) * 100) / 1000;
+			return (this.progressTimeMs / 1000).toFixed(1);
 		},
 	},
 	mounted() {
@@ -38,7 +39,7 @@ export default Vue.extend({
 			self.progressTimeMs = 0;
 
 			const ctx = this.canvas.getContext('2d');
-			ctx.fillStyle = `rgb(0, 0, 0)`;
+			ctx.fillStyle = 'rgb(0, 0, 0)';
 			ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
 			const rayOrigin = new tuples.Point(0, 0, -5);
@@ -58,43 +59,65 @@ export default Vue.extend({
 			const lightColor = new colors.Color(1, 1, 1);
 			const light = new lights.PointLight(lightPosition, lightColor);
 
-			const renderRow = function(y: number) {
-				const worldY = half - pixelSize * y;
-				for (let x = 0; x < self.canvas.width; ++x) {
-					const worldX = -half + pixelSize * x;
-					const position = new tuples.Point(worldX, worldY, wallZ);
-					const ray = new rays.Ray(
-						rayOrigin,
-						position.subtract(rayOrigin).normalize()
-					);
-					const xs = ray.intersects(shape);
-					const hit = xs.hit();
-					if (hit) {
-						const point = ray.position(hit.t);
-						const normal = hit.obj.normalAt(point);
-						const eye = ray.direction.multiply(-1);
-						const color = hit.obj.material.lighting(
-							light,
-							point,
-							eye,
-							normal
-						);
-						self.drawPixel(ctx, x, y, color);
-					}
+			const renderPixel = function(
+				x: number,
+				worldX: number,
+				y: number,
+				worldY: number
+			) {
+				const position = new tuples.Point(worldX, worldY, wallZ);
+				const ray = new rays.Ray(
+					rayOrigin,
+					position.subtract(rayOrigin).normalize()
+				);
+				const xs = ray.intersects(shape);
+				const hit = xs.hit();
+				if (hit) {
+					const point = ray.position(hit.t);
+					const normal = hit.obj.normalAt(point);
+					const eye = ray.direction.multiply(-1);
+					const color = hit.obj.material.lighting(light, point, eye, normal);
+					self.drawPixel(ctx, x, y, color);
 				}
 			};
 
-			const before = new Date() as any;
+			let workers = [];
 			for (let y = 0; y < self.canvas.height; ++y) {
-				setTimeout(function() {
-					renderRow(y);
+				const worldY = half - pixelSize * y;
+				for (let x = 0; x < self.canvas.width; ++x) {
+					const worldX = -half + pixelSize * x;
+					workers.push(function() {
+						renderPixel(x, worldX, y, worldY);
+					});
+				}
+			}
+			self.shuffleInPlace(workers);
 
-					const percent = Math.round(((y + 1) / self.canvas.height) * 100);
+			let numDone = 0;
+			const totalPixels = self.canvas.width * self.canvas.height;
+			const iterations = 25;
+			const batchSize = workers.length / iterations;
+			const before = new Date() as any;
+			for (let i = 0; i < workers.length; i += batchSize) {
+				const workerBatch = workers.slice(i, i + batchSize);
+				setTimeout(function() {
+					for (const worker of workerBatch) {
+						worker();
+						++numDone;
+					}
+
+					const percent = Math.round((numDone / totalPixels) * 100);
 					self.progressPercent = percent;
 
 					const after = new Date() as any;
 					self.progressTimeMs = after - before;
 				}, 0);
+			}
+		},
+		shuffleInPlace<T>(a: T[]): void {
+			for (let i = 0; i < a.length; ++i) {
+				const randomI = numbers.randomIntInclusive(i, a.length - 1);
+				[a[i], a[randomI]] = [a[randomI], a[i]];
 			}
 		},
 		drawPixel(ctx, x, y, color) {
@@ -108,7 +131,7 @@ export default Vue.extend({
 				const green = color.green * 255;
 				const blue = color.blue * 255;
 				ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
-				// y = this.height - y - 1; // To draw from the bottom.
+				// y = this.height - y - 1; // To flip the y-axis.
 				ctx.fillRect(x, y, 1, 1);
 			} else {
 				console.error(`Point (${x}, ${y}) is outside canvas`);
@@ -136,9 +159,5 @@ div.columns.is-vcentered
 <style lang="scss" scoped>
 .columns {
 	height: 100%;
-}
-
-canvas {
-	border: 1px solid black;
 }
 </style>
