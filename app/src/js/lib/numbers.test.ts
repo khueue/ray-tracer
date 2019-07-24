@@ -12,9 +12,11 @@ test('epsilon comparison', function(t) {
 });
 
 test('random int inclusive', function(t) {
-	for (let i = 0; i < 100; ++i) {
-		const x = numbers.randomIntInclusive(0, i);
-		t.ok(0 <= x && x <= i);
+	const min = -100;
+	const max = +100;
+	for (let i = min; i <= max; ++i) {
+		const x = numbers.randomIntInclusive(min, i);
+		t.ok(min <= x && x <= i);
 	}
 
 	t.end();
