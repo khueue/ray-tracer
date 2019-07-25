@@ -12,7 +12,7 @@ echo "--- Prettifying source code ..."
 	--print-width 78 \
 	--use-tabs \
 	--single-quote \
-	--trailing-comma es5 \
+	--trailing-comma all \
 	"./src/**/*.js" \
 	"./src/**/*.ts" \
 	"./src/**/*.vue" \

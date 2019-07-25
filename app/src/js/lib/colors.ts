@@ -23,7 +23,7 @@ export class Color {
 		return new Color(
 			this.red + b.red,
 			this.green + b.green,
-			this.blue + b.blue
+			this.blue + b.blue,
 		);
 	}
 
@@ -31,7 +31,7 @@ export class Color {
 		return new Color(
 			this.red - b.red,
 			this.green - b.green,
-			this.blue - b.blue
+			this.blue - b.blue,
 		);
 	}
 
@@ -39,7 +39,7 @@ export class Color {
 		return new Color(
 			this.red * b.red,
 			this.green * b.green,
-			this.blue * b.blue
+			this.blue * b.blue,
 		);
 	}
 

@@ -1,7 +1,7 @@
-import * as tuples from './tuples';
-import * as spheres from './spheres';
 import * as intersections from './intersections';
 import * as matrices from './matrices';
+import * as spheres from './spheres';
+import * as tuples from './tuples';
 
 export class Ray {
 	readonly origin: tuples.Point;

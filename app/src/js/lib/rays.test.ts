@@ -1,10 +1,10 @@
 import * as test from 'tape';
 
 import * as numbers from './numbers';
-import * as tuples from './tuples';
 import * as rays from './rays';
 import * as spheres from './spheres';
 import * as transformations from './transformations';
+import * as tuples from './tuples';
 
 test('creating ray', function(t) {
 	const origin = new tuples.Point(1, 2, 3);
@@ -20,7 +20,7 @@ test('creating ray', function(t) {
 test('computing point from distance', function(t) {
 	const r = new rays.Ray(
 		new tuples.Point(2, 3, 4),
-		new tuples.Vector(1, 0, 0)
+		new tuples.Vector(1, 0, 0),
 	);
 
 	t.ok(r.position(0).equal(new tuples.Point(2, 3, 4)));
@@ -34,7 +34,7 @@ test('computing point from distance', function(t) {
 test('ray intersects sphere at two points', function(t) {
 	const r = new rays.Ray(
 		new tuples.Point(0, 0, -5),
-		new tuples.Vector(0, 0, 1)
+		new tuples.Vector(0, 0, 1),
 	);
 	const s = new spheres.Sphere();
 	const xs = r.intersects(s);
@@ -49,7 +49,7 @@ test('ray intersects sphere at two points', function(t) {
 test('ray intersects sphere at tangent', function(t) {
 	const r = new rays.Ray(
 		new tuples.Point(0, 1, -5),
-		new tuples.Vector(0, 0, 1)
+		new tuples.Vector(0, 0, 1),
 	);
 	const s = new spheres.Sphere();
 	const xs = r.intersects(s);
@@ -64,7 +64,7 @@ test('ray intersects sphere at tangent', function(t) {
 test('ray misses sphere', function(t) {
 	const r = new rays.Ray(
 		new tuples.Point(0, 2, -5),
-		new tuples.Vector(0, 0, 1)
+		new tuples.Vector(0, 0, 1),
 	);
 	const s = new spheres.Sphere();
 	const xs = r.intersects(s);
@@ -77,7 +77,7 @@ test('ray misses sphere', function(t) {
 test('ray originates inside sphere', function(t) {
 	const r = new rays.Ray(
 		new tuples.Point(0, 0, 0),
-		new tuples.Vector(0, 0, 1)
+		new tuples.Vector(0, 0, 1),
 	);
 	const s = new spheres.Sphere();
 	const xs = r.intersects(s);
@@ -92,7 +92,7 @@ test('ray originates inside sphere', function(t) {
 test('ray is passed sphere', function(t) {
 	const r = new rays.Ray(
 		new tuples.Point(0, 0, 5),
-		new tuples.Vector(0, 0, 1)
+		new tuples.Vector(0, 0, 1),
 	);
 	const s = new spheres.Sphere();
 	const xs = r.intersects(s);
@@ -107,7 +107,7 @@ test('ray is passed sphere', function(t) {
 test('translating ray', function(t) {
 	const r = new rays.Ray(
 		new tuples.Point(1, 2, 3),
-		new tuples.Vector(0, 1, 0)
+		new tuples.Vector(0, 1, 0),
 	);
 	const m = transformations.translation(3, 4, 5);
 	const r2 = r.transform(m);
@@ -121,7 +121,7 @@ test('translating ray', function(t) {
 test('scaling ray', function(t) {
 	const r = new rays.Ray(
 		new tuples.Point(1, 2, 3),
-		new tuples.Vector(0, 1, 0)
+		new tuples.Vector(0, 1, 0),
 	);
 	const m = transformations.scaling(2, 3, 4);
 	const r2 = r.transform(m);

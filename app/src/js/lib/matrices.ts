@@ -1,7 +1,6 @@
 import * as numbers from './numbers';
-import * as tuples from './tuples';
-// XXX Think about this circular dependency:
 import * as transformations from './transformations';
+import * as tuples from './tuples';
 
 export class Matrix {
 	readonly numRows: number;
@@ -73,7 +72,7 @@ export class Matrix {
 
 	multiplyByMatrix(b: Matrix) {
 		// Result is sized as: rows of this, columns of b.
-		let c = new Matrix(this.numRows, b.numCols, 0);
+		const c = new Matrix(this.numRows, b.numCols, 0);
 
 		for (let row = 0; row < this.numRows; ++row) {
 			for (let col = 0; col < b.numCols; ++col) {
@@ -95,7 +94,7 @@ export class Matrix {
 	}
 
 	transpose() {
-		let trans = new Matrix(this.numRows, this.numCols, 0);
+		const trans = new Matrix(this.numRows, this.numCols, 0);
 
 		for (let row = 0; row < this.numRows; ++row) {
 			for (let col = 0; col < this.numCols; ++col) {
@@ -120,7 +119,7 @@ export class Matrix {
 
 	submatrix(rowToSkip: number, colToSkip: number) {
 		// Submatrix is always one smaller than the input.
-		let sub = new Matrix(this.numRows - 1, this.numCols - 1, 0);
+		const sub = new Matrix(this.numRows - 1, this.numCols - 1, 0);
 
 		for (let row = 0, subRow = 0; row < this.numRows; ++row, ++subRow) {
 			if (row === rowToSkip) {
@@ -167,7 +166,7 @@ export class Matrix {
 			throw new Error('inverse() requires invertible matrix');
 		}
 
-		let inv = new Matrix(this.numRows, this.numCols, 0);
+		const inv = new Matrix(this.numRows, this.numCols, 0);
 
 		for (let row = 0; row < this.numRows; ++row) {
 			for (let col = 0; col < this.numCols; ++col) {
@@ -212,7 +211,7 @@ export class Matrix {
 		yx: number,
 		yz: number,
 		zx: number,
-		zy: number
+		zy: number,
 	) {
 		return transformations.shearing(xy, xz, yx, yz, zx, zy).multiply(this);
 	}

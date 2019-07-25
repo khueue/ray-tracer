@@ -1,6 +1,6 @@
+import * as materials from './materials';
 import * as matrices from './matrices';
 import * as tuples from './tuples';
-import * as materials from './materials';
 
 let UNIQUE_ID = 0;
 

@@ -35,7 +35,7 @@ export class Tuple {
 			this.x * scalar,
 			this.y * scalar,
 			this.z * scalar,
-			this.w * scalar
+			this.w * scalar,
 		);
 	}
 
@@ -44,7 +44,7 @@ export class Tuple {
 			this.x / scalar,
 			this.y / scalar,
 			this.z / scalar,
-			this.w / scalar
+			this.w / scalar,
 		);
 	}
 
@@ -69,7 +69,7 @@ export class Tuple {
 		return new Vector(
 			this.y * b.z - this.z * b.y,
 			this.z * b.x - this.x * b.z,
-			this.x * b.y - this.y * b.x
+			this.x * b.y - this.y * b.x,
 		);
 	}
 

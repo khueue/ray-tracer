@@ -10,4 +10,4 @@ echo "--- Watching for changes ..."
 ./node_modules/.bin/nodemon \
 	--delay 300ms \
 	--ext js,ts,vue,scss,pug \
-	--exec "time ./bin/pretty && time ./bin/test"
+	--exec "time ./bin/lint && time ./bin/pretty && time ./bin/test"

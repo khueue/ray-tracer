@@ -11,6 +11,10 @@ indent_size = 4
 [Makefile]
 indent_style = tab
 
+[tslint.json]
+indent_style = space
+indent_size = 4
+
 [package.json]
 indent_style = space
 indent_size = 2

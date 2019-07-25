@@ -3,7 +3,7 @@
 set -o errexit
 set -o pipefail
 set -o nounset
-set -o xtrace
+# set -o xtrace
 
 OUT_DIR=./build/dev
 CACHE_DIR="${OUT_DIR}.cache"

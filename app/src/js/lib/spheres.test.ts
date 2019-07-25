@@ -1,12 +1,12 @@
 import * as test from 'tape';
 
-import * as spheres from './spheres';
+import * as materials from './materials';
+import * as matrices from './matrices';
 import * as numbers from './numbers';
 import * as rays from './rays';
-import * as tuples from './tuples';
-import * as matrices from './matrices';
+import * as spheres from './spheres';
 import * as transformations from './transformations';
-import * as materials from './materials';
+import * as tuples from './tuples';
 
 test('each sphere is unique', function(t) {
 	const a = new spheres.Sphere();
@@ -37,7 +37,7 @@ test('changing sphere transformation', function(t) {
 test('intersecting scaled sphere with ray', function(t) {
 	const r = new rays.Ray(
 		new tuples.Point(0, 0, -5),
-		new tuples.Vector(0, 0, 1)
+		new tuples.Vector(0, 0, 1),
 	);
 	const s = new spheres.Sphere();
 	s.transformation = transformations.scaling(2, 2, 2);
@@ -53,7 +53,7 @@ test('intersecting scaled sphere with ray', function(t) {
 test('intersecting translated sphere with ray', function(t) {
 	const r = new rays.Ray(
 		new tuples.Point(0, 0, -5),
-		new tuples.Vector(0, 0, 1)
+		new tuples.Vector(0, 0, 1),
 	);
 	const s = new spheres.Sphere();
 	s.transformation = transformations.translation(5, 0, 0);

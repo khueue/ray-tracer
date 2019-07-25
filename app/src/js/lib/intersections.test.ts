@@ -1,8 +1,8 @@
 import * as test from 'tape';
 
+import * as intersections from './intersections';
 import * as numbers from './numbers';
 import * as spheres from './spheres';
-import * as intersections from './intersections';
 
 test('intersection has t and object', function(t) {
 	const s = new spheres.Sphere();

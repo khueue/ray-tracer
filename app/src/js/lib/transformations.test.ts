@@ -1,8 +1,8 @@
 import * as test from 'tape';
 
-import * as tuples from './tuples';
 import * as matrices from './matrices';
 import * as transformations from './transformations';
+import * as tuples from './tuples';
 
 test('multiplying by translation matrix', function(t) {
 	const transform = transformations.translation(5, -3, 2);

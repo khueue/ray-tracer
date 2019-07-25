@@ -1,7 +1,7 @@
 import * as test from 'tape';
 
-import * as numbers from './numbers';
 import * as matrices from './matrices';
+import * as numbers from './numbers';
 import * as tuples from './tuples';
 
 test('construct 2x2 matrix', function(t) {

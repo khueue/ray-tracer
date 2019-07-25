@@ -1,7 +1,7 @@
 import * as test from 'tape';
 
-import * as lights from './lights';
 import * as colors from './colors';
+import * as lights from './lights';
 import * as tuples from './tuples';
 
 test('point light has position and intensity', function(t) {

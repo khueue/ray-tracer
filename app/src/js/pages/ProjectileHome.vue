@@ -54,7 +54,7 @@ export default Vue.extend({
 					ctx,
 					proj.position.x,
 					proj.position.y,
-					new colors.Color(1.0, 1.0, 1.0)
+					new colors.Color(1.0, 1.0, 1.0),
 				);
 				proj = this.tick(env, proj);
 			}

@@ -28,13 +28,13 @@ export default Vue.extend({
 			const center = new tuples.Point(
 				this.canvas.width / 2,
 				this.canvas.height / 2,
-				0
+				0,
 			);
 			this.drawPixel(
 				ctx,
 				center.x,
 				center.y,
-				new colors.Color(0.6, 0.6, 0.6)
+				new colors.Color(0.6, 0.6, 0.6),
 			);
 
 			const radius = this.canvas.height * 0.35;
@@ -56,7 +56,7 @@ export default Vue.extend({
 					ctx,
 					hourPositioned.x,
 					hourPositioned.y,
-					new colors.Color(1.0, 1.0, 1.0)
+					new colors.Color(1.0, 1.0, 1.0),
 				);
 			}
 		},

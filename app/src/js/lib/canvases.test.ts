@@ -1,7 +1,7 @@
 import * as test from 'tape';
 
-import * as colors from './colors';
 import * as canvases from './canvases';
+import * as colors from './colors';
 
 test('creating canvas', function(t) {
 	const c = new canvases.Canvas(10, 20);
@@ -9,8 +9,8 @@ test('creating canvas', function(t) {
 	t.ok(c.width === 10);
 	t.ok(c.height === 20);
 
-	function isBlack(c: colors.Color) {
-		return c.red === 0 && c.green === 0 && c.blue === 0;
+	function isBlack(x: colors.Color) {
+		return x.red === 0 && x.green === 0 && x.blue === 0;
 	}
 
 	// Suffice to check corners.

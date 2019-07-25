@@ -25,6 +25,9 @@ build:
 pretty:
 	make app-cmd cmd=./bin/pretty
 
+lint:
+	make app-cmd cmd=./bin/lint
+
 test:
 	make app-cmd cmd=./bin/test
 
@@ -47,13 +50,13 @@ IMAGE_TAG_APP=ray-tracer-app
 
 app-cmd: app-docker-build
 	docker run --interactive --tty --rm \
-		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency="consistent" \
+		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency="delegated" \
 		$(IMAGE_TAG_APP) \
 		bash -c "$(cmd)"
 
 app-cmd-with-ports: app-docker-build
 	docker run --interactive --tty --rm \
-		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency="consistent" \
+		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency="delegated" \
 		--publish 1234:1234 \
 		--publish 4321:4321 \
 		$(IMAGE_TAG_APP) \

@@ -57,7 +57,7 @@ export function shearing(
 	yx: number,
 	yz: number,
 	zx: number,
-	zy: number
+	zy: number,
 ) {
 	return new matrices.Matrix([
 		[1, xy, xz, 0],

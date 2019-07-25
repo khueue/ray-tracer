@@ -57,7 +57,7 @@ export default Vue.extend({
 					const position = new tuples.Point(worldX, worldY, wallZ);
 					const r = new rays.Ray(
 						rayOrigin,
-						position.subtract(rayOrigin).normalize()
+						position.subtract(rayOrigin).normalize(),
 					);
 					const xs = r.intersects(shape);
 					if (xs.hit()) {

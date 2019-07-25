@@ -1,0 +1,15 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:latest"
+    ],
+    "jsRules": {},
+    "rules": {
+        "indent": [true, "tabs"],
+        "member-access": false,
+        "quotemark": [true, "single"],
+        "only-arrow-functions": false,
+        "max-classes-per-file": false,
+        "prefer-for-of": false
+    }
+}

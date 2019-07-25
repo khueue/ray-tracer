@@ -32,7 +32,7 @@ export default Vue.extend({
 					const c = new colors.Color(
 						getRandomInt(255),
 						getRandomInt(255),
-						getRandomInt(255)
+						getRandomInt(255),
 					);
 					this.drawPixel(ctx, x, y, c);
 				}

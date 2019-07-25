@@ -1,7 +1,7 @@
 import * as colors from './colors';
+import * as lights from './lights';
 import * as numbers from './numbers';
 import * as tuples from './tuples';
-import * as lights from './lights';
 
 export class Material {
 	color: colors.Color;
@@ -32,7 +32,7 @@ export class Material {
 		light: lights.PointLight,
 		point: tuples.Point,
 		eyeV: tuples.Vector,
-		normalV: tuples.Vector
+		normalV: tuples.Vector,
 	) {
 		const effectiveColor = this.color.multiply(light.intensity);
 		const lightV = light.position.subtract(point).normalize();

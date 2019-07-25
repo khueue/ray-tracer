@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
+
+echo "--- Running linter ..."
+
+./node_modules/.bin/tslint \
+	--config "./tslint.json" \
+	--project "./tsconfig.json" \
+	--format stylish \
+	--fix \
+	"./src/**/*.ts"
+
+echo "--- Finished running linter."
