@@ -123,7 +123,6 @@ test('different size matrices', function(t) {
 // test('identity constant can not be changed', function(t) {
 // 	matrices.IDENTITY_44[0][0] = 0;
 // 	t.ok(numbers.equal(matrices.IDENTITY_44[0][0], 1));
-
 // 	t.end();
 // });
 

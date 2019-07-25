@@ -57,7 +57,9 @@ test('multiplying colors', function(t) {
 test('comparing colors', function(t) {
 	const a = new colors.Color(1, 0.2, 0.4);
 	const b = new colors.Color(1, 0.2, 0.4);
+	const c = new colors.Color(1, 0.2, 0.7);
 	t.ok(a.equal(b));
+	t.ok(!a.equal(c));
 
 	t.end();
 });

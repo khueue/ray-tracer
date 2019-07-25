@@ -11,7 +11,7 @@ export class Color {
 		this.blue = blue;
 	}
 
-	equal(b: Color): boolean {
+	equal(b: Color) {
 		return (
 			numbers.equal(this.red, b.red) &&
 			numbers.equal(this.green, b.green) &&

@@ -20,14 +20,12 @@ export class Sphere {
 	}
 
 	normalAt(worldPoint: tuples.Point) {
-		const inverseTransformation = this.transformation.inverse();
+		const invTrans = this.transformation.inverse();
 
-		const objectPoint = inverseTransformation.multiplyByTuple(worldPoint);
+		const objectPoint = invTrans.multiplyByTuple(worldPoint);
 		const objectNormal = objectPoint.subtract(tuples.POINT_ZERO);
 
-		const worldNormal = inverseTransformation
-			.transpose()
-			.multiplyByTuple(objectNormal);
+		const worldNormal = invTrans.transpose().multiplyByTuple(objectNormal);
 		worldNormal.w = 0;
 		return worldNormal.normalize();
 	}

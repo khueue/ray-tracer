@@ -13,7 +13,7 @@ export class Tuple {
 		this.w = w;
 	}
 
-	equal(b: Tuple): boolean {
+	equal(b: Tuple) {
 		return (
 			numbers.equal(this.x, b.x) &&
 			numbers.equal(this.y, b.y) &&

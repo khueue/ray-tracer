@@ -27,6 +27,16 @@ test('tuple with w=0 is a vector', function(t) {
 	t.end();
 });
 
+test('comparing tuples', function(t) {
+	const a = new tuples.Tuple(1, 0, 0, 0);
+	const b = new tuples.Tuple(1, 0, 0, 0);
+	const c = new tuples.Tuple(0, 1, 0, 0);
+	t.ok(a.equal(b));
+	t.ok(!a.equal(c));
+
+	t.end();
+});
+
 test('Point() creates a point', function(t) {
 	const a = new tuples.Point(4, -4, 3);
 	const b = new tuples.Tuple(4, -4, 3, 1);
