@@ -10,7 +10,7 @@ echo "--- Linting ..."
 ./node_modules/.bin/tslint \
 	--config "./tslint.json" \
 	--project "./tsconfig.json" \
-	--format stylish \
+	--format codeFrame \
 	--fix \
 	"./src/**/*.ts"
 
