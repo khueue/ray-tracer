@@ -1,15 +1,12 @@
 {
     "defaultSeverity": "error",
-    "extends": [
-        "tslint:latest"
-    ],
-    "jsRules": {},
+    "extends": "tslint:latest",
     "rules": {
         "indent": [true, "tabs"],
-        "member-access": false,
-        "quotemark": [true, "single"],
-        "only-arrow-functions": false,
         "max-classes-per-file": false,
-        "prefer-for-of": false
+        "member-access": false,
+        "only-arrow-functions": false,
+        "prefer-for-of": false,
+        "quotemark": [true, "single"]
     }
 }

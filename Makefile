@@ -20,7 +20,7 @@ server:
 	make app-cmd-with-ports cmd=./bin/server
 
 build:
-	make app-cmd-with-ports cmd=./bin/build
+	make app-cmd cmd=./bin/build
 
 pretty:
 	make app-cmd cmd=./bin/pretty
@@ -30,6 +30,9 @@ lint:
 
 test:
 	make app-cmd cmd=./bin/test
+
+lint-pretty-test:
+	make app-cmd cmd="./bin/lint && ./bin/pretty && ./bin/test"
 
 watch:
 	make app-cmd cmd=./bin/watch

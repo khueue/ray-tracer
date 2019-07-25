@@ -5,7 +5,7 @@ set -o pipefail
 set -o nounset
 # set -o xtrace
 
-echo "--- Running linter ..."
+echo "--- Linting ..."
 
 ./node_modules/.bin/tslint \
 	--config "./tslint.json" \
@@ -14,4 +14,4 @@ echo "--- Running linter ..."
 	--fix \
 	"./src/**/*.ts"
 
-echo "--- Finished running linter."
+echo "--- Finished linting."

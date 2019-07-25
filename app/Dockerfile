@@ -2,9 +2,10 @@ FROM node:12.6.0-alpine
 
 WORKDIR /workdir
 
-# For running commands.
+# For running commands and file watching.
 RUN apk add --no-cache \
-	bash
+	bash \
+	inotify-tools
 
 # For NPM (node-gyp).
 RUN apk add --no-cache \

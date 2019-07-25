@@ -1,13 +1,24 @@
 #!/usr/bin/env bash
 
-set -o errexit
-set -o pipefail
+# set -o errexit
+# set -o pipefail
 set -o nounset
 # set -o xtrace
 
-echo "--- Watching for changes ..."
+function wait_for_change {
+	echo "--- Watching for changes ..."
+	inotifywait \
+		--quiet \
+		--event modify,move,create,delete \
+		--recursive \
+		"./src/"
+}
 
-./node_modules/.bin/nodemon \
-	--delay 300ms \
-	--ext js,ts,vue,scss,pug \
-	--exec "time ./bin/lint && time ./bin/pretty && time ./bin/test"
+while wait_for_change; do
+	RAND=$(( (RANDOM % 5) + 1 ))
+	if [[ ${RAND} -eq 1 ]]; then
+		time ./bin/lint
+		time ./bin/pretty
+	fi
+	time ./bin/test
+done
