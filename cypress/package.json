@@ -1,0 +1,8 @@
+{
+  "name": "ray-tracer",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "cypress": "3.4.1"
+  }
+}
