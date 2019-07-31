@@ -1,10 +1,12 @@
 {
   "name": "ray-tracer",
   "version": "0.0.0",
-  "description": "",
-  "keywords": [],
-  "private": true,
-  "license": "",
+  "description": "Experimenting with The Ray Tracer Challenge, by Jamis Buck.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khueue/ray-tracer"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.10.0",
     "@types/node": "12.6.8",
