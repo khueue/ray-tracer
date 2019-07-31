@@ -1,4 +1,4 @@
-import '../../node_modules/@fortawesome/fontawesome-free/js/all.min.js';
+import '@fortawesome/fontawesome-free/js/all.min';
 
 import Vue from 'vue';
 
