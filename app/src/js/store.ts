@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import pkgJson from '../../package.json';
+import * as pkgJson from '../../package.json';
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
 	state: {
 		appVersion: pkgJson.version,
 	},
@@ -13,5 +13,3 @@ const store = new Vuex.Store({
 	mutations: {},
 	actions: {},
 });
-
-export default store;

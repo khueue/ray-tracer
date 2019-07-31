@@ -2,10 +2,10 @@ import '@fortawesome/fontawesome-free/js/all.min';
 
 import Vue from 'vue';
 
-import router from '/js/router';
-import store from '/js/store';
+import router from './router';
+import store from './store';
 
-import App from '/js/App.vue';
+import App from './App.vue';
 
 Vue.config.productionTip = false;
 

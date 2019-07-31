@@ -4,6 +4,14 @@
 		"target": "es5",
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
-		"noUnusedParameters": true
-	}
+		"noUnusedParameters": true,
+		"resolveJsonModule": true
+	},
+	"include": [
+		"**/*.ts",
+		"**/*.vue"
+	],
+	"files": [
+		"vue-shim.d.ts"
+	]
 }
