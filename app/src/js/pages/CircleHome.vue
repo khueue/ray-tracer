@@ -9,6 +9,7 @@ import * as rays from '../lib/rays';
 import * as transformations from '../lib/transformations';
 
 export default Vue.extend({
+	name: 'CircleHome',
 	data() {
 		return {
 			id: 'circle',

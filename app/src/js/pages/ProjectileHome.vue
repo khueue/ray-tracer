@@ -5,6 +5,7 @@ import * as colors from '../lib/colors';
 import * as tuples from '../lib/tuples';
 
 export default Vue.extend({
+	name: 'ProjectileHome',
 	data() {
 		return {
 			id: 'projectile',

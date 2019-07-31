@@ -6,6 +6,7 @@ import * as tuples from '../lib/tuples';
 import * as matrices from '../lib/matrices';
 
 export default Vue.extend({
+	name: 'ClockHome',
 	data() {
 		return {
 			id: 'projectile',

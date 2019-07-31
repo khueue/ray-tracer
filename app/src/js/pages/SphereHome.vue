@@ -12,6 +12,7 @@ import * as transformations from '../lib/transformations';
 import * as lights from '../lib/lights';
 
 export default Vue.extend({
+	name: 'SphereHome',
 	data() {
 		return {
 			id: 'sphere',
