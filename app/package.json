@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.10.0",
-    "@types/node": "12.6.8",
+    "@types/node": "12.6.9",
     "@types/tape": "4.2.33",
     "@vue/component-compiler-utils": "3.0.0",
     "bulma": "0.7.5",
