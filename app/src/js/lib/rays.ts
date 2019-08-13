@@ -2,6 +2,7 @@ import * as intersections from './intersections';
 import * as matrices from './matrices';
 import * as spheres from './spheres';
 import * as tuples from './tuples';
+import * as worlds from './worlds';
 
 export class Ray {
 	readonly origin: tuples.Point;
@@ -42,6 +43,18 @@ export class Ray {
 		const x2 = new intersections.Intersection(t2, s);
 
 		return new intersections.Intersections(x1, x2);
+	}
+
+	// NOTE: Performs too many sorts. Should optimize. Rewrite Intersections?
+	intersectsWorld(w: worlds.World) {
+		const allXs = [];
+		for (const obj of w.objects.values()) {
+			const xs = this.intersects(obj);
+			for (let i = 0; i < xs.length; ++i) {
+				allXs.push(xs[i]);
+			}
+		}
+		return new intersections.Intersections(...allXs);
 	}
 
 	transform(m: matrices.Matrix) {
