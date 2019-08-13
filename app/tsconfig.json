@@ -2,10 +2,12 @@
 	"compilerOptions": {
 		"strict": true,
 		"target": "es5",
+		"downlevelIteration": true,
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"removeComments": true
 	},
 	"include": [
 		"**/*.ts",
