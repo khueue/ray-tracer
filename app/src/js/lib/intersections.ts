@@ -1,4 +1,6 @@
+import * as rays from './rays';
 import * as spheres from './spheres';
+import * as tuples from './tuples';
 
 export class Intersection {
 	readonly t: number;
@@ -7,6 +9,10 @@ export class Intersection {
 	constructor(t: number, obj: spheres.Sphere) {
 		this.t = t;
 		this.obj = obj;
+	}
+
+	computations(ray: rays.Ray) {
+		return new Computations(this, ray);
 	}
 }
 
@@ -32,5 +38,28 @@ export class Intersections {
 			}
 		}
 		return null;
+	}
+}
+
+export class Computations {
+	readonly t: number;
+	readonly obj: spheres.Sphere;
+	readonly point: tuples.Point;
+	readonly eyeV: tuples.Vector;
+	readonly normalV: tuples.Vector;
+	readonly inside: boolean;
+
+	constructor(intersection: Intersection, ray: rays.Ray) {
+		this.t = intersection.t;
+		this.obj = intersection.obj;
+		this.point = ray.position(intersection.t);
+		this.eyeV = ray.direction.negate();
+		this.normalV = this.obj.normalAt(this.point);
+		if (this.normalV.dot(this.eyeV) < 0) {
+			this.inside = true;
+			this.normalV = this.normalV.negate();
+		} else {
+			this.inside = false;
+		}
 	}
 }

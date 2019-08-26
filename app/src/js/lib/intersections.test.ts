@@ -2,7 +2,9 @@ import * as test from 'tape';
 
 import * as intersections from './intersections';
 import * as numbers from './numbers';
+import * as rays from './rays';
 import * as spheres from './spheres';
+import * as tuples from './tuples';
 
 test('intersection has t and object', function(t) {
 	const s = new spheres.Sphere();
@@ -92,6 +94,56 @@ test('no intersections means no hit', function(t) {
 	const xs = new intersections.Intersections();
 
 	t.ok(!xs.hit());
+
+	t.end();
+});
+
+test('precompute intersection state', function(t) {
+	const ray = new rays.Ray(
+		new tuples.Point(0, 0, -5),
+		new tuples.Vector(0, 0, 1),
+	);
+	const s = new spheres.Sphere();
+	const i = new intersections.Intersection(4, s);
+	const comps = i.computations(ray);
+
+	t.ok(numbers.equal(comps.t, i.t));
+	t.ok(comps.obj === s);
+	t.ok(comps.point.equal(new tuples.Point(0, 0, -1)));
+	t.ok(comps.eyeV.equal(new tuples.Vector(0, 0, -1)));
+	t.ok(comps.normalV.equal(new tuples.Vector(0, 0, -1)));
+
+	t.end();
+});
+
+test('hit, when intersection occurs on the outside', function(t) {
+	const ray = new rays.Ray(
+		new tuples.Point(0, 0, -5),
+		new tuples.Vector(0, 0, 1),
+	);
+	const s = new spheres.Sphere();
+	const i = new intersections.Intersection(4, s);
+	const comps = i.computations(ray);
+
+	t.ok(!comps.inside);
+
+	t.end();
+});
+
+test('hit, when intersection occurs on the inside', function(t) {
+	const ray = new rays.Ray(
+		new tuples.Point(0, 0, 0),
+		new tuples.Vector(0, 0, 1),
+	);
+	const s = new spheres.Sphere();
+	const i = new intersections.Intersection(1, s);
+	const comps = i.computations(ray);
+
+	t.ok(comps.point.equal(new tuples.Point(0, 0, 1)));
+	t.ok(comps.eyeV.equal(new tuples.Vector(0, 0, -1)));
+	t.ok(comps.inside);
+	// Normal would have been (0, 0, 1) but is inverted:
+	t.ok(comps.normalV.equal(new tuples.Vector(0, 0, -1)));
 
 	t.end();
 });
