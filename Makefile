@@ -25,6 +25,13 @@ build:
 pretty:
 	make app-cmd cmd=./bin/pretty
 
+# Could be used like this:
+# In ./.git/hooks/pre-push:
+# #!/bin/sh
+# make pre-push-check
+pre-push-check:
+	make app-cmd-non-interactive cmd="./bin/lint && ./bin/pretty && ./bin/coverage"
+
 lint:
 	make app-cmd cmd=./bin/lint
 
@@ -62,6 +69,12 @@ app-cmd-with-ports: app-docker-build
 		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency="delegated" \
 		--publish 1234:1234 \
 		--publish 4321:4321 \
+		$(IMAGE_TAG_APP) \
+		bash -c "$(cmd)"
+
+app-cmd-non-interactive: app-docker-build
+	docker run --rm \
+		--mount type="bind",source="$(PWD)/app",target="/workdir",consistency="delegated" \
 		$(IMAGE_TAG_APP) \
 		bash -c "$(cmd)"
 
