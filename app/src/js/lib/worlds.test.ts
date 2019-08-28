@@ -41,10 +41,10 @@ function newDefaultWorld() {
 }
 
 test('create empty world', function(t) {
-	const w = new worlds.World();
+	const world = new worlds.World();
 
-	t.ok(w.light);
-	t.ok(w.objects.size === 0);
+	t.ok(world.light);
+	t.ok(world.objects.size === 0);
 
 	t.end();
 });
