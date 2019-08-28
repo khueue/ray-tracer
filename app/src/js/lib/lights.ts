@@ -11,7 +11,6 @@ export class PointLight {
 	}
 }
 
-export const DEFAULT_LIGHT = new PointLight(
-	new tuples.Point(0, 0, 0),
-	colors.WHITE,
-);
+export function defaultLight() {
+	return new PointLight(new tuples.Point(0, 0, 0), colors.white());
+}

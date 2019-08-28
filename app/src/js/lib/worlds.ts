@@ -1,5 +1,7 @@
+import * as colors from './colors';
 import * as intersections from './intersections';
 import * as lights from './lights';
+import * as rays from './rays';
 import * as spheres from './spheres';
 
 export class World {
@@ -7,7 +9,7 @@ export class World {
 	objects: Map<number, spheres.Sphere>;
 
 	constructor() {
-		this.light = lights.DEFAULT_LIGHT;
+		this.light = lights.defaultLight();
 		this.objects = new Map();
 	}
 
@@ -22,5 +24,17 @@ export class World {
 			comps.eyeV,
 			comps.normalV,
 		);
+	}
+
+	colorAt(ray: rays.Ray) {
+		const inters = ray.intersectsWorld(this);
+		const hit = inters.hit();
+		if (hit) {
+			const comps = hit.computations(ray);
+			const color = this.shadeHit(comps);
+			return color;
+		} else {
+			return colors.black();
+		}
 	}
 }

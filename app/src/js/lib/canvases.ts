@@ -11,7 +11,7 @@ export class Canvas {
 		for (let x = 0; x < width; ++x) {
 			this[x] = [];
 			for (let y = 0; y < height; ++y) {
-				this[x][y] = colors.BLACK;
+				this[x][y] = colors.black();
 			}
 		}
 	}

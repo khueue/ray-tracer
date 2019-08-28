@@ -9,7 +9,7 @@ import * as tuples from './tuples';
 test('default material', function(t) {
 	const m = new materials.Material();
 
-	t.ok(m.color.equal(colors.WHITE));
+	t.ok(m.color.equal(colors.white()));
 	t.ok(numbers.equal(m.ambient, 0.1));
 	t.ok(numbers.equal(m.diffuse, 0.9));
 	t.ok(numbers.equal(m.specular, 0.9));
@@ -38,7 +38,7 @@ test('lighting with eye between light and surface', function(t) {
 	const normalV = new tuples.Vector(0, 0, -1);
 	const light = new lights.PointLight(
 		new tuples.Point(0, 0, -10),
-		colors.WHITE,
+		colors.white(),
 	);
 	const result = m.lighting(light, position, eyeV, normalV);
 
@@ -55,7 +55,7 @@ test('lighting with eye between light and surface, eye offset 45 degrees', funct
 	const normalV = new tuples.Vector(0, 0, -1);
 	const light = new lights.PointLight(
 		new tuples.Point(0, 0, -10),
-		colors.WHITE,
+		colors.white(),
 	);
 	const result = m.lighting(light, position, eyeV, normalV);
 
@@ -72,7 +72,7 @@ test('lighting with eye opposite surface, light offset 45 degrees', function(t) 
 	const normalV = new tuples.Vector(0, 0, -1);
 	const light = new lights.PointLight(
 		new tuples.Point(0, 10, -10),
-		colors.WHITE,
+		colors.white(),
 	);
 	const result = m.lighting(light, position, eyeV, normalV);
 
@@ -89,7 +89,7 @@ test('lighting with eye in path of reflection vector', function(t) {
 	const normalV = new tuples.Vector(0, 0, -1);
 	const light = new lights.PointLight(
 		new tuples.Point(0, 10, -10),
-		colors.WHITE,
+		colors.white(),
 	);
 	const result = m.lighting(light, position, eyeV, normalV);
 
@@ -106,7 +106,7 @@ test('lighting with light behind surface', function(t) {
 	const normalV = new tuples.Vector(0, 0, -1);
 	const light = new lights.PointLight(
 		new tuples.Point(0, 0, 10),
-		colors.WHITE,
+		colors.white(),
 	);
 	const result = m.lighting(light, position, eyeV, normalV);
 
@@ -123,7 +123,7 @@ test('lighting with light reflecting away from eye', function(t) {
 	const normalV = new tuples.Vector(0, 0, -1);
 	const light = new lights.PointLight(
 		new tuples.Point(0, 10, -10),
-		colors.WHITE,
+		colors.white(),
 	);
 	const result = m.lighting(light, position, eyeV, normalV);
 

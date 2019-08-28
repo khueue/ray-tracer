@@ -11,7 +11,7 @@ export class Material {
 	shininess: number; // 10-200
 
 	constructor() {
-		this.color = colors.WHITE;
+		this.color = colors.white();
 		this.ambient = 0.1;
 		this.diffuse = 0.9;
 		this.specular = 0.9;
@@ -43,14 +43,14 @@ export class Material {
 		let specular: colors.Color;
 
 		if (lightDotNormal < 0) {
-			diffuse = colors.BLACK;
-			specular = colors.BLACK;
+			diffuse = colors.black();
+			specular = colors.black();
 		} else {
 			diffuse = effectiveColor.scale(this.diffuse).scale(lightDotNormal);
 			const reflectV = lightV.multiply(-1).reflect(normalV);
 			const reflectDotEye = reflectV.dot(eyeV);
 			if (reflectDotEye <= 0) {
-				specular = colors.BLACK;
+				specular = colors.black();
 			} else {
 				const factor = reflectDotEye ** this.shininess;
 				specular = light.intensity.scale(this.specular).scale(factor);
