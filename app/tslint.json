@@ -9,6 +9,13 @@
         "object-literal-sort-keys": false,
         "only-arrow-functions": false,
         "prefer-for-of": false,
-        "quotemark": [true, "single"]
+        "quotemark": [true, "single"],
+        "variable-name": {
+            "options": [
+                "ban-keywords",
+                "check-format",
+                "allow-leading-underscore"
+            ]
+        }
     }
 }

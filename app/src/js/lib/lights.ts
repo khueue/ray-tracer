@@ -10,3 +10,8 @@ export class PointLight {
 		this.intensity = intensity;
 	}
 }
+
+export const DEFAULT_LIGHT = new PointLight(
+	new tuples.Point(0, 0, 0),
+	colors.WHITE,
+);

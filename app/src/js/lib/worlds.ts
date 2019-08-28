@@ -1,20 +1,26 @@
+import * as intersections from './intersections';
 import * as lights from './lights';
 import * as spheres from './spheres';
 
 export class World {
-	light: lights.PointLight | null;
+	light: lights.PointLight;
 	objects: Map<number, spheres.Sphere>;
 
 	constructor() {
-		this.light = null;
+		this.light = lights.DEFAULT_LIGHT;
 		this.objects = new Map();
-	}
-
-	setLight(light: lights.PointLight) {
-		this.light = light;
 	}
 
 	setObject(obj: spheres.Sphere) {
 		this.objects.set(obj.id, obj);
+	}
+
+	shadeHit(comps: intersections.Computations) {
+		return comps.obj.material.lighting(
+			this.light,
+			comps.point,
+			comps.eyeV,
+			comps.normalV,
+		);
 	}
 }
