@@ -1,4 +1,5 @@
 import * as matrices from './matrices';
+import * as tuples from './tuples';
 
 export function translation(x: number, y: number, z: number) {
 	return new matrices.Matrix([
@@ -65,4 +66,23 @@ export function shearing(
 		[zx, zy, 1, 0],
 		[0, 0, 0, 1],
 	]);
+}
+
+export function viewTransform(
+	from: tuples.Point,
+	to: tuples.Point,
+	up: tuples.Vector,
+) {
+	const forward = to.subtract(from).normalize();
+	const upNormalized = up.normalize();
+	const left = forward.cross(upNormalized);
+	const trueUp = left.cross(forward);
+
+	const orientation = new matrices.Matrix([
+		[left.x, left.y, left.z, 0.0],
+		[trueUp.x, trueUp.y, trueUp.z, 0.0],
+		[-forward.x, -forward.y, -forward.z, 0.0],
+		[0.0, 0.0, 0.0, 1.0],
+	]);
+	return orientation.multiply(translation(-from.x, -from.y, -from.z));
 }
