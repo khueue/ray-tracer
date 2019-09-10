@@ -56,10 +56,16 @@ test('construct ray through corner of canvas', function(t) {
 
 test('construct ray when camera is transformed', function(t) {
 	const c = new cameras.Camera(201, 101, Math.PI / 2);
-	c.transform = transformations.rotationY(Math.PI / 4).multiply(transformations.translation(0, -2, 5));
+	c.transform = transformations
+		.rotationY(Math.PI / 4)
+		.multiply(transformations.translation(0, -2, 5));
 	const ray = c.rayForPixel(100, 50);
 	t.ok(ray.origin.equal(new tuples.Point(0, 2, -5)));
-	t.ok(ray.direction.equal(new tuples.Vector(Math.SQRT2 / 2, 0, -Math.SQRT2 / 2)));
+	t.ok(
+		ray.direction.equal(
+			new tuples.Vector(Math.SQRT2 / 2, 0, -Math.SQRT2 / 2),
+		),
+	);
 
 	t.end();
 });

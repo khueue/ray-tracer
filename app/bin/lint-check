@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
+
+echo "--- Checking linting ..."
+
+./node_modules/.bin/tslint \
+	--config "./tslint.json" \
+	--project "./tsconfig.json" \
+	--format codeFrame \
+	"./src/**/*.ts"
+
+echo "--- Finished checking linting."

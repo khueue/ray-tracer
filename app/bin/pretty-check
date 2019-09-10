@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
+
+echo "--- Checking source code formatting ..."
+
+./node_modules/.bin/prettier \
+	--check \
+	--print-width 78 \
+	--use-tabs \
+	--single-quote \
+	--trailing-comma all \
+	"./src/**/*.js" \
+	"./src/**/*.ts" \
+	"./src/**/*.vue" \
+	"./src/**/*.scss"
+
+echo "--- Finished checking source code formatting."

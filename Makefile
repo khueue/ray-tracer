@@ -27,10 +27,13 @@ pretty:
 
 # Could be used like this:
 # In ./.git/hooks/pre-push:
-# #!/bin/sh
+# #!/usr/bin/env bash
+# set -o errexit
+# set -o pipefail
+# set -o nounset
 # make pre-push-check
 pre-push-check:
-	make app-cmd-non-interactive cmd="./bin/lint && ./bin/pretty && ./bin/coverage"
+	make app-cmd-non-interactive cmd="./bin/lint-check && ./bin/pretty-check && ./bin/coverage"
 
 lint:
 	make app-cmd cmd=./bin/lint
