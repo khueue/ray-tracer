@@ -7,6 +7,12 @@ export default new VueRouter({
 	mode: 'history',
 	routes: [
 		{
+			path: '/world',
+			component() {
+				return import('/js/pages/WorldHome.vue');
+			},
+		},
+		{
 			path: '/sphere',
 			component() {
 				return import('/js/pages/SphereHome.vue');
@@ -33,7 +39,7 @@ export default new VueRouter({
 		{
 			path: '*',
 			component() {
-				return import('/js/pages/SphereHome.vue');
+				return import('/js/pages/WorldHome.vue');
 			},
 		},
 	],
