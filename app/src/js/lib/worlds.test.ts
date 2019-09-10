@@ -3,42 +3,11 @@ import * as test from 'tape';
 import * as colors from './colors';
 import * as intersections from './intersections';
 import * as lights from './lights';
-import * as materials from './materials';
 import * as numbers from './numbers';
 import * as rays from './rays';
-import * as spheres from './spheres';
-import * as transformations from './transformations';
 import * as tuples from './tuples';
+import * as utils from './utils';
 import * as worlds from './worlds';
-
-function newDefaultWorld() {
-	const light = new lights.PointLight(
-		new tuples.Point(-10, 10, -10),
-		colors.white(),
-	);
-
-	const shape1 = new spheres.Sphere();
-	shape1.material = new materials.Material();
-	shape1.material.color = new colors.Color(0.8, 1.0, 0.6);
-	shape1.material.diffuse = 0.7;
-	shape1.material.specular = 0.2;
-
-	const shape2 = new spheres.Sphere();
-	shape2.transformation = transformations.scaling(0.5, 0.5, 0.5);
-
-	const world = new worlds.World();
-	world.light = light;
-	world.setObject(shape1);
-	world.setObject(shape2);
-
-	// Return all the objects, for easy access.
-	return {
-		light,
-		shape1,
-		shape2,
-		world,
-	};
-}
 
 test('create empty world', function(t) {
 	const world = new worlds.World();
@@ -50,7 +19,7 @@ test('create empty world', function(t) {
 });
 
 test('create default world', function(t) {
-	const { world } = newDefaultWorld();
+	const { world } = utils.newDefaultWorld();
 
 	t.ok(world.light);
 	t.ok(world.objects.size === 2);
@@ -59,7 +28,7 @@ test('create default world', function(t) {
 });
 
 test('intersect world with ray', function(t) {
-	const { world } = newDefaultWorld();
+	const { world } = utils.newDefaultWorld();
 	const ray = new rays.Ray(
 		new tuples.Point(0, 0, -5),
 		new tuples.Vector(0, 0, 1),
@@ -76,7 +45,7 @@ test('intersect world with ray', function(t) {
 });
 
 test('shade an intersection', function(t) {
-	const { world, shape1 } = newDefaultWorld();
+	const { world, shape1 } = utils.newDefaultWorld();
 	const ray = new rays.Ray(
 		new tuples.Point(0, 0, -5),
 		new tuples.Vector(0, 0, 1),
@@ -91,7 +60,7 @@ test('shade an intersection', function(t) {
 });
 
 test('shade an intersection from the inside', function(t) {
-	const { world, shape2 } = newDefaultWorld();
+	const { world, shape2 } = utils.newDefaultWorld();
 	world.light = new lights.PointLight(
 		new tuples.Point(0, 0.25, 0),
 		colors.white(),
@@ -110,7 +79,7 @@ test('shade an intersection from the inside', function(t) {
 });
 
 test('color when ray misses', function(t) {
-	const { world } = newDefaultWorld();
+	const { world } = utils.newDefaultWorld();
 	const ray = new rays.Ray(
 		new tuples.Point(0, 0, -5),
 		new tuples.Vector(0, 1, 0),
@@ -123,7 +92,7 @@ test('color when ray misses', function(t) {
 });
 
 test('color when ray hits', function(t) {
-	const { world } = newDefaultWorld();
+	const { world } = utils.newDefaultWorld();
 	const ray = new rays.Ray(
 		new tuples.Point(0, 0, -5),
 		new tuples.Vector(0, 0, 1),
@@ -136,7 +105,7 @@ test('color when ray hits', function(t) {
 });
 
 test('color with intersection behind ray', function(t) {
-	const { world, shape1: outer, shape2: inner } = newDefaultWorld();
+	const { world, shape1: outer, shape2: inner } = utils.newDefaultWorld();
 	outer.material.ambient = 1;
 	inner.material.ambient = 1;
 	const ray = new rays.Ray(
