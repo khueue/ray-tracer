@@ -59,4 +59,22 @@ export class Camera {
 
 		return image;
 	}
+
+	getRenderWorkers(world: worlds.World) {
+		const workers = [];
+
+		const self = this;
+		for (let y = 0; y < this.vSize; ++y) {
+			for (let x = 0; x < this.hSize; ++x) {
+				const worker = function() {
+					const ray = self.rayForPixel(x, y);
+					const color = world.colorAt(ray);
+					return { x, y, color };
+				};
+				workers.push(worker);
+			}
+		}
+
+		return workers;
+	}
 }

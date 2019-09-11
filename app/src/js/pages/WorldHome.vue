@@ -14,12 +14,12 @@ import * as lights from '../lib/lights';
 import * as worlds from '../lib/worlds';
 
 export default Vue.extend({
-	name: 'SphereHome',
+	name: 'WorldHome',
 	data() {
 		return {
-			id: 'world',
-			width: 400,
-			height: 300,
+			id: 'canvas',
+			width: 300,
+			height: 200,
 			canvas: null,
 			progressPercent: 0,
 			progressTimeMs: 0,
@@ -41,9 +41,9 @@ export default Vue.extend({
 			self.progressPercent = 0;
 			self.progressTimeMs = 0;
 
-			const ctx = this.canvas.getContext('2d');
+			const ctx = self.canvas.getContext('2d');
 			ctx.fillStyle = 'rgb(0, 0, 0)';
-			ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+			ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
 
 			const world = new worlds.World();
 			world.light = new lights.PointLight(
@@ -107,28 +107,42 @@ export default Vue.extend({
 			left.material.specular = 0.3;
 			world.setObject(left);
 
-			const image = camera.render(world);
+			const workers = camera.getRenderWorkers(world);
+			self.shuffleInPlace(workers);
 
-			for (let x = 0; x < image.width; ++x) {
-				for (let y = 0; y < image.height; ++y) {
-					this.drawPixel(ctx, x, y, image[x][y]);
-				}
+			let numDone = 0;
+			const totalPixels = self.canvas.width * self.canvas.height;
+			const iterations = 100;
+			const batchSize = workers.length / iterations;
+			const before = new Date() as any;
+			for (let i = 0; i < workers.length; i += batchSize) {
+				const workerBatch = workers.slice(i, i + batchSize);
+				setTimeout(function() {
+					for (const worker of workerBatch) {
+						const { x, y, color } = worker();
+						self.drawPixel(ctx, x, y, color);
+						++numDone;
+					}
+
+					const percent = Math.round((numDone / totalPixels) * 100);
+					self.progressPercent = percent;
+
+					const after = new Date() as any;
+					self.progressTimeMs = after - before;
+				}, 0);
 			}
 		},
 		drawPixel(ctx, x, y, color) {
-			if (
-				0 <= x &&
-				x < this.canvas.width &&
-				0 <= y &&
-				y < this.canvas.height
-			) {
-				const red = color.red * 255;
-				const green = color.green * 255;
-				const blue = color.blue * 255;
-				ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
-				ctx.fillRect(x, y, 1, 1);
-			} else {
-				console.error(`Point (${x}, ${y}) is outside canvas`);
+			const red = color.red * 255;
+			const green = color.green * 255;
+			const blue = color.blue * 255;
+			ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+			ctx.fillRect(x, y, 1, 1);
+		},
+		shuffleInPlace<T>(a: T[]): void {
+			for (let i = 0; i < a.length; ++i) {
+				const randomI = numbers.randomIntInclusive(i, a.length - 1);
+				[a[i], a[randomI]] = [a[randomI], a[i]];
 			}
 		},
 	},
@@ -140,7 +154,7 @@ div.columns.is-vcentered
 	div.column
 		div.container.has-text-centered
 			h1.title.has-text-grey-lighter World
-			p.subtitle.has-text-grey {{ progressPercent }}% &mdash; {{ progressTimeTakenSeconds }}s
+			p.subtitle.has-text-grey {{ progressPercent }} % &mdash; {{ progressTimeTakenSeconds }} s
 			canvas(
 				:ref="id"
 				:id="id"

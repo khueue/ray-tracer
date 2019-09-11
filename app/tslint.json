@@ -6,6 +6,7 @@
         "max-classes-per-file": false,
         "member-access": false,
         "no-submodule-imports": false,
+        "no-this-assignment": false,
         "object-literal-sort-keys": false,
         "only-arrow-functions": false,
         "prefer-for-of": false,
